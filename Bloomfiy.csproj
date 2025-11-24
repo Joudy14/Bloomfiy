@@ -184,6 +184,7 @@
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Checkout\" />
     <Folder Include="Views\Event\" />
+    <Folder Include="Views\Home\tttt\" />
     <Folder Include="Views\Information\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Product\" />
