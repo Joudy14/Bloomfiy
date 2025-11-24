@@ -166,7 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
+    <Folder Include="Content\qq\" />
     <Folder Include="Models\" />
     <Folder Include="Script\" />
     <Folder Include="Views\Account\" />
