@@ -13,5 +13,10 @@ namespace Bloomfiy.Controllers
         {
             return View();
         }
+        public ActionResult Booking()
+        {
+            return View();
+        }
+
     }
 }

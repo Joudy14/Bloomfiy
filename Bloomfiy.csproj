@@ -130,6 +130,7 @@
     <Compile Include="Controllers\Admin\AdminProductController.cs" />
     <Compile Include="Controllers\Admin\AdminUserController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CareGuideController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\EventController.cs" />
@@ -137,8 +138,6 @@
     <Compile Include="Controllers\InformationController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\Test1Controller.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,10 +181,9 @@
     <Folder Include="Views\AdminProduct\" />
     <Folder Include="Views\AdminUser\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Blog\" />
+    <Folder Include="Views\Care\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Checkout\" />
-    <Folder Include="Views\Event\" />
     <Folder Include="Views\Information\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Product\" />
@@ -196,6 +194,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\Post.cshtml" />
+    <Content Include="Views\Blog\Category.cshtml" />
+    <Content Include="Views\CareGuide\Index.cshtml" />
+    <Content Include="Views\CareGuide\Details.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Event\Booking.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
