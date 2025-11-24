@@ -137,6 +137,7 @@
     <Compile Include="Controllers\InformationController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\Test1Controller.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -185,12 +186,9 @@
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Checkout\" />
     <Folder Include="Views\Event\" />
-    <Folder Include="Views\Home\nnnnn\" />
-    <Folder Include="Views\Home\tttt\" />
     <Folder Include="Views\Information\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Product\" />
-    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
