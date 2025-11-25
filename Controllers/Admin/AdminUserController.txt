@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Bloomfiy.Controllers.Admin
+{
+    public class AdminUserController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateRole(int id, string role)
+        {
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public ActionResult Deactivate(int id)
+        {
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public ActionResult Activate(int id)
+        {
+            return Json(new { success = true });
+        }
+    }
+}

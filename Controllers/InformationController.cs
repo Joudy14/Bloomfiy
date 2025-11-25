@@ -13,6 +13,5 @@ namespace Bloomfiy.Controllers
         public ActionResult PrivacyPolicy() => View();
         public ActionResult TermsOfService() => View();
         public ActionResult RefundPolicy() => View();
-        public ActionResult CareGuides() => View();  // Move from CareGuideController?
     }
 }
