@@ -1,7 +1,181 @@
 ﻿@{
     ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-<p>Use this area to provide additional information.</p>
+}
+<main class="about">
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="aboutbg_pic.jpg" alt="Bloomfiy flower shop exterior">
+        <div class="hero-overlay">
+            <h1>Where Flowers Speak the Language of Love</h1>
+            <p>One poetry, one bouquet at a time</p>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="intro">
+        <div class="intro-text">
+            <h2>Who We Are</h2>
+            <p><strong>Bloomfiy</strong> is a flower boutique dedicated to simple, elegant designs crafted with love. We celebrate the beauty of every bloom — fresh roses, wild daisies, lilies, tulips, and more — combining them to create art that touches hearts.</p>
+            <p>We believe that flowers are not just gifts, but emotions — little symbols of care, joy, and connection that speak louder than words.</p>
+            <p>Founded in 2018, our journey began with a simple flower stall and a big dream: to bring the beauty of nature into people's lives through thoughtfully designed floral arrangements. Today, we continue to grow while staying true to our roots - focusing on quality, sustainability, and the personal touch that makes every Bloomfiy bouquet special.</p>
+        </div>
+        <div class="intro-image">
+            <img src="aboutintro.jpg" alt="Florist arranging flowers">
+        </div>
+    </section>
+
+    <!-- Why Choose Bloomfiy -->
+    <section class="why">
+        <h2>Why Choose Bloomfiy?</h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <img src="fresh.jpg" alt="Fresh flowers">
+                <h3>Fresh & Local</h3>
+                <p>All our flowers are handpicked daily from trusted local growers. Freshness is our promise, from petal to delivery.</p>
+            </div>
+            <div class="why-card">
+                <img src="event.jpg" alt="Wedding flowers">
+                <h3>Events & Occasions</h3>
+                <p>We design unique arrangements for weddings, birthdays, and celebrations — making every moment bloom beautifully.</p>
+            </div>
+            <div class="why-card">
+                <img src="eco.jpg" alt="Eco-friendly floristry">
+                <h3>Eco-friendly Touch</h3>
+                <p>We use sustainable wrapping, minimal plastic, and eco-conscious packaging to protect both beauty and nature.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section class="values">
+        <h2>Our Values</h2>
+        <div class="values-grid">
+            <div class="value-item">
+                <h3>🌿 Simplicity</h3>
+                <p>We believe beauty lies in simplicity — soft colors, natural textures, and gentle details that let each flower's natural elegance shine through.</p>
+            </div>
+            <div class="value-item">
+                <h3>🌸 Love for Flowers</h3>
+                <p>Flowers are our language. Each arrangement is a message of joy, kindness, and love, carefully crafted to convey your deepest emotions.</p>
+            </div>
+            <div class="value-item">
+                <h3>🌼 Authenticity</h3>
+                <p>Everything we do is from the heart — no mass production, only genuine, handmade creations that reflect our passion for floral artistry.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story / Timeline -->
+    <section class="timeline">
+        <h2>Our Story</h2>
+        <div class="timeline-container">
+
+            <div class="timeline-item">
+                <div class="year">2018</div>
+                <div class="content">
+                    <h3>Where It All Began</h3>
+                    <p>Bloomfiy started as a small flower stall surrounded by fields of wild blooms and endless dreams. Our founder, a passionate botanist with a love for floral design, began creating simple bouquets for friends and neighbors, quickly gaining recognition for her unique style and attention to detail.</p>
+                    <p>Those early days were filled with learning, experimentation, and building relationships with local flower growers who shared our commitment to quality and sustainability.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year">2019</div>
+                <div class="content">
+                    <h3>Finding Our Style</h3>
+                    <p>As word spread about our distinctive floral arrangements, we developed our signature style - a blend of rustic charm and modern elegance that celebrates the natural beauty of each flower. This year marked our first major event - providing floral arrangements for a local wedding that received rave reviews.</p>
+                    <p>We began building our team, bringing on talented florists who shared our vision and passion for creating meaningful floral experiences.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year">2020</div>
+                <div class="content">
+                    <h3>Our First Online Store</h3>
+                    <p>We opened our digital doors, delivering handmade bouquets to homes filled with love and warmth. The transition to e-commerce allowed us to reach customers beyond our local community while maintaining the personal touch that defined our brand.</p>
+                    <p>Despite the challenges of the pandemic, we adapted by offering contactless delivery and virtual consultations, strengthening our commitment to serving our customers in any circumstance.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year">2022</div>
+                <div class="content">
+                    <h3>Expanding Our Reach</h3>
+                    <p>This year marked significant growth as we expanded our operations to include corporate clients and larger events. We invested in advanced floral preservation techniques and sustainable packaging solutions, reinforcing our commitment to environmental responsibility.</p>
+                    <p>Our team grew to include specialists in event design, customer service, and floral education, allowing us to offer a more comprehensive range of services.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year">2023</div>
+                <div class="content">
+                    <h3>Expanding to Events</h3>
+                    <p>We began creating floral designs for weddings, birthdays, and every kind of celebration. Our event division quickly became one of our most popular services, with clients appreciating our ability to translate their vision into stunning floral reality.</p>
+                    <p>We launched our floral workshop series, sharing our knowledge and passion with the community through hands-on classes in floral design and care.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year">2024</div>
+                <div class="content">
+                    <h3>Recognition & Awards</h3>
+                    <p>Bloomfiy received the "Best Local Florist" award and was featured in several prominent floral design publications. This recognition validated our approach to combining traditional craftsmanship with innovative design.</p>
+                    <p>We established partnerships with several charitable organizations, donating a portion of our proceeds to community gardens and floral therapy programs.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year">2025</div>
+                <div class="content">
+                    <h3>Still Growing</h3>
+                    <p>Now, Bloomfiy continues to bloom every day — spreading beauty, peace, and nature's magic. We're exploring new avenues including subscription services, advanced floral preservation, and expanding our event design capabilities.</p>
+                    <p>Our commitment remains unchanged: to create beautiful, meaningful floral experiences that connect people and celebrate life's special moments, while maintaining our core values of quality, sustainability, and heartfelt service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet the Team -->
+    <section class="team">
+        <h2>Meet Our Florists</h2>
+        <p>Behind every Bloomfiy bouquet is a team of creative hands and warm hearts who love flowers as much as you do. Our talented florists bring diverse backgrounds and unique perspectives to their work, united by a shared passion for creating beauty and spreading joy through flowers.</p>
+
+        <!-- All team members -->
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="joud.png" alt="Florist Joud">
+                <h3>Joud</h3>
+                <p>Lead Designer & Founder</p>
+                <p class="team-bio">With over 10 years of experience in floral design, Joud's creative vision shapes every Bloomfiy arrangement. Her specialty is blending traditional techniques with contemporary aesthetics.</p>
+            </div>
+            <div class="team-member">
+                <img src="layan.png" alt="Florist Layan">
+                <h3>Layan</h3>
+                <p>Event Specialist</p>
+                <p class="team-bio">Layan brings magical floral visions to life for weddings and special events. Her attention to detail and creative flair ensure every event is uniquely beautiful and memorable.</p>
+            </div>
+            <div class="team-member">
+                <img src="bahar.png" alt="Florist Bahar">
+                <h3>Bahar</h3>
+                <p>Seasonal Collection Curator</p>
+                <p class="team-bio">Bahar's deep knowledge of seasonal blooms and color theory helps create our stunning seasonal collections. She works directly with growers to source the freshest, most beautiful flowers.</p>
+            </div>
+            <div class="team-member">
+                <img src="maftuna.png" alt="Florist Maftuna">
+                <h3>Maftuna</h3>
+                <p>Bouquet Stylist</p>
+                <p class="team-bio">Maftuna has a gift for creating bouquets that tell stories. Her arrangements are known for their emotional depth and perfect balance of color, texture, and form.</p>
+            </div>
+            <div class="team-member">
+                <img src="ayset.png" alt="Florist Ayset">
+                <h3>Ayset</h3>
+                <p>Customer Experience Manager</p>
+                <p class="team-bio">Ayset ensures every customer interaction is as beautiful as our flowers. She personally oversees custom orders to make sure each arrangement perfectly captures your sentiment.</p>
+            </div>
+        </div>
+    </section>
+
+</main>

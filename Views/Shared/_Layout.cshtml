@@ -1,42 +1,112 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Bloomfiy</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/faq.css">
+    <link rel="stylesheet" href="~/Content/DeliveryInfo.css">
+    <link rel="stylesheet" href="~/Content/Privacy.css">
+    <link rel="stylesheet" href="~/Content/terms.css">
+    <link rel="stylesheet" href="~/Content/refund.css">
+
+
+
+
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!-- Header & Navigation -->
+    <header>
+        <nav id="nav">
+            <div class="logo nav-common">
+                <img src="~/Images/webName.png" alt="Bloomfiy" class="webname-img">
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+            <ul class="nav-common">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                <li>@Html.ActionLink("Shop", "Catalog", "Product")</li>
+                <li>@Html.ActionLink("Blog", "Index", "Blog")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                <!-- User Account Links (will show when logged in) -->
+                @if (Request.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("My Account", "Dashboard", "Account")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                    <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                }
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                        <li>@Html.ActionLink("Events", "Services", "Event")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Policies</h3>
+                    <ul>
+                        <li>@Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Information")</li>
+                        <li>@Html.ActionLink("Terms of Service", "TermsOfService", "Information")</li>
+                        <li>@Html.ActionLink("Delivery Information", "DeliveryInfo", "Information")</li>
+                        <li>@Html.ActionLink("Refund Policy", "RefundPolicy", "Information")</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Subscribe</h3>
+                    <p>Get updates on new arrivals and special offers</p>
+                    <div class="subscribe-form">
+                        <input type="email" placeholder="Your email address">
+                        <button class="subscribe-btn">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; @DateTime.Now.Year Bloomfiy Flower Shop. All rights reserved.</p>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <!-- Your custom JavaScript -->
+    <script src="~/Scripts/script.js"></script>
+    <script src="~/Scripts/faq.js"></script>
+    <script src="~/Scripts/DeliveryInfo.js"></script>
+    <script src="privacy.js"></script>
+    <script src="terms.js"></script>
+    <script src="refund.js"></script>
+
+
+
+
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

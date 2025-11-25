@@ -1,0 +1,186 @@
+/* Delivery Information Page Styles */
+.delivery-page {
+    margin-top: 6.6rem;
+}
+
+.page-hero {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('delivery-hero.jpg') center/cover;
+    padding: 100px 0;
+    text-align: center;
+    color: white;
+}
+
+.page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.page-hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.delivery-content {
+    padding: 80px 0;
+    background-color: #f9f7f2;
+}
+
+.delivery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.delivery-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.delivery-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.delivery-card h3 {
+    color: #5a7c5a;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.delivery-card p {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.delivery-card ul {
+    text-align: left;
+    color: #666;
+    list-style: none;
+    padding: 0;
+}
+
+.delivery-card li {
+    padding: 5px 0;
+    position: relative;
+    padding-left: 20px;
+}
+
+.delivery-card li:before {
+    content: "•";
+    color: #8b7355;
+    position: absolute;
+    left: 0;
+}
+
+.delivery-details {
+    margin-bottom: 60px;
+}
+
+.delivery-details h2 {
+    text-align: center;
+    color: #8b7355;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.detail-item {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.detail-item h4 {
+    color: #5a7c5a;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.detail-item p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.delivery-faq {
+    background: white;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.delivery-faq h2 {
+    text-align: center;
+    color: #8b7355;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.faq-pair {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.faq-pair:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.faq-pair h4 {
+    color: #5a7c5a;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.faq-pair p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .page-hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .delivery-card {
+        padding: 30px 20px;
+    }
+    
+    .delivery-faq {
+        padding: 30px 20px;
+    }
+    
+    .delivery-details h2,
+    .delivery-faq h2 {
+        font-size: 2rem;
+    }
+}

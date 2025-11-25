@@ -1,0 +1,95 @@
+@{
+    ViewBag.Title = "FAQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<main class="faq-page">
+    <section class="page-hero">
+        <div class="hero-content">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about our flowers and services</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-categories">
+                <button class="category-btn active" data-category="all">All Questions</button>
+                <button class="category-btn" data-category="ordering">Ordering</button>
+                <button class="category-btn" data-category="delivery">Delivery</button>
+                <button class="category-btn" data-category="care">Flower Care</button>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item" data-category="ordering">
+                    <div class="faq-question">
+                        <h3>How far in advance should I place my order?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We recommend placing orders at least 48 hours in advance for standard arrangements. For weddings and large events, we suggest booking 2-3 weeks ahead to ensure availability.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="ordering">
+                    <div class="faq-question">
+                        <h3>Can I customize my flower arrangement?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We specialize in custom arrangements. You can specify your preferred colors, flower types, and style during the ordering process or contact us directly for personalized service.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="delivery">
+                    <div class="faq-question">
+                        <h3>What are your delivery areas and times?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We deliver within the city limits from 8:00 AM to 6:00 PM, Monday through Saturday. Same-day delivery is available for orders placed before 2:00 PM.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="delivery">
+                    <div class="faq-question">
+                        <h3>Do you offer international delivery?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, we only offer local delivery within our city. However, we're working on expanding our delivery services in the future.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="care">
+                    <div class="faq-question">
+                        <h3>How can I make my flowers last longer?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Change the water every 2 days, trim stems at an angle, keep away from direct sunlight and heat sources, and use flower food provided with your arrangement.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="care">
+                    <div class="faq-question">
+                        <h3>Are your flowers locally sourced?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We prioritize working with local growers and source 80% of our flowers from within 100 miles. The rest are imported for variety and seasonal availability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Still have questions?</h2>
+            <p>We're here to help! Contact us for any additional inquiries.</p>
+            <a href="contact.html" class="cta-button">Contact Us</a>
+        </div>
+    </section>
+</main>

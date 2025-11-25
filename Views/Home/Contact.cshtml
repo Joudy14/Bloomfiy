@@ -1,17 +1,40 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<!-- Contact Section -->
+<section id="contact-section">
+    <div class="contact-container">
+        <div class="contact-header">
+            <h1>Contact Bloomfiy</h1>
+            <p>We’d love to hear from you! Whether it’s a special event, a custom bouquet, or a simple hello, reach out to us anytime.</p>
+        </div>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" id="phone" placeholder="Your Phone">
+            </div>
+            <div class="form-group">
+                <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="send-btn">Send Message</button>
+        </form>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+        <div id="successMessage" style="display: none; text-align: center; margin-top: 30px;">
+            <h2 style="color: #5a7c5a; font-style: italic;"> Thank you for reaching out!</h2>
+            <p style="color: #666;">Your message has been sent successfully — we’ll get back to you soon.</p>
+            <a href="#" id="sendAnother" style="color: #8b7355; font-weight: 500; text-decoration: none; border: 1px solid #8b7355; padding: 8px 14px; border-radius: 5px; display: inline-block; margin-top: 10px;">Click here to send another message</a>
+        </div>
+
+        <div class="contact-details">
+            <h3>We’re all ears – get in touch!</h3>
+            <p><strong>Email:</strong> bloomfiy@gmail.com</p>
+            <p><strong>Phone:</strong> +90 555 123 4567</p>
+        </div>
+    </div>
+</section>

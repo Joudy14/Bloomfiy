@@ -144,6 +144,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\DeliveryInfo.css" />
+    <Content Include="Content\faq.css" />
+    <Content Include="Content\Privacy.css" />
+    <Content Include="Content\refund.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\terms.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -151,6 +157,17 @@
     <Content Include="Image\product_img\peony\peony_pink.png" />
     <Content Include="Image\product_img\peony\peony_red.png" />
     <Content Include="Image\product_img\peony\peony_wihte.png" />
+    <Content Include="Script\DeliveryInfo.js" />
+    <Content Include="Script\faq.js" />
+    <Content Include="Script\Privacy.js" />
+    <Content Include="Script\refund.js" />
+    <Content Include="Script\script.js" />
+    <None Include="Views\Information\FAQ.cshtml" />
+    <None Include="Views\Information\PrivacyPolicy.cshtml" />
+    <Content Include="Script\terms.js" />
+    <None Include="Views\Information\TermsOfService.cshtml" />
+    <None Include="Views\Information\DeliveryInfo.cshtml" />
+    <None Include="Views\Information\RefundPolicy.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -168,12 +185,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\pp\" />
-    <Folder Include="Content\ss\%27%27\" />
-    <Folder Include="Content\ss\aa\kk\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Script\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\AdminCatagory\" />
     <Folder Include="Views\AdminContent\" />
@@ -185,7 +198,6 @@
     <Folder Include="Views\Care\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Checkout\" />
-    <Folder Include="Views\Information\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
