@@ -1,8 +1,128 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Blog - Floral Inspiration & Tips";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<!-- Blog Hero Section -->
+<section class="blog-hero">
+    <div class="container">
+        <div class="blog-hero-content">
+            <h1>Floral Inspiration & Care Tips</h1>
+            <p>Discover the art of flowers with our expert guides, seasonal inspiration, and care tips</p>
+        </div>
+    </div>
+</section>
 
-<p>This page is under development. Content coming soon.</p> 
+<!-- Blog Categories -->
+<section class="blog-categories">
+    <div class="container">
+        <div class="categories-grid">
+            <a href="@Url.Action("Category", "Blog", new { category = "care-tips" })" class="category-card">
+                <div class="category-icon">🌿</div>
+                <h3>Care Tips</h3>
+                <p>Keep your flowers fresh longer</p>
+            </a>
+            <a href="@Url.Action("Category", "Blog", new { category = "seasonal" })" class="category-card">
+                <div class="category-icon">🌸</div>
+                <h3>Seasonal Guide</h3>
+                <p>Best flowers for each season</p>
+            </a>
+            <a href="@Url.Action("Category", "Blog", new { category = "arrangements" })" class="category-card">
+                <div class="category-icon">💐</div>
+                <h3>Arrangements</h3>
+                <p>Creative floral designs</p>
+            </a>
+            <a href="@Url.Action("Category", "Blog", new { category = "events" })" class="category-card">
+                <div class="category-icon">🎉</div>
+                <h3>Events</h3>
+                <p>Floral decor for special occasions</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Posts -->
+<section class="featured-posts">
+    <div class="container">
+        <h2 class="section-title">Featured Articles</h2>
+        <div class="posts-grid">
+            <!-- Post 1 -->
+            <article class="post-card featured">
+                <div class="post-image">
+                    <img src="~/Images/blog/spring-care.jpg" alt="Spring Flower Care">
+                    <span class="post-category">Care Tips</span>
+                </div>
+                <div class="post-content">
+                    <h3><a href="@Url.Action("Post", "Blog", new { id = 1 })">Spring Flower Care Guide: Keeping Your Blooms Fresh</a></h3>
+                    <p class="post-excerpt">Learn how to care for your spring flowers to ensure they stay vibrant and beautiful throughout the season...</p>
+                    <div class="post-meta">
+                        <span class="post-date">March 15, 2024</span>
+                        <span class="read-time">5 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="~/Images/blog/wedding-bouquets.jpg" alt="Wedding Bouquets">
+                    <span class="post-category">Events</span>
+                </div>
+                <div class="post-content">
+                    <h3><a href="@Url.Action("Post", "Blog", new { id = 2 })">10 Stunning Wedding Bouquet Ideas for 2024</a></h3>
+                    <p class="post-excerpt">Discover the latest trends in wedding bouquets that will make your special day unforgettable...</p>
+                    <div class="post-meta">
+                        <span class="post-date">March 10, 2024</span>
+                        <span class="read-time">7 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="~/Images/blog/rose-care.jpg" alt="Rose Care">
+                    <span class="post-category">Care Tips</span>
+                </div>
+                <div class="post-content">
+                    <h3><a href="@Url.Action("Post", "Blog", new { id = 3 })">The Ultimate Guide to Rose Care and Maintenance</a></h3>
+                    <p class="post-excerpt">Everything you need to know about growing and caring for beautiful roses in your garden...</p>
+                    <div class="post-meta">
+                        <span class="post-date">March 5, 2024</span>
+                        <span class="read-time">6 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 4 -->
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="~/Images/blog/summer-flowers.jpg" alt="Summer Flowers">
+                    <span class="post-category">Seasonal</span>
+                </div>
+                <div class="post-content">
+                    <h3><a href="@Url.Action("Post", "Blog", new { id = 4 })">Top Summer Flowers That Thrive in Heat</a></h3>
+                    <p class="post-excerpt">Discover which flowers love the summer sun and how to keep them blooming all season long...</p>
+                    <div class="post-meta">
+                        <span class="post-date">February 28, 2024</span>
+                        <span class="read-time">4 min read</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="blog-newsletter">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2>Get Floral Inspiration Delivered</h2>
+            <p>Subscribe to our newsletter for weekly flower care tips, seasonal guides, and exclusive offers</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="subscribe-btn">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section>

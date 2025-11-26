@@ -1,8 +1,130 @@
-﻿
-@{
-    ViewBag.Title = "Post";
+﻿@{
+    ViewBag.Title = "Spring Flower Care Guide - Bloomfiy Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Post</h2>
+<!-- Blog Post Header -->
+<section class="post-header">
+    <div class="container">
+        <div class="post-header-content">
+            <nav class="breadcrumb">
+                <a href="@Url.Action("Index", "Home")">Home</a> &gt;
+                <a href="@Url.Action("Index", "Blog")">Blog</a> &gt;
+                <a href="@Url.Action("Category", "Blog", new { category = "care-tips" })">Care Tips</a> &gt;
+                <span>Spring Flower Care</span>
+            </nav>
+            <h1>Spring Flower Care Guide: Keeping Your Blooms Fresh</h1>
+            <div class="post-meta-large">
+                <div class="author-info">
+                    <img src="~/Images/blog/author.jpg" alt="Author" class="author-avatar">
+                    <div>
+                        <span class="author-name">Sarah Johnson</span>
+                        <span class="post-date">March 15, 2024 • 5 min read</span>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="share-btn" onclick="sharePost()">Share</button>
+                    <button class="save-btn" onclick="savePost()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<p>This page is under development. Content coming soon.</p> 
+<!-- Featured Image -->
+<section class="post-featured-image">
+    <div class="container">
+        <img src="~/Images/blog/spring-care-large.jpg" alt="Spring Flower Care">
+    </div>
+</section>
+
+<!-- Blog Post Content -->
+<article class="post-content">
+    <div class="container">
+        <div class="post-body">
+            <p class="post-intro">Spring is a time of renewal and beauty, and what better way to celebrate than with fresh, vibrant flowers? In this comprehensive guide, we'll share expert tips to help your spring blooms stay fresh and beautiful longer.</p>
+
+            <h2>Understanding Spring Flowers</h2>
+            <p>Spring flowers like tulips, daffodils, and hyacinths have unique needs. Understanding their specific requirements is the first step to ensuring their longevity.</p>
+
+            <h2>Essential Care Tips</h2>
+
+            <h3>1. Proper Watering Techniques</h3>
+            <p>Most spring flowers prefer consistently moist soil. Water them early in the morning to prevent evaporation and fungal growth.</p>
+
+            <div class="tip-box">
+                <strong>Pro Tip:</strong> Use room temperature water to avoid shocking the delicate roots of spring blooms.
+            </div>
+
+            <h3>2. Ideal Temperature Conditions</h3>
+            <p>Keep your flowers in a cool environment away from direct sunlight and heating vents. Most spring flowers thrive at temperatures between 60-70°F (15-21°C).</p>
+
+            <h3>3. Regular Maintenance</h3>
+            <ul>
+                <li>Remove wilted flowers promptly</li>
+                <li>Change water every 2-3 days</li>
+                <li>Trim stems at an angle every few days</li>
+                <li>Keep away from ripening fruits</li>
+            </ul>
+
+            <blockquote>
+                "A flower's beauty is temporary, but with proper care, its impact can last much longer in our hearts and memories."
+            </blockquote>
+
+            <h2>Seasonal Flower Recommendations</h2>
+            <div class="flower-recommendations">
+                <div class="flower-item">
+                    <img src="~/Images/blog/tulip.jpg" alt="Tulips">
+                    <h4>Tulips</h4>
+                    <p>Known for continuing to grow after cutting. Keep in cool water and away from direct sunlight.</p>
+                </div>
+                <div class="flower-item">
+                    <img src="~/Images/blog/daffodil.jpg" alt="Daffodils">
+                    <h4>Daffodils</h4>
+                    <p>Best kept alone as their sap can be harmful to other flowers. Change water frequently.</p>
+                </div>
+                <div class="flower-item">
+                    <img src="~/Images/blog/hyacinth.jpg" alt="Hyacinths">
+                    <h4>Hyacinths</h4>
+                    <p>Fragrant and beautiful. Keep in cool locations and handle carefully as stems can be fragile.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post Tags & Share -->
+        <div class="post-footer">
+            <div class="post-tags">
+                <span>Tags:</span>
+                <a href="@Url.Action("Category", "Blog", new { category = "spring" })" class="tag">Spring</a>
+                <a href="@Url.Action("Category", "Blog", new { category = "care-tips" })" class="tag">Care Tips</a>
+                <a href="@Url.Action("Category", "Blog", new { category = "seasonal" })" class="tag">Seasonal</a>
+            </div>
+            <div class="share-buttons">
+                <button class="share-btn facebook" onclick="shareOnFacebook()">Facebook</button>
+                <button class="share-btn twitter" onclick="shareOnTwitter()">Twitter</button>
+                <button class="share-btn pinterest" onclick="shareOnPinterest()">Pinterest</button>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- Related Posts -->
+<section class="related-posts">
+    <div class="container">
+        <h2>You Might Also Like</h2>
+        <div class="posts-grid">
+            <!-- Related post cards similar to index page -->
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="~/Images/blog/summer-care.jpg" alt="Summer Care">
+                    <span class="post-category">Care Tips</span>
+                </div>
+                <div class="post-content">
+                    <h3><a href="@Url.Action("Post", "Blog", new { id = 5 })">Summer Flower Care: Beating the Heat</a></h3>
+                    <p class="post-excerpt">Keep your flowers thriving during the hot summer months with these essential tips...</p>
+                </div>
+            </article>
+            <!-- Add 2-3 more related posts -->
+        </div>
+    </div>
+</section>

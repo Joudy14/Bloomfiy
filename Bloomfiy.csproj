@@ -129,7 +129,7 @@
     <Content Include="Controllers\Admin\AdminOrderController.txt" />
     <Content Include="Controllers\Admin\AdminProductController.txt" />
     <Content Include="Controllers\Admin\AdminUserController.txt" />
-    <Content Include="Controllers\BlogController.txt" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Content Include="Controllers\CartController.txt" />
     <Content Include="Controllers\CheckoutController.txt" />
     <Content Include="Controllers\EventController.txt" />
