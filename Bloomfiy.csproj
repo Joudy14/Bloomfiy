@@ -183,7 +183,16 @@
     <None Include="Views\Information\TermsOfService.cshtml" />
     <None Include="Views\Information\DeliveryInfo.cshtml" />
     <None Include="Views\Information\RefundPolicy.cshtml" />
-    <None Include="Views\Account1\Login.cshtml" />
+    <None Include="Views\Account\Login.cshtml" />
+    <None Include="Views\Account\Register.cshtml" />
+    <None Include="Views\Account\Dashboard.cshtml" />
+    <None Include="Views\Account\Profile.cshtml" />
+    <None Include="Views\Account\Addresses.cshtml" />
+    <None Include="Views\Account\Wishlist.cshtml" />
+    <None Include="Views\Order\Confirmation.cshtml" />
+    <None Include="Views\Order\History.cshtml" />
+    <None Include="Views\Order\Tracking.cshtml" />
+    <None Include="Views\Order\Details.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -203,7 +212,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\AdminCatagory\" />
     <Folder Include="Views\AdminContent\" />
     <Folder Include="Views\AdminEvent\" />
@@ -214,7 +222,6 @@
     <Folder Include="Views\Care\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Checkout\" />
-    <Folder Include="Views\Order\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
