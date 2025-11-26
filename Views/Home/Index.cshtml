@@ -3,126 +3,125 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-    <!-- Hero Section -->
-    <section id="header-hero">
-        <div class="header-bg">
-            <img src="/Images/backgroundM.jpg" alt="Beautiful Flower Background">
+<!-- Hero Section -->
+<section id="header-hero">
+    <div class="header-bg parallax-bg">
+        <img src="~/Images/backgroundM.jpg" alt="Beautiful Flower Background" class="parallax-image">
+    </div>
+    <div class="header-content">
+        <div class="hero-logo">
         </div>
-        <div class="header-content">
-            <div class="hero-logo">
-            </div>
-            <p class="heading-1">Premium Floral Arrangements</p>
-            <h1>Welcome to<br><span class="wave">Bloomfiy</span><br>Unique Flower Shop</h1>
-            <p class="description">Discover breathtaking floral art that captures your heart. <br> Elegant expressions of nature's beauty crafted with passion.</p>
-            <div class="button">
-                <a href="#Shop">PICK YOUR FLOWERS</a>
-            </div>
+        <p class="heading-1">Premium Floral Arrangements</p>
+        <h1>Welcome to<br><span class="wave">Bloomfiy</span><br>Unique Flower Shop</h1>
+        <p class="description">Discover breathtaking floral art that captures your heart.</br> Elegant expressions of nature's beauty crafted with passion.</p>
+        <div class="button">
+            @Html.ActionLink("PICK YOUR FLOWERS", "Catalog", "Product")
         </div>
-    </section>
+    </div>
+</section>
 
-
-    <!-- Seasonal Flowers Section -->
-    <section id="seasonal-flowers" class="section">
-        <div class="container">
-            <div class="seasonal-header">
-                <h2>Seasonal Flowers</h2>
-                <p>Discover our current seasonal collection</p>
-            </div>
-            <div class="seasonal-grid">
-                <div class="flower-card">
-                    <div class="flower-slider">
-                        <div class="flower-slides">
-                            <div class="flower-slide"><img src="~/Images/product_img/peony/peony_pink.png" alt="Peony Flower Pink"></div>
-                            <div class="flower-slide"><img src="~/Images/product_img/peony/peony_red.png" alt="Peony Flower Red"></div>
-                            <div class="flower-slide"><img src="~/Images/product_img/peony/peony_wihte.png" alt="Peony Flower Wihte"></div>
-                        </div>
-                    </div>
-                    <h3>Peony</h3>
-                    <div class="flower-overlay">
-                        <a href="#peony" class="view-details">View Details</a>
+<!-- Seasonal Flowers Section -->
+<section id="seasonal-flowers" class="section">
+    <div class="container">
+        <div class="seasonal-header">
+            <h2>Seasonal Flowers</h2>
+            <p>Discover our current seasonal collection</p>
+        </div>
+        <div class="seasonal-grid">
+            <div class="flower-card">
+                <div class="flower-slider">
+                    <div class="flower-slides">
+                        <div class="flower-slide"><img src="~/Images/product_img/peony/peony_pink.png" alt="Peony Flower Pink"></div>
+                        <div class="flower-slide"><img src="~/Images/product_img/peony/peony_red.png" alt="Peony Flower Red"></div>
+                        <div class="flower-slide"><img src="~/Images/product_img/peony/peony_wihte.png" alt="Peony Flower Wihte"></div>
                     </div>
                 </div>
-                <div class="flower-card">
-                    <div class="flower-slider">
-                        <div class="flower-slides">
-                            <div class="flower-slide"><img src="/Images/product_img/chrysanthemum_pink.png" alt="Chrysanthemum Flower pink"></div>
-                            <div class="flower-slide"><img src="/Images/product_img/chrysanthemum_red.png" alt="Chrysanthemum Flower Red"></div>
-                            <div class="flower-slide"><img src="/Images/product_img/chrysanthemum_wihte.png" alt="Chrysanthemum Flower Wihte"></div>
-                        </div>
+                <h3>Peony</h3>
+                <div class="flower-overlay">
+                    <a href="#peony" class="view-details">View Details</a>
+                </div>
+            </div>
+            <div class="flower-card">
+                <div class="flower-slider">
+                    <div class="flower-slides">
+                        <div class="flower-slide"><img src="/Images/product_img/chrysanthemum_pink.png" alt="Chrysanthemum Flower pink"></div>
+                        <div class="flower-slide"><img src="/Images/product_img/chrysanthemum_red.png" alt="Chrysanthemum Flower Red"></div>
+                        <div class="flower-slide"><img src="/Images/product_img/chrysanthemum_wihte.png" alt="Chrysanthemum Flower Wihte"></div>
                     </div>
-                    <h3>Chrysanthemum</h3>
-                    <div class="flower-overlay">
-                        <a href="#chrysanthemum" class="view-details">View Details</a>
-                    </div>
+                </div>
+                <h3>Chrysanthemum</h3>
+                <div class="flower-overlay">
+                    <a href="#chrysanthemum" class="view-details">View Details</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
-    <!-- About Us Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="sc-content">
-                <h1>Our Story</h1>
-                <p class="description">At Bloomfiy, we specialize in creating opulent floral art inspired by nature's serenity. We offer local flowers priced individually by the stem, or arranged as elegant expressions of our craftsmanship.</p>
-                <p class="description">Located in the heart of the city, our space showcases a rich assortment of textures and delightful gifts. We sincerely appreciate your trust in us to work our floral magic.</p>
-                <a href="about.html" class="discover-link">Learn More...</a>
-            </div>
-            <div class="sc-media">
-                <div class="sc-media-bg">
-                    <img src="~/Images/about-image.jpg" alt="Our Flower Shop">
-                </div>
+<!-- About Us Section -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="sc-content">
+            <h1>Our Story</h1>
+            <p class="description">At Bloomfiy, we specialize in creating opulent floral art inspired by nature's serenity. We offer local flowers priced individually by the stem, or arranged as elegant expressions of our craftsmanship.</p>
+            <p class="description">Located in the heart of the city, our space showcases a rich assortment of textures and delightful gifts. We sincerely appreciate your trust in us to work our floral magic.</p>
+            <a href="about.html" class="discover-link">Learn More...</a>
+        </div>
+        <div class="sc-media">
+            <div class="sc-media-bg">
+                <img src="~/Images/about-image.jpg" alt="Our Flower Shop">
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Events Section -->
-    <section id="events" class="section">
-        <div class="container">
-            <div class="products-header">
-                <h2>Events & Occasions</h2>
-                <p>Perfect floral arrangements for your special moments</p>
+<!-- Events Section -->
+<section id="events" class="section">
+    <div class="container">
+        <div class="products-header">
+            <h2>Events & Occasions</h2>
+            <p>Perfect floral arrangements for your special moments</p>
+        </div>
+        <div class="events-grid">
+            <div class="event-card">
+                <h3>Weddings</h3>
+                <p>Elegant bridal bouquets and ceremony decorations</p>
             </div>
-            <div class="events-grid">
-                <div class="event-card">
-                    <h3>Weddings</h3>
-                    <p>Elegant bridal bouquets and ceremony decorations</p>
-                </div>
-                <div class="event-card">
-                    <h3>Corporate Events</h3>
-                    <p>Professional arrangements for business occasions</p>
-                </div>
-                <div class="event-card">
-                    <h3>Special Celebrations</h3>
-                    <p>Birthdays, anniversaries, and memorable moments</p>
-                </div>
+            <div class="event-card">
+                <h3>Corporate Events</h3>
+                <p>Professional arrangements for business occasions</p>
+            </div>
+            <div class="event-card">
+                <h3>Special Celebrations</h3>
+                <p>Birthdays, anniversaries, and memorable moments</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Blog Section -->
-    <section id="blog" class="section">
-        <div class="container">
-            <div class="blog-header">
-                <h2>From Our Blog</h2>
-                <p>Floral inspiration and care tips</p>
+<!-- Blog Section -->
+<section id="blog" class="section">
+    <div class="container">
+        <div class="blog-header">
+            <h2>From Our Blog</h2>
+            <p>Floral inspiration and care tips</p>
+        </div>
+        <div class="blog-content">
+            <div class="blog-post">
+                <img src="~/Images/blog1pic.jpg" alt="Spring Blooming Guide">
+                <h4>Seasonal Flowers</h4>
+                <h3>Spring Blooming Guide</h3>
+                <p class="description">Discover the best flowers for spring and how to care for them to ensure long-lasting beauty in your home.</p>
+                <a href="#blog" class="read-more">Read more...</a>
             </div>
-            <div class="blog-content">
-                <div class="blog-post">
-                    <img src="~/Images/blog1pic.jpg" alt="Spring Blooming Guide">
-                    <h4>Seasonal Flowers</h4>
-                    <h3>Spring Blooming Guide</h3>
-                    <p class="description">Discover the best flowers for spring and how to care for them to ensure long-lasting beauty in your home.</p>
-                    <a href="#blog" class="read-more">Read more...</a>
-                </div>
-                <div class="blog-post">
-                    <img src="~/Images/blog2pic.jpg" alt="Extend Your Bouquet's Life">
-                    <h4>Care Tips</h4>
-                    <h3>Extend Your Bouquet's Life</h3>
-                    <p class="description">Learn professional tips to keep your flowers fresh and vibrant for longer periods.</p>
-                    <a href="#blog" class="read-more">Read more...</a>
-                </div>
+            <div class="blog-post">
+                <img src="~/Images/blog2pic.jpg" alt="Extend Your Bouquet's Life">
+                <h4>Care Tips</h4>
+                <h3>Extend Your Bouquet's Life</h3>
+                <p class="description">Learn professional tips to keep your flowers fresh and vibrant for longer periods.</p>
+                <a href="#blog" class="read-more">Read more...</a>
             </div>
         </div>
-    </section>
+    </div>
+</section>

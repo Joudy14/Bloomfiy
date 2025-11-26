@@ -27,29 +27,42 @@
     <!-- Header & Navigation -->
     <header>
         <nav id="nav">
+            <!-- Logo as Link to Home -->
             <div class="logo nav-common">
-                <img src="~/Images/webName.png" alt="Bloomfiy" class="webname-img">
+                <a href="@Url.Action("Index", "Home")" class="logo-link">
+                    <img src="~/Images/webName.png" alt="Bloomfiy" class="webname-img">
+                </a>
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn">☰</button>
+
             <ul class="nav-common">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("About Us", "About", "Home")</li>
                 <li>@Html.ActionLink("Shop", "Catalog", "Product")</li>
+                <li>@Html.ActionLink("Events", "Services", "Event")</li>
                 <li>@Html.ActionLink("Blog", "Index", "Blog")</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                <!-- User Account Links (will show when logged in) -->
-                @if (Request.IsAuthenticated)
-                {
-                    <li>@Html.ActionLink("My Account", "Dashboard", "Account")</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-                    <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
-                }
-                else
-                {
-                    // <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                    // <li>@Html.ActionLink("Register", "Register", "Account")</li>
-                }
             </ul>
+
+            <!-- User Actions - Right Side -->
+            <div class="user-actions">
+                <!-- Wishlist Icon -->
+                <a href="@Url.Action("Index", "Wishlist")" class="action-icon wishlist-icon" title="Wishlist">
+                    ♡
+                    <span class="wishlist-count">0</span>
+                </a>
+
+                <!-- Cart Icon -->
+                <a href="@Url.Action("Index", "Cart")" class="action-icon cart-icon" title="Cart">
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+
+                <!-- Login Button -->
+                <a href="@Url.Action("Login", "Account")" class="login-btn">Login</a>
+            </div>
         </nav>
     </header>
 
@@ -107,7 +120,6 @@
     <script src="refund.js"></script>
     <script src="~/Scripts/blog.js"></script>
     <script src="~/Scripts/event.js"></script>
-
 
 
 
