@@ -9,7 +9,7 @@ namespace Bloomfiy.Controllers
     public class EventController : Controller
     {
         // GET: Event
-        public ActionResult Index()
+        public ActionResult Services()
         {
             return View();
         }

@@ -122,6 +122,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\blog.css" />
+    <Content Include="Content\event.css" />
     <Content Include="Controllers\AccountControllert.txt" />
     <Content Include="Controllers\Admin\AdminCatagoryController.txt" />
     <Content Include="Controllers\Admin\AdminContentController.txt" />
@@ -133,7 +134,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Content Include="Controllers\CartController.txt" />
     <Content Include="Controllers\CheckoutController.txt" />
-    <Content Include="Controllers\EventController.txt" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
     <Content Include="Controllers\OrderController.txt" />
@@ -175,6 +176,7 @@
     <Content Include="Images\webName.png" />
     <Content Include="Script\blog.js" />
     <Content Include="Script\DeliveryInfo.js" />
+    <Content Include="Script\event.js" />
     <Content Include="Script\faq.js" />
     <Content Include="Script\Privacy.js" />
     <Content Include="Script\refund.js" />
@@ -236,7 +238,7 @@
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\CareGuide\Index.cshtml" />
     <Content Include="Views\CareGuide\Details.cshtml" />
-    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Event\Services.cshtml" />
     <Content Include="Views\Event\Booking.cshtml" />
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Event Services - Bloomfiy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="events-hero">
+    <div class="container">
+        <h1>Event Floral Services</h1>
+        <p>Beautiful floral arrangements for your special moments</p>
+    </div>
+</section>
+
+<section class="event-services">
+    <div class="container">
+        <div class="services-grid">
+            <!-- Wedding Service -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="~/Images/events/wedding.jpg" alt="Wedding Flowers">
+                </div>
+                <div class="service-content">
+                    <h3>Weddings</h3>
+                    <p>Beautiful bridal bouquets, ceremony arrangements, and reception decor that make your special day unforgettable.</p>
+                    <ul>
+                        <li>Bridal bouquets</li>
+                        <li>Boutonnieres</li>
+                        <li>Ceremony arrangements</li>
+                        <li>Reception centerpieces</li>
+                    </ul>
+                    <a href="@Url.Action("Booking", "Event")" class="service-btn">Book Wedding Service</a>
+                </div>
+            </div>
+
+            <!-- Corporate Service -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="~/Images/events/corporate.jpg" alt="Corporate Events">
+                </div>
+                <div class="service-content">
+                    <h3>Corporate Events</h3>
+                    <p>Professional floral arrangements for business meetings, conferences, and corporate celebrations.</p>
+                    <ul>
+                        <li>Office decorations</li>
+                        <li>Conference arrangements</li>
+                        <li>Executive gifts</li>
+                        <li>Brand-themed flowers</li>
+                    </ul>
+                    <a href="@Url.Action("Booking", "Event")" class="service-btn">Book Corporate Service</a>
+                </div>
+            </div>
+
+            <!-- Special Occasions -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="~/Images/events/celebration.jpg" alt="Special Celebrations">
+                </div>
+                <div class="service-content">
+                    <h3>Special Celebrations</h3>
+                    <p>Perfect floral arrangements for birthdays, anniversaries, parties, and all your memorable moments.</p>
+                    <ul>
+                        <li>Birthday arrangements</li>
+                        <li>Anniversary bouquets</li>
+                        <li>Party decorations</li>
+                        <li>Special gift flowers</li>
+                    </ul>
+                    <a href="@Url.Action("Booking", "Event")" class="service-btn">Book Celebration Service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
