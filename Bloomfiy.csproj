@@ -122,7 +122,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\blog.css" />
+    <Content Include="Content\details.css" />
     <Content Include="Content\event.css" />
+    <Content Include="Content\shop.css" />
     <Content Include="Controllers\AccountControllert.txt" />
     <Content Include="Controllers\Admin\AdminCatagoryController.txt" />
     <Content Include="Controllers\Admin\AdminContentController.txt" />
@@ -138,7 +140,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
     <Content Include="Controllers\OrderController.txt" />
-    <Content Include="Controllers\ProductController.txt" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -170,9 +172,9 @@
     <Content Include="Images\joud.png" />
     <Content Include="Images\layan.png" />
     <Content Include="Images\maftuna.png" />
-    <Content Include="Images\product_img\peony\peony_pink.png" />
-    <Content Include="Images\product_img\peony\peony_red.png" />
-    <Content Include="Images\product_img\peony\peony_wihte.png" />
+    <Content Include="Images\products_img\peony\peony_pink.png" />
+    <Content Include="Images\products_img\peony\peony_red.png" />
+    <Content Include="Images\products_img\peony\peony_wihte.png" />
     <Content Include="Images\webName.png" />
     <Content Include="Scripts\blog.js" />
     <Content Include="Scripts\DeliveryInfo.js" />
@@ -183,6 +185,7 @@
     <Content Include="Scripts\script.js" />
     <None Include="Views\Information\FAQ.cshtml" />
     <None Include="Views\Information\PrivacyPolicy.cshtml" />
+    <Content Include="Scripts\shop.js" />
     <Content Include="Scripts\terms.js" />
     <None Include="Views\Information\TermsOfService.cshtml" />
     <None Include="Views\Information\DeliveryInfo.cshtml" />
@@ -211,6 +214,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Product\Catalog.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -225,7 +230,6 @@
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Checkout\" />
-    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

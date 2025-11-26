@@ -1,0 +1,176 @@
+﻿﻿@{
+    ViewBag.Title = "Peony - Bloomfiy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="product-detail-hero">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="@Url.Action("Index", "Home")">Home</a> &gt;
+            <a href="@Url.Action("Catalog", "Product")">Shop</a> &gt;
+            <span>Peony</span>
+        </nav>
+    </div>
+</section>
+
+<section class="product-detail">
+    <div class="container">
+        <div class="product-detail-grid">
+            <!-- Product Images -->
+            <div class="product-images">
+                <div class="main-image">
+                    <img src="~/Images/products_img/peony/peony_pink.png" alt="Pink Peony" id="mainProductImage">
+                </div>
+                <div class="image-thumbnails">
+                    <div class="thumbnail active">
+                        <img src="~/Images/products_img/peony/peony_pink.png" alt="Pink Peony">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="~/Images/products_img/peony/peony_red.png" alt="Red Peony">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="~/Images/products_img/peony/peony_wihte.png" alt="White Peony">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info-detail">
+                <h1>Peony</h1>
+
+                <!-- Color Selection -->
+                <div class="color-selection-detail">
+                    <label>Select Color:</label>
+                    <div class="color-options-detail">
+                        <div class="color-option-detail active" data-color="pink" data-price="68.99"
+                             data-image="/Images/products_img/peony/peony_pink.png">
+                            <div class="color-swatch-large" style="background-color: #ff69b4;"></div>
+                            <div class="color-info">
+                                <span class="color-name">Pink</span>
+                                <span class="color-price">$68.99</span>
+                            </div>
+                        </div>
+
+                        <div class="color-option-detail" data-color="red" data-price="72.99"
+                             data-image="/Images/products_img/peony/peony_red.png">
+                            <div class="color-swatch-large" style="background-color: #ff0000;"></div>
+                            <div class="color-info">
+                                <span class="color-name">Red</span>
+                                <span class="color-price">$72.99</span>
+                            </div>
+                        </div>
+
+                        <div class="color-option-detail" data-color="white" data-price="65.99"
+                             data-image="/Images/products_img/peony/peony_white.png">
+                            <div class="color-swatch-large" style="background-color: #ffffff; border: 1px solid #ccc;"></div>
+                            <div class="color-info">
+                                <span class="color-name">White</span>
+                                <span class="color-price">$65.99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-price-detail">
+                    <span class="current-price">$68.99</span>
+                    <span class="original-price">$78.99</span>
+                </div>
+
+                <div class="product-rating-detail">
+                    ⭐⭐⭐⭐⭐ (256 reviews)
+                </div>
+
+                <div class="product-features-detail">
+                    <div class="feature-item">
+                        <strong>Origin:</strong> Holland
+                    </div>
+                    <div class="feature-item">
+                        <strong>Scent:</strong> Scented
+                    </div>
+                    <div class="feature-item">
+                        <strong>Vase Life:</strong> 5-7 days (with proper care)
+                    </div>
+                    <div class="feature-item">
+                        <strong>Bloom Stage:</strong> Bud
+                    </div>
+                    <div class="feature-item">
+                        <strong>Available Colors:</strong> Pink, Red, White
+                    </div>
+                </div>
+
+                <!-- Add to Cart -->
+                <div class="add-to-cart-detail">
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" value="1" min="1" max="10" class="quantity-input">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart-btn large" data-product-id="7" data-color="pink" data-price="68.99">
+                        Add to Cart - $68.99
+                    </button>
+                </div>
+
+                <!-- Quick Features -->
+                <div class="quick-features">
+                    <div class="feature">
+                        <span>🚚</span>
+                        <div>
+                            <strong>Free Delivery</strong>
+                            <p>On orders over $50</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <span>💐</span>
+                        <div>
+                            <strong>Fresh Guarantee</strong>
+                            <p>7-day freshness guarantee</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <span>🎨</span>
+                        <div>
+                            <strong>3 Colors</strong>
+                            <p>Multiple color options</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Description & Care -->
+        <div class="product-description-section">
+            <div class="description-tabs">
+                <button class="tab-btn active" data-tab="description">Description</button>
+                <button class="tab-btn" data-tab="care">Care Guide</button>
+            </div>
+
+            <div class="tab-content active" id="description">
+                <h2>About Peonies</h2>
+                <p>Peonies are renowned for their large, luxurious blooms and delightful fragrance. These lush flowers feature layer upon layer of delicate petals that create a stunning visual display. Known as the flower of prosperity and romance, peonies make an exceptional choice for special occasions.</p>
+
+                <div class="perfect-for">
+                    <h3>🎯 Perfect For</h3>
+                    <div class="occasion-tags">
+                        <span class="occasion-tag">Birthday</span>
+                        <span class="occasion-tag">Thank You</span>
+                        <span class="occasion-tag">Weddings</span>
+                        <span class="occasion-tag">Romantic Occasions</span>
+                        <span class="occasion-tag">Anniversary</span>
+                        <span class="occasion-tag">Special Events</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="care">
+                <h2>Peony Care Guide</h2>
+                <div class="care-guide-content">
+                    <div class="care-step">Keep in cool environment away from direct sunlight</div>
+                    <div class="care-step">Change water every 2 days and trim stems at an angle</div>
+                    <div class="care-step">Remove any leaves that fall below the water line</div>
+                    <div class="care-step">Display in a clean vase with fresh flower food</div>
+                    <div class="care-step">Avoid placing near ripening fruit or heat sources</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

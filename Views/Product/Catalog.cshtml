@@ -1,0 +1,166 @@
+﻿﻿@{
+    ViewBag.Title = "Flower Shop - Bloomfiy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="shop-hero">
+    <div class="container">
+        <h1>Our Flower Collection</h1>
+        <p>Discover beautiful floral arrangements for every occasion</p>
+    </div>
+</section>
+
+<section class="product-catalog">
+    <div class="container">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+            <div class="filter-group">
+                <h3>Categories</h3>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" checked> Bouquets
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Single Varieties
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Arrangements
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Premium Collection
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Occasions</h3>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox"> Romantic
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Birthday
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Wedding
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Thank You
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Sympathy
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Celebration
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Scent</h3>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" checked> Scented
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Unscented
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Origin</h3>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox"> Holland
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Ecuador
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Colombia
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox"> Local
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Colors</h3>
+                <div class="color-filters">
+                    <div class="color-option" style="background-color: #ff0000;" data-color="red" title="Red"></div>
+                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ccc;" data-color="white" title="White"></div>
+                    <div class="color-option" style="background-color: #ff69b4;" data-color="pink" title="Pink"></div>
+                    <div class="color-option" style="background-color: #ffd700;" data-color="yellow" title="Yellow"></div>
+                    <div class="color-option" style="background-color: #800080;" data-color="purple" title="Purple"></div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Price Range</h3>
+                <div class="price-range">
+                    <input type="range" min="0" max="200" value="100" class="price-slider">
+                    <div class="price-values">
+                        <span>$0</span>
+                        <span>$200</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="clear-filters-btn">Clear All Filters</button>
+        </aside>
+
+        <!-- Products Main Area -->
+        <div class="products-main">
+            <div class="products-header">
+                <div class="results-count">
+                    Showing 1 product
+                </div>
+                <div class="sort-options">
+                    <select class="sort-select">
+                        <option>Sort by: Featured</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest First</option>
+                        <option>Most Popular</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <!-- Only Peony Product -->
+                <!-- Only Peony Product - SIMPLE VERSION -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="~/Images/products_img/peony/peony_pink.png" alt="Peony Flowers" class="main-product-image">
+                        <div class="product-actions">
+                            <button class="wishlist-btn" title="Add to Wishlist">♡</button>
+                            <button class="quick-view-btn" title="Quick View">👁️</button>
+                        </div>
+                        <div class="product-badge">Premium</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Peony</h3>
+                        <p class="product-description">Lush, rose-shaped blooms with rich sweet fragrance</p>
+                        <div class="product-price">
+                            <span class="current-price">$68.99</span>
+                            <span class="original-price">$78.99</span>
+                        </div>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐⭐ (256 reviews)
+                        </div>
+                        <button class="add-to-cart-btn" data-product-id="7">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Load More - Moved DOWN and fixed -->
+                <div class="load-more-container">
+                    <button class="load-more-btn" id="loadMoreBtn">Load More Flowers</button>
+                    <div class="no-more-products" style="display: none;">
+                        No more flowers to load. You've seen all our beautiful collection!
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
