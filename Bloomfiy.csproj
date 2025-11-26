@@ -183,6 +183,7 @@
     <None Include="Views\Information\TermsOfService.cshtml" />
     <None Include="Views\Information\DeliveryInfo.cshtml" />
     <None Include="Views\Information\RefundPolicy.cshtml" />
+    <None Include="Views\Account1\Login.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
