@@ -85,19 +85,6 @@ function initMainPage() {
         });
     });
 
-    // Parallax Scrolling Effect for Hero Section
-    function initParallax() {
-        const parallaxImage = document.querySelector('#header-hero .header-bg img');
-
-        if (!parallaxImage) return;
-
-        window.addEventListener('scroll', function () {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5; 
-            parallaxImage.style.transform = `translateY(${rate}px)`;
-        });
-    }
-
     document.addEventListener('DOMContentLoaded', function () {
         initParallax();
     });

@@ -66,7 +66,7 @@
             <h1>Our Story</h1>
             <p class="description">At Bloomfiy, we specialize in creating opulent floral art inspired by nature's serenity. We offer local flowers priced individually by the stem, or arranged as elegant expressions of our craftsmanship.</p>
             <p class="description">Located in the heart of the city, our space showcases a rich assortment of textures and delightful gifts. We sincerely appreciate your trust in us to work our floral magic.</p>
-            <a href="about.html" class="discover-link">Learn More...</a>
+            @Html.ActionLink("Learn More...", "About", "Home", null, new { @class = "discover-link" })
         </div>
         <div class="sc-media">
             <div class="sc-media-bg">
@@ -108,20 +108,22 @@
             <p>Floral inspiration and care tips</p>
         </div>
         <div class="blog-content">
+            <!-- Post 1 - Links to actual blog post -->
             <div class="blog-post">
-                <img src="~/Images/blog1pic.jpg" alt="Spring Blooming Guide">
-                <h4>Seasonal Flowers</h4>
-                <h3>Spring Blooming Guide</h3>
-                <p class="description">Discover the best flowers for spring and how to care for them to ensure long-lasting beauty in your home.</p>
-                <a href="#blog" class="read-more">Read more...</a>
-            </div>
-            <div class="blog-post">
-                <img src="~/Images/blog2pic.jpg" alt="Extend Your Bouquet's Life">
+                <img src="/Images/blog1pic.jpg" alt="Spring Flower Care">
                 <h4>Care Tips</h4>
-                <h3>Extend Your Bouquet's Life</h3>
-                <p class="description">Learn professional tips to keep your flowers fresh and vibrant for longer periods.</p>
-                <a href="#blog" class="read-more">Read more...</a>
+                <h3>Spring Flower Care Guide</h3>
+                <p class="description">Learn how to care for your spring flowers to ensure they stay vibrant and beautiful throughout the season with our expert tips...</p>
+                @Html.ActionLink("Read more...", "Post", "Blog", new { id = 1 }, new { @class = "read-more" })
             </div>
-        </div>
+
+            <!-- Post 2 - Links to actual blog post -->
+            <div class="blog-post">
+                <img src="/Images/blog2pic.jpg" alt="Rose Care">
+                <h4>Care Tips</h4>
+                <h3>Rose Care Basics</h3>
+                <p class="description">Everything you need to know about growing and caring for beautiful roses in your garden or home...</p>
+                @Html.ActionLink("Read more...", "Post", "Blog", new { id = 2 }, new { @class = "read-more" })
+            </div>
     </div>
 </section>

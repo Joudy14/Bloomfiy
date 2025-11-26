@@ -33,7 +33,7 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -174,16 +174,16 @@
     <Content Include="Images\product_img\peony\peony_red.png" />
     <Content Include="Images\product_img\peony\peony_wihte.png" />
     <Content Include="Images\webName.png" />
-    <Content Include="Script\blog.js" />
-    <Content Include="Script\DeliveryInfo.js" />
-    <Content Include="Script\event.js" />
-    <Content Include="Script\faq.js" />
-    <Content Include="Script\Privacy.js" />
-    <Content Include="Script\refund.js" />
-    <Content Include="Script\script.js" />
+    <Content Include="Scripts\blog.js" />
+    <Content Include="Scripts\DeliveryInfo.js" />
+    <Content Include="Scripts\event.js" />
+    <Content Include="Scripts\faq.js" />
+    <Content Include="Scripts\Privacy.js" />
+    <Content Include="Scripts\refund.js" />
+    <Content Include="Scripts\script.js" />
     <None Include="Views\Information\FAQ.cshtml" />
     <None Include="Views\Information\PrivacyPolicy.cshtml" />
-    <Content Include="Script\terms.js" />
+    <Content Include="Scripts\terms.js" />
     <None Include="Views\Information\TermsOfService.cshtml" />
     <None Include="Views\Information\DeliveryInfo.cshtml" />
     <None Include="Views\Information\RefundPolicy.cshtml" />
