@@ -74,7 +74,7 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-    color: #5a7c5a; /
+    color: #5a7c5a; 
 }
 
 /*  Seasonal Flowers Section */
@@ -268,7 +268,7 @@ header nav ul li a:hover {
 #header-hero .header-content p.description {
     margin: 0 auto;
     width: 50%;
-    font-size: 1.rem;
+    font-size: 1.5rem;
     margin-bottom: 2rem;
     color: white; 
     line-height: 1.6;
@@ -359,7 +359,7 @@ header nav ul li a:hover {
 
 /* Events Section */
 #events {
-    background: url('eventbg.jpg') center center/cover no-repeat;
+    background: url('eventbg.jpg') center center cover no-repeat;
     position: relative;
     padding: 80px 0;
 }
@@ -1248,5 +1248,4 @@ opacity: 0.9;
         font-size: 2rem;
     }
     
-    }
-}
+ }
