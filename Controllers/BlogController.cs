@@ -17,10 +17,5 @@ namespace Bloomfiy.Controllers
         {
             return View();
         }
-
-        public ActionResult Category(string category)
-        {
-            return View();
-        }
     }
 }

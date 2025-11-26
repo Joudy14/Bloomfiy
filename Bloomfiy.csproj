@@ -121,6 +121,7 @@
     <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Content\blog.css" />
     <Content Include="Controllers\AccountControllert.txt" />
     <Content Include="Controllers\Admin\AdminCatagoryController.txt" />
     <Content Include="Controllers\Admin\AdminContentController.txt" />
@@ -172,6 +173,7 @@
     <Content Include="Images\product_img\peony\peony_red.png" />
     <Content Include="Images\product_img\peony\peony_wihte.png" />
     <Content Include="Images\webName.png" />
+    <Content Include="Script\blog.js" />
     <Content Include="Script\DeliveryInfo.js" />
     <Content Include="Script\faq.js" />
     <Content Include="Script\Privacy.js" />
@@ -232,7 +234,6 @@
     <None Include="packages.config" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Post.cshtml" />
-    <Content Include="Views\Blog\Category.cshtml" />
     <Content Include="Views\CareGuide\Index.cshtml" />
     <Content Include="Views\CareGuide\Details.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
