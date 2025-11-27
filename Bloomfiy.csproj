@@ -172,12 +172,14 @@
     <Content Include="Images\joud.png" />
     <Content Include="Images\layan.png" />
     <Content Include="Images\maftuna.png" />
+    <Content Include="Images\products_img\peony\peony_care.JPG" />
     <Content Include="Images\products_img\peony\peony_pink.png" />
     <Content Include="Images\products_img\peony\peony_red.png" />
-    <Content Include="Images\products_img\peony\peony_wihte.png" />
+    <Content Include="Images\products_img\peony\peony_white.png" />
     <Content Include="Images\webName.png" />
     <Content Include="Scripts\blog.js" />
     <Content Include="Scripts\DeliveryInfo.js" />
+    <Content Include="Scripts\detail.js" />
     <Content Include="Scripts\event.js" />
     <Content Include="Scripts\faq.js" />
     <Content Include="Scripts\Privacy.js" />
@@ -185,7 +187,7 @@
     <Content Include="Scripts\script.js" />
     <None Include="Views\Information\FAQ.cshtml" />
     <None Include="Views\Information\PrivacyPolicy.cshtml" />
-    <Content Include="Scripts\shop.js" />
+    <Content Include="Scripts\catalog.js" />
     <Content Include="Scripts\terms.js" />
     <None Include="Views\Information\TermsOfService.cshtml" />
     <None Include="Views\Information\DeliveryInfo.cshtml" />

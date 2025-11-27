@@ -12,7 +12,7 @@
 
 <section class="product-catalog">
     <div class="container">
-        <!-- Filters e Sidebar -->
+        <!-- Filters Sidebar -->
         <aside class="filters-sidebar">
             <div class="filter-group">
                 <h3>Categories</h3>
@@ -152,15 +152,397 @@
                         <button class="add-to-cart-btn" data-product-id="7">Add to Cart</button>
                     </div>
                 </div>
+            </div>
 
-                <!-- Load More - Moved DOWN and fixed -->
-                <div class="load-more-container">
-                    <button class="load-more-btn" id="loadMoreBtn">Load More Flowers</button>
-                    <div class="no-more-products" style="display: none;">
-                        No more flowers to load. You've seen all our beautiful collection!
-                    </div>
+            <!-- Load More - CORRECT POSITION outside products-grid -->
+            <div class="load-more-container">
+                <button class="load-more-btn" id="loadMoreBtn">Load More Flowers</button>
+                <div class="no-more-products" style="display: none;">
+                    No more flowers to load. You've seen all our beautiful collection!
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+<script>
+    // FANCY JAVASCRIPT FOR ENTIRE CATALOG PAGE
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🌸 Bloomfiy Catalog - Fancy Edition Loaded!');
+
+        // ===== FANCY PAGE LOAD ANIMATIONS =====
+        // Animate hero section
+        const hero = document.querySelector('.shop-hero');
+        if (hero) {
+            hero.style.opacity = '0';
+            hero.style.transform = 'translateY(30px)';
+
+            setTimeout(() => {
+                hero.style.transition = 'all 0.8s ease';
+                hero.style.opacity = '1';
+                hero.style.transform = 'translateY(0)';
+            }, 200);
+        }
+
+        // Animate filters sidebar
+        const filters = document.querySelector('.filters-sidebar');
+        if (filters) {
+            filters.style.opacity = '0';
+            filters.style.transform = 'translateX(-30px)';
+
+            setTimeout(() => {
+                filters.style.transition = 'all 0.6s ease 0.3s';
+                filters.style.opacity = '1';
+                filters.style.transform = 'translateX(0)';
+            }, 400);
+        }
+
+        // Animate product cards with stagger
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(40px) scale(0.95)';
+
+            setTimeout(() => {
+                card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0) scale(1)';
+            }, 500 + (index * 100));
+        });
+
+        // ===== INTERACTIVE FILTERS =====
+        // Color filter animation
+        const colorOptions = document.querySelectorAll('.color-option');
+        colorOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                this.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                    this.classList.toggle('active');
+                }, 150);
+            });
+        });
+
+        // Checkbox animations
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const label = this.closest('.filter-option');
+                if (this.checked) {
+                    label.style.color = '#5a7c5a';
+                    label.style.transform = 'translateX(5px)';
+                    setTimeout(() => label.style.transform = 'translateX(0)', 200);
+                } else {
+                    label.style.color = '';
+                }
+            });
+        });
+
+        // Price slider animation
+        const priceSlider = document.querySelector('.price-slider');
+        if (priceSlider) {
+            priceSlider.addEventListener('input', function() {
+                this.style.background = `linear-gradient(90deg, #5a7c5a ${this.value}%, #e0e0e0 ${this.value}%)`;
+            });
+        }
+
+        // Clear filters animation
+        const clearBtn = document.querySelector('.clear-filters-btn');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+                this.innerHTML = '✓ Cleared!';
+                this.style.background = '#27ae60';
+
+                // Reset all filters with animation
+                checkboxes.forEach(cb => {
+                    cb.checked = false;
+                    const label = cb.closest('.filter-option');
+                    label.style.color = '';
+                });
+
+                colorOptions.forEach(opt => opt.classList.remove('active'));
+
+                setTimeout(() => {
+                    this.innerHTML = 'Clear All Filters';
+                    this.style.background = '';
+                }, 1500);
+            });
+        }
+
+        // ===== PRODUCT CARD INTERACTIONS =====
+        // Product card click with ripple effect
+        productCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't navigate if clicking buttons
+                if (e.target.closest('button')) return;
+
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(90, 124, 90, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+
+                // Navigate after animation
+                setTimeout(() => {
+                    window.location.href = '/Product/Details/7';
+                }, 400);
+            });
+        });
+
+        // Add to Cart with fancy animation
+        const addToCartBtn = document.querySelector('.add-to-cart-btn');
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+
+                // Button animation
+                this.style.transform = 'scale(0.95)';
+                this.innerHTML = '✓ Adding...';
+
+                // Create flying flower animation
+                const productImage = this.closest('.product-card').querySelector('img');
+                const productRect = productImage.getBoundingClientRect();
+                const cartIcon = document.querySelector('.cart-icon') || document.querySelector('.cart-count');
+
+                if (cartIcon) {
+                    const cartRect = cartIcon.getBoundingClientRect();
+
+                    // Create flying element
+                    const flyingFlower = document.createElement('div');
+                    flyingFlower.innerHTML = '🌸';
+                    flyingFlower.style.position = 'fixed';
+                    flyingFlower.style.left = productRect.left + 'px';
+                    flyingFlower.style.top = productRect.top + 'px';
+                    flyingFlower.style.fontSize = '20px';
+                    flyingFlower.style.zIndex = '10000';
+                    flyingFlower.style.pointerEvents = 'none';
+                    flyingFlower.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+
+                    document.body.appendChild(flyingFlower);
+
+                    // Animate to cart
+                    setTimeout(() => {
+                        flyingFlower.style.left = cartRect.left + 'px';
+                        flyingFlower.style.top = cartRect.top + 'px';
+                        flyingFlower.style.transform = 'scale(0.5)';
+                        flyingFlower.style.opacity = '0';
+                    }, 50);
+
+                    // Remove flying element
+                    setTimeout(() => {
+                        document.body.removeChild(flyingFlower);
+                    }, 850);
+                }
+
+                // Update cart count with animation
+                const cartCount = document.querySelector('.cart-count');
+                if (cartCount) {
+                    const currentCount = parseInt(cartCount.textContent) || 0;
+                    cartCount.textContent = currentCount + 1;
+                    cartCount.style.transform = 'scale(1.5)';
+                    setTimeout(() => cartCount.style.transform = 'scale(1)', 300);
+                }
+
+                // Reset button
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                    this.innerHTML = '✓ Added!';
+                    setTimeout(() => {
+                        this.innerHTML = 'Add to Cart';
+                    }, 1000);
+                }, 800);
+            });
+        }
+
+        // Wishlist heart animation
+        const wishlistBtn = document.querySelector('.wishlist-btn');
+        if (wishlistBtn) {
+            wishlistBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+
+                const isFilled = this.textContent === '♥';
+                this.textContent = isFilled ? '♡' : '♥';
+
+                // Heart animation
+                this.style.transform = 'scale(1.3)';
+                this.style.color = isFilled ? '' : '#e74c3c';
+                setTimeout(() => this.style.transform = 'scale(1)', 200);
+
+                // Floating hearts effect
+                if (!isFilled) {
+                    for (let i = 0; i < 3; i++) {
+                        createFloatingHeart(this);
+                    }
+                }
+            });
+        }
+
+        // Quick view animation
+        const quickViewBtn = document.querySelector('.quick-view-btn');
+        if (quickViewBtn) {
+            quickViewBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+
+                // Button animation
+                this.style.transform = 'scale(0.8)';
+                setTimeout(() => this.style.transform = 'scale(1)', 200);
+
+                // Show quick view modal (simulated)
+                const productCard = this.closest('.product-card');
+                productCard.style.boxShadow = '0 0 30px rgba(90, 124, 90, 0.5)';
+                setTimeout(() => productCard.style.boxShadow = '', 1000);
+
+                alert('🌸 Quick view feature would open here!');
+            });
+        }
+
+        // ===== LOAD MORE BUTTON =====
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+                this.innerHTML = '🌷 Loading Beautiful Flowers...';
+                this.style.background = '#8b7355';
+
+                // Simulate loading
+                setTimeout(() => {
+                    this.innerHTML = '✨ No More Flowers Available';
+                    this.style.background = '#95a5a6';
+                    this.disabled = true;
+
+                    // Show message
+                    const noMore = document.querySelector('.no-more-products');
+                    if (noMore) {
+                        noMore.style.display = 'block';
+                        noMore.style.opacity = '0';
+                        noMore.style.transform = 'translateY(20px)';
+
+                        setTimeout(() => {
+                            noMore.style.transition = 'all 0.6s ease';
+                            noMore.style.opacity = '1';
+                            noMore.style.transform = 'translateY(0)';
+                        }, 100);
+                    }
+                }, 1500);
+            });
+        }
+
+        // ===== SCROLL ANIMATIONS =====
+        // Parallax effect for hero
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.shop-hero');
+            if (hero) {
+                const rate = scrolled * -0.3;
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // ===== HELPER FUNCTIONS =====
+        function createFloatingHeart(element) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '♥';
+            heart.style.position = 'absolute';
+            heart.style.color = '#e74c3c';
+            heart.style.fontSize = '16px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '1000';
+            heart.style.opacity = '1';
+
+            const rect = element.getBoundingClientRect();
+            heart.style.left = rect.left + rect.width / 2 + 'px';
+            heart.style.top = rect.top + 'px';
+
+            document.body.appendChild(heart);
+
+            // Random animation
+            const randomX = (Math.random() - 0.5) * 100;
+            const randomY = -Math.random() * 80 - 20;
+
+            heart.style.transition = 'all 1s ease';
+            setTimeout(() => {
+                heart.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                heart.style.opacity = '0';
+            }, 10);
+
+            // Remove after animation
+            setTimeout(() => {
+                document.body.removeChild(heart);
+            }, 1000);
+        }
+    });
+
+    </script>
+
+
+<script>
+    // SIMPLE FIX - Product click navigation
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('🛍️ Catalog navigation loaded');
+
+        // Product card click to go to details page
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('click', function (e) {
+                console.log('Product card clicked');
+                // Only navigate if not clicking a button
+                if (!e.target.closest('button')) {
+                    window.location.href = '/Product/Details/7';
+                }
+            });
+        });
+
+        // Add to Cart button
+        const addToCartBtn = document.querySelector('.add-to-cart-btn');
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                console.log('Add to cart clicked');
+                alert('Peony added to cart!');
+
+                // Update cart count
+                const cartCount = document.querySelector('.cart-count');
+                if (cartCount) {
+                    const currentCount = parseInt(cartCount.textContent) || 0;
+                    cartCount.textContent = currentCount + 1;
+                }
+            });
+        }
+
+        // Wishlist button
+        const wishlistBtn = document.querySelector('.wishlist-btn');
+        if (wishlistBtn) {
+            wishlistBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                console.log('Wishlist clicked');
+                this.textContent = this.textContent === '♡' ? '♥' : '♡';
+            });
+        }
+
+        // Quick view button
+        const quickViewBtn = document.querySelector('.quick-view-btn');
+        if (quickViewBtn) {
+            quickViewBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                console.log('Quick view clicked');
+                alert('Quick view would open here!');
+            });
+        }
+    });
+</script>

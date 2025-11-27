@@ -29,7 +29,7 @@
                         <img src="~/Images/products_img/peony/peony_red.png" alt="Red Peony">
                     </div>
                     <div class="thumbnail">
-                        <img src="~/Images/products_img/peony/peony_wihte.png" alt="White Peony">
+                        <img src="~/Images/products_img/peony/peony_white.png" alt="White Peony">
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                         <strong>Vase Life:</strong> 5-7 days (with proper care)
                     </div>
                     <div class="feature-item">
-                        <strong>Bloom Stage:</strong> Bud
+                        <strong>Bloom Stage:</strong> Bud (on arrival)
                     </div>
                     <div class="feature-item">
                         <strong>Available Colors:</strong> Pink, Red, White
@@ -137,16 +137,12 @@
             </div>
         </div>
 
-        <!-- Product Description & Care -->
-        <div class="product-description-section">
-            <div class="description-tabs">
-                <button class="tab-btn active" data-tab="description">Description</button>
-                <button class="tab-btn" data-tab="care">Care Guide</button>
-            </div>
-
-            <div class="tab-content active" id="description">
+        <!-- Product Description & Details - ALL TOGETHER -->
+        <div class="product-full-details">
+            <!-- About Section -->
+            <div class="detail-section" id="about">
                 <h2>About Peonies</h2>
-                <p>Peonies are renowned for their large, luxurious blooms and delightful fragrance. These lush flowers feature layer upon layer of delicate petals that create a stunning visual display. Known as the flower of prosperity and romance, peonies make an exceptional choice for special occasions.</p>
+                <p class="lead">Peony stands out with its lush, rose-shaped blooms in a rich, sweet fragrance that fills any space. It offers calm and elegance impact for premium floral arrangements.</p>
 
                 <div class="perfect-for">
                     <h3>🎯 Perfect For</h3>
@@ -163,12 +159,59 @@
 
             <div class="tab-content" id="care">
                 <h2>Peony Care Guide</h2>
-                <div class="care-guide-content">
-                    <div class="care-step">Keep in cool environment away from direct sunlight</div>
-                    <div class="care-step">Change water every 2 days and trim stems at an angle</div>
-                    <div class="care-step">Remove any leaves that fall below the water line</div>
-                    <div class="care-step">Display in a clean vase with fresh flower food</div>
-                    <div class="care-step">Avoid placing near ripening fruit or heat sources</div>
+                <div class="care-guide-container">
+                    <!-- Image spans full width -->
+                    <div class="care-image-full">
+                        <img src="~/Images/products_img/peony/peony_care.JPG" alt="Flower Care Instructions">
+                    </div>
+
+                    <!-- Care info below the image -->
+                    <div class="care-steps-simple">
+                        <div class="care-step">
+                            <strong>Keep in cool environment</strong> - Away from direct sunlight and heat sources
+                        </div>
+                        <div class="care-step">
+                            <strong>Water maintenance</strong> - Change water every 2 days and trim stems at an angle
+                        </div>
+                        <div class="care-step">
+                            <strong>Leaf care</strong> - Remove any leaves that fall below the water line
+                        </div>
+                        <div class="care-step">
+                            <strong>Vase preparation</strong> - Display in a clean vase with fresh flower food
+                        </div>
+                        <div class="care-step">
+                            <strong>Avoid contamination</strong> - Keep away from ripening fruit or direct heat
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Important Information -->
+            <div class="detail-section important-section" id="important">
+                <h2>📋 Important Information</h2>
+                <div class="important-info">
+                    <div class="info-card">
+                        <div class="info-icon">🌿</div>
+                        <div class="info-content">
+                            <h3>Farm-fresh, wholesale grade</h3>
+                            <p>Our flowers ship straight from the farm and are packed to protect them in transit and extend shelf life. Because they are farm-fresh and minimally handled, natural imperfections - such as minor bruising, bent or occasionally broken buds/stems - can occur. This is normal. A quick trim, rehydration, and light arranging on arrival will help them open beautifully.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">🌸</div>
+                        <div class="info-content">
+                            <h3>Bloom & longevity</h3>
+                            <p>Actual appearance will vary as blooms continue to open with proper care. We take great care in selecting and packing, but once delivered, longevity depends on handling and environment.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card warning-card">
+                        <div class="info-icon">⚠️</div>
+                        <div class="info-content">
+                            <h3>Safety Notice</h3>
+                            <p>For ornamental use only; not for human or animal consumption. Some flowers may cause skin/eye irritation and can be harmful if eaten. Please wash hands after handling and keep out of reach of children and pets.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
