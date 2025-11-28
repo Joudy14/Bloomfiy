@@ -185,6 +185,17 @@
     <Content Include="Scripts\Privacy.js" />
     <Content Include="Scripts\refund.js" />
     <Content Include="Scripts\script.js" />
+    <Content Include="Views\Admin\AdminEvent\Bookings.cshtml" />
+    <Content Include="Views\Admin\AdminEvent\BookingDetails.cshtml" />
+    <Content Include="Views\Admin\AdminContent\BlogPosts.cshtml" />
+    <Content Include="Views\Admin\AdminContent\CreateBlogPost.cshtml" />
+    <Content Include="Views\Admin\AdminContent\EditBlogPost.cshtml" />
+    <Content Include="Views\Admin\AdminContent\ContactMessage.cshtml" />
+    <Content Include="Views\Admin\AdminContent\MessageDetails.cshtml" />
+    <Content Include="Views\Admin\AdminContent\Subscribers.cshtml" />
+    <Content Include="Views\Admin\AdminCategory\Index.cshtml" />
+    <Content Include="Views\Admin\AdminCategory\Create.cshtml" />
+    <Content Include="Views\Admin\AdminCategory\Edit.cshtml" />
     <None Include="Views\Information\FAQ.cshtml" />
     <None Include="Views\Information\PrivacyPolicy.cshtml" />
     <Content Include="Scripts\catalog.js" />
@@ -207,9 +218,6 @@
     <None Include="Views\Admin\AdminProduct\Index.cshtml" />
     <None Include="Views\Admin\AdminProduct\Create.cshtml" />
     <None Include="Views\Admin\AdminProduct\Edit.cshtml" />
-    <None Include="Views\Admin\AdminCategory\Index.cshtml" />
-    <None Include="Views\Admin\AdminCategory\Create.cshtml" />
-    <None Include="Views\Admin\AdminCategory\Edit.cshtml" />
     <None Include="Views\Admin\AdminOrder\Index.cshtml" />
     <None Include="Views\Admin\AdminOrder\Details.cshtml" />
     <None Include="Views\Admin\AdminUser\Index.cshtml" />
@@ -235,8 +243,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\AdminContent\" />
-    <Folder Include="Views\AdminEvent\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Checkout\" />
   </ItemGroup>
