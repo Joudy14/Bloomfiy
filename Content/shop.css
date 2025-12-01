@@ -34,6 +34,22 @@
         align-items: start;
     }
 
+.products-header h2 {
+    font-size: 3.5rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.products-header p {
+    text-align: center;
+    color: white;
+    font-style: italic;
+    margin-bottom: 3rem;
+}
+
 /* Filters Sidebar */
 .filters-sidebar {
     background: #f9f7f2;
