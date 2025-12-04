@@ -1,0 +1,295 @@
+﻿@{
+    ViewBag.Title = "SelectFlowers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="cart-view-page">
+    <div class="cart-view-container">
+        <!-- Progress Bar -->
+        <div class="cart-progress">
+            <div class="cart-step active">
+                <div class="cart-step-number">1</div>
+                <div class="cart-step-label">Select Flowers</div>
+            </div>
+            <div class="cart-step">
+                <div class="cart-step-number">2</div>
+                <div class="cart-step-label">Customize</div>
+            </div>
+            <div class="cart-step">
+                <div class="cart-step-number">3</div>
+                <div class="cart-step-label">Review</div>
+            </div>
+            <div class="cart-step">
+                <div class="cart-step-number">4</div>
+                <div class="cart-step-label">Checkout</div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="cart-view-header">
+            <h1>Build Your Dream Bouquet</h1>
+            <p>Choose the flowers you love - mix and match to create your perfect arrangement</p>
+        </div>
+
+        <!-- Flower Selection -->
+        <div class="cart-view-card">
+            <h2 style="color: #5a7c5a; font-size: 1.8rem; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; font-weight: 500; font-style: italic;">
+                Select Your Flowers
+            </h2>
+
+            <div class="flower-selection-instructions" style="margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+                <p style="color: #666; margin-bottom: 10px;"><strong>How it works:</strong></p>
+                <p style="color: #666; font-size: 0.95rem;">Select 3-5 types of flowers for a balanced bouquet. Each selection includes 5 stems.</p>
+            </div>
+
+            <!-- Flower Grid -->
+            <div class="flower-grid">
+                <!-- Peony -->
+                <div class="flower-selection-card" data-flower="peony" data-price="45.99">
+                    <div class="flower-image">
+                        <img src="/Images/product_img/peony/peony_pink.png" alt="Peony">
+                    </div>
+                    <div class="flower-info">
+                        <h3>Peony</h3>
+                        <p>Lush, romantic blooms perfect for special occasions</p>
+                        <div class="flower-price">$45.99</div>
+                    </div>
+                    <div class="selection-badge">✓</div>
+                </div>
+
+                <!-- Rose -->
+                <div class="flower-selection-card" data-flower="rose" data-price="29.99">
+                    <div class="flower-image">
+                        <img src="/Images/product_img/rose_bouquet.jpg" alt="Rose">
+                    </div>
+                    <div class="flower-info">
+                        <h3>Rose</h3>
+                        <p>Classic elegance in various colors and sizes</p>
+                        <div class="flower-price">$29.99</div>
+                    </div>
+                    <div class="selection-badge">✓</div>
+                </div>
+
+                <!-- Lily -->
+                <div class="flower-selection-card" data-flower="lily" data-price="42.99">
+                    <div class="flower-image">
+                        <img src="/Images/product_img/lily_bouquet.jpg" alt="Lily">
+                    </div>
+                    <div class="flower-info">
+                        <h3>Lily</h3>
+                        <p>Elegant and fragrant, adds drama to any arrangement</p>
+                        <div class="flower-price">$42.99</div>
+                    </div>
+                    <div class="selection-badge">✓</div>
+                </div>
+
+                <!-- Chrysanthemum -->
+                <div class="flower-selection-card" data-flower="chrysanthemum" data-price="38.50">
+                    <div class="flower-image">
+                        <img src="/Images/product_img/chrysanthemum_pink.png" alt="Chrysanthemum">
+                    </div>
+                    <div class="flower-info">
+                        <h3>Chrysanthemum</h3>
+                        <p>Long-lasting blooms with vibrant colors</p>
+                        <div class="flower-price">$38.50</div>
+                    </div>
+                    <div class="selection-badge">✓</div>
+                </div>
+
+                <!-- Tulip -->
+                <div class="flower-selection-card" data-flower="tulip" data-price="35.50">
+                    <div class="flower-image">
+                        <img src="/Images/product_img/tulip_bouquet.jpg" alt="Tulip">
+                    </div>
+                    <div class="flower-info">
+                        <h3>Tulip</h3>
+                        <p>Spring favorite with graceful stems and soft colors</p>
+                        <div class="flower-price">$35.50</div>
+                    </div>
+                    <div class="selection-badge">✓</div>
+                </div>
+
+                <!-- Orchid -->
+                <div class="flower-selection-card" data-flower="orchid" data-price="55.99">
+                    <div class="flower-image">
+                        <img src="/Images/product_img/orchid.jpg" alt="Orchid">
+                    </div>
+                    <div class="flower-info">
+                        <h3>Orchid</h3>
+                        <p>Exotic and sophisticated, perfect for modern arrangements</p>
+                        <div class="flower-price">$55.99</div>
+                    </div>
+                    <div class="selection-badge">✓</div>
+                </div>
+
+                <!-- Sunflower -->
+                <div class="flower-selection-card" data-flower="sunflower" data-price="32.99">
+                    <div class="flower-image">
+                        <img src="/Images/product_img/sunflower.jpg" alt="Sunflower">
+                    </div>
+                    <div class="flower-info">
+                        <h3>Sunflower</h3>
+                        <p>Bright and cheerful, brings summer vibes all year round</p>
+                        <div class="flower-price">$32.99</div>
+                    </div>
+                    <div class="selection-badge">✓</div>
+                </div>
+
+                <!-- Hydrangea -->
+                <div class="flower-selection-card" data-flower="hydrangea" data-price="48.99">
+                    <div class="flower-image">
+                        <img src="/Images/product_img/hydrangea.jpg" alt="Hydrangea">
+                    </div>
+                    <div class="flower-info">
+                        <h3>Hydrangea</h3>
+                        <p>Voluminous blooms that make a statement</p>
+                        <div class="flower-price">$48.99</div>
+                    </div>
+                    <div class="selection-badge">✓</div>
+                </div>
+            </div>
+
+            <!-- Selection Summary -->
+            <div id="selectionSummary" style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px; display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <p style="color: #5a7c5a; font-weight: 500; margin-bottom: 5px;">
+                            Selected: <span id="selectedCount">0</span> flowers
+                        </p>
+                        <p style="color: #666; font-size: 0.9rem;">Total: $<span id="selectedTotal">0.00</span></p>
+                    </div>
+                    <div>
+                        <button id="clearSelection" style="background: transparent; color: #cc5555; border: 1px solid #cc5555; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; margin-right: 10px;">
+                            Clear All
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="cart-navigation">
+                <a href="@Url.Action("Catalog", "Product")" class="cart-nav-btn back">← Continue Shopping</a>
+                <button id="nextToCustomize" class="cart-nav-btn next" disabled>Continue to Customize →</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Flower Selection
+    let selectedFlowers = [];
+    const maxSelections = 5;
+    const minSelections = 3;
+
+    document.querySelectorAll('.flower-selection-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const flower = this.dataset.flower;
+            const price = parseFloat(this.dataset.price);
+
+            if (this.classList.contains('selected')) {
+                // Deselect
+                this.classList.remove('selected');
+                selectedFlowers = selectedFlowers.filter(f => f.name !== flower);
+            } else {
+                // Check if we can select more
+                if (selectedFlowers.length >= maxSelections) {
+                    alert(`You can select up to ${maxSelections} types of flowers. Please deselect one to add another.`);
+                    return;
+                }
+
+                // Select
+                this.classList.add('selected');
+                selectedFlowers.push({
+                    name: flower,
+                    price: price,
+                    displayName: this.querySelector('h3').textContent,
+                    image: this.querySelector('img').src
+                });
+            }
+
+            updateSelectionSummary();
+            updateNextButton();
+        });
+    });
+
+    // Update Selection Summary
+    function updateSelectionSummary() {
+        const selectedCount = selectedFlowers.length;
+        const selectedTotal = selectedFlowers.reduce((sum, flower) => sum + flower.price, 0);
+
+        document.getElementById('selectedCount').textContent = selectedCount;
+        document.getElementById('selectedTotal').textContent = selectedTotal.toFixed(2);
+
+        const summary = document.getElementById('selectionSummary');
+        if (selectedCount > 0) {
+            summary.style.display = 'block';
+        } else {
+            summary.style.display = 'none';
+        }
+
+        // Update flower cards with numbers
+        document.querySelectorAll('.flower-selection-card.selected').forEach((card, index) => {
+            const badge = card.querySelector('.selection-badge');
+            badge.textContent = index + 1;
+        });
+    }
+
+    // Clear Selection
+    document.getElementById('clearSelection').addEventListener('click', function() {
+        if (confirm('Clear all selected flowers?')) {
+            selectedFlowers = [];
+            document.querySelectorAll('.flower-selection-card.selected').forEach(card => {
+                card.classList.remove('selected');
+            });
+            updateSelectionSummary();
+            updateNextButton();
+        }
+    });
+
+    // Update Next Button
+    function updateNextButton() {
+        const nextButton = document.getElementById('nextToCustomize');
+        if (selectedFlowers.length >= minSelections) {
+            nextButton.disabled = false;
+            nextButton.style.opacity = '1';
+            nextButton.style.cursor = 'pointer';
+        } else {
+            nextButton.disabled = true;
+            nextButton.style.opacity = '0.6';
+            nextButton.style.cursor = 'not-allowed';
+        }
+    }
+
+    // Next Button Click
+    document.getElementById('nextToCustomize').addEventListener('click', function() {
+        if (selectedFlowers.length < minSelections) {
+            alert(`Please select at least ${minSelections} types of flowers.`);
+            return;
+        }
+
+        // Save selections to localStorage
+        localStorage.setItem('selectedFlowers', JSON.stringify(selectedFlowers));
+
+        // Redirect to next step
+        window.location.href = '@Url.Action("Step2", "Cart")';
+    });
+
+    // Load previously selected flowers
+    window.addEventListener('load', function() {
+        const savedSelections = localStorage.getItem('selectedFlowers');
+        if (savedSelections) {
+            selectedFlowers = JSON.parse(savedSelections);
+
+            // Update UI
+            selectedFlowers.forEach(flower => {
+                const card = document.querySelector(`[data-flower="${flower.name}"]`);
+                if (card) {
+                    card.classList.add('selected');
+                }
+            });
+
+            updateSelectionSummary();
+            updateNextButton();
+        }
+    });
+</script>

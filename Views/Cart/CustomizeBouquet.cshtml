@@ -1,0 +1,395 @@
+﻿@{
+    ViewBag.Title = "CustomizeBouquet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="cart-view-page">
+    <div class="cart-view-container">
+        <!-- Progress Bar -->
+        <div class="cart-progress">
+            <div class="cart-step completed">
+                <div class="cart-step-number">✓</div>
+                <div class="cart-step-label">Select Flowers</div>
+            </div>
+            <div class="cart-step active">
+                <div class="cart-step-number">2</div>
+                <div class="cart-step-label">Customize</div>
+            </div>
+            <div class="cart-step">
+                <div class="cart-step-number">3</div>
+                <div class="cart-step-label">Review</div>
+            </div>
+            <div class="cart-step">
+                <div class="cart-step-number">4</div>
+                <div class="cart-step-label">Checkout</div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="cart-view-header">
+            <h1>Customize Your Bouquet</h1>
+            <p>Add finishing touches to make your arrangement uniquely yours</p>
+        </div>
+
+        <!-- Customization Options -->
+        <div class="cart-view-card">
+            <!-- Selected Flowers Preview -->
+            <div style="margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+                <h3 style="color: #5a7c5a; margin-bottom: 15px; font-weight: 500;">Your Selected Flowers</h3>
+                <div id="selectedFlowersPreview" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Vase Selection -->
+            <div class="customization-options">
+                <div class="option-section">
+                    <h3>Choose Your Vase</h3>
+                    <div class="option-grid">
+                        <div class="option-card" data-option="no-vase" data-price="0">
+                            <div class="option-icon">🏺</div>
+                            <h4>No Vase</h4>
+                            <p>We'll wrap beautifully</p>
+                            <div class="option-price">$0.00</div>
+                        </div>
+
+                        <div class="option-card" data-option="glass-vase" data-price="15">
+                            <div class="option-icon">🥛</div>
+                            <h4>Glass Vase</h4>
+                            <p>Classic transparent vase</p>
+                            <div class="option-price">+$15.00</div>
+                        </div>
+
+                        <div class="option-card" data-option="ceramic-vase" data-price="25">
+                            <div class="option-icon">🏺</div>
+                            <h4>Ceramic Vase</h4>
+                            <p>Hand-painted design</p>
+                            <div class="option-price">+$25.00</div>
+                        </div>
+
+                        <div class="option-card" data-option="crystal-vase" data-price="45">
+                            <div class="option-icon">💎</div>
+                            <h4>Crystal Vase</h4>
+                            <p>Luxury cut crystal</p>
+                            <div class="option-price">+$45.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ribbon Selection -->
+                <div class="option-section">
+                    <h3>Add a Ribbon</h3>
+                    <div class="option-grid">
+                        <div class="option-card" data-option="no-ribbon" data-price="0">
+                            <div class="option-icon">🎀</div>
+                            <h4>No Ribbon</h4>
+                            <p>Simple and elegant</p>
+                            <div class="option-price">$0.00</div>
+                        </div>
+
+                        <div class="option-card" data-option="satin-ribbon" data-price="5">
+                            <div class="option-icon">🎀</div>
+                            <h4>Satin Ribbon</h4>
+                            <p>Soft, shiny finish</p>
+                            <div class="option-price">+$5.00</div>
+                        </div>
+
+                        <div class="option-card" data-option="velvet-ribbon" data-price="8">
+                            <div class="option-icon">🎀</div>
+                            <h4>Velvet Ribbon</h4>
+                            <p>Luxurious texture</p>
+                            <div class="option-price">+$8.00</div>
+                        </div>
+
+                        <div class="option-card" data-option="personalized-ribbon" data-price="12">
+                            <div class="option-icon">🎀</div>
+                            <h4>Personalized Ribbon</h4>
+                            <p>With custom message</p>
+                            <div class="option-price">+$12.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foliage Selection -->
+                <div class="option-section">
+                    <h3>Add Greenery</h3>
+                    <div class="option-grid">
+                        <div class="option-card" data-option="standard-greenery" data-price="0">
+                            <div class="option-icon">🌿</div>
+                            <h4>Standard Greenery</h4>
+                            <p>Complimentary ferns</p>
+                            <div class="option-price">$0.00</div>
+                        </div>
+
+                        <div class="option-card" data-option="premium-greenery" data-price="10">
+                            <div class="option-icon">🌿</div>
+                            <h4>Premium Greenery</h4>
+                            <p>Eucalyptus & ivy</p>
+                            <div class="option-price">+$10.00</div>
+                        </div>
+
+                        <div class="option-card" data-option="flowering-greenery" data-price="15">
+                            <div class="option-icon">🌸</div>
+                            <h4>Flowering Greens</h4>
+                            <p>With berry accents</p>
+                            <div class="option-price">+$15.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gift Options -->
+                <div class="gift-options">
+                    <h3 style="color: #5a7c5a; margin-bottom: 15px; font-weight: 500;">Gift Options</h3>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="isGift" style="width: auto;">
+                            <span style="color: #5a7c5a; font-weight: 500;">This is a gift</span>
+                        </label>
+                    </div>
+
+                    <div id="giftMessageSection" style="display: none;">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display: block; margin-bottom: 8px; color: #5a7c5a; font-weight: 500;">Gift Message</label>
+                            <textarea id="giftMessage" rows="3" placeholder="Write your personal message here..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-family: 'Georgia', 'Times New Roman', serif;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="includeCard">
+                                <span style="color: #5a7c5a;">Include gift card ($2.50)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customization Summary -->
+            <div id="customizationSummary" style="margin-top: 30px; padding: 25px; background: #f9f9f9; border-radius: 8px;">
+                <h3 style="color: #5a7c5a; margin-bottom: 15px; font-weight: 500;">Customization Summary</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                    <div>
+                        <p style="color: #666; margin-bottom: 5px;">Vase:</p>
+                        <p id="vaseSelection" style="color: #5a7c5a; font-weight: 500;">Not selected</p>
+                    </div>
+                    <div>
+                        <p style="color: #666; margin-bottom: 5px;">Ribbon:</p>
+                        <p id="ribbonSelection" style="color: #5a7c5a; font-weight: 500;">Not selected</p>
+                    </div>
+                    <div>
+                        <p style="color: #666; margin-bottom: 5px;">Greenery:</p>
+                        <p id="greenerySelection" style="color: #5a7c5a; font-weight: 500;">Standard</p>
+                    </div>
+                </div>
+                <div style="padding-top: 15px; border-top: 1px solid #ddd;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #666;">Flower Total:</span>
+                        <span style="color: #8b7355; font-weight: 600;">$<span id="flowerTotal">0.00</span></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #666;">Customization Total:</span>
+                        <span style="color: #8b7355; font-weight: 600;">+$<span id="customizationTotal">0.00</span></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px solid #ddd;">
+                        <span style="color: #5a7c5a; font-weight: 600;">Estimated Total:</span>
+                        <span style="color: #5a7c5a; font-weight: 600; font-size: 1.2rem;">$<span id="estimatedTotal">0.00</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="cart-navigation">
+                <a href="@Url.Action("Step1", "Cart")" class="cart-nav-btn back">← Back to Flowers</a>
+                <button id="nextToReview" class="cart-nav-btn next">Continue to Review →</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Load selected flowers
+    let selectedFlowers = [];
+    let customization = {
+        vase: null,
+        ribbon: null,
+        greenery: { name: 'Standard Greenery', price: 0 },
+        isGift: false,
+        giftMessage: '',
+        includeCard: false
+    };
+
+    // Initialize
+    window.addEventListener('load', function() {
+        // Load selected flowers
+        const savedFlowers = localStorage.getItem('selectedFlowers');
+        if (savedFlowers) {
+            selectedFlowers = JSON.parse(savedFlowers);
+            updateFlowersPreview();
+            updateFlowerTotal();
+        } else {
+            // No flowers selected, redirect to step 1
+            window.location.href = '@Url.Action("Step1", "Cart")';
+        }
+
+        // Load saved customization
+        const savedCustomization = localStorage.getItem('bouquetCustomization');
+        if (savedCustomization) {
+            customization = JSON.parse(savedCustomization);
+            applySavedCustomization();
+        }
+
+        // Update summary
+        updateCustomizationSummary();
+        updateTotal();
+    });
+
+    // Update Flowers Preview
+    function updateFlowersPreview() {
+        const container = document.getElementById('selectedFlowersPreview');
+        container.innerHTML = '';
+
+        selectedFlowers.forEach(flower => {
+            const flowerDiv = document.createElement('div');
+            flowerDiv.style.cssText = `
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 80px;
+                text-align: center;
+            `;
+
+            flowerDiv.innerHTML = `
+                <img src="${flower.image}" alt="${flower.displayName}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; margin-bottom: 5px;">
+                <span style="font-size: 0.8rem; color: #5a7c5a; font-weight: 500;">${flower.displayName}</span>
+                <span style="font-size: 0.75rem; color: #8b7355;">$${flower.price.toFixed(2)}</span>
+            `;
+
+            container.appendChild(flowerDiv);
+        });
+    }
+
+    // Update Flower Total
+    function updateFlowerTotal() {
+        const flowerTotal = selectedFlowers.reduce((sum, flower) => sum + flower.price, 0);
+        document.getElementById('flowerTotal').textContent = flowerTotal.toFixed(2);
+    }
+
+    // Option Selection
+    document.querySelectorAll('.option-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const optionType = this.closest('.option-section').querySelector('h3').textContent;
+            const optionName = this.querySelector('h4').textContent;
+            const optionPrice = parseFloat(this.dataset.price);
+            const optionKey = this.dataset.option;
+
+            // Remove selected class from siblings
+            const siblings = this.parentElement.querySelectorAll('.option-card');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+
+            // Add selected class to this card
+            this.classList.add('selected');
+
+            // Update customization based on option type
+            if (optionType.includes('Vase')) {
+                customization.vase = { name: optionName, price: optionPrice, key: optionKey };
+                document.getElementById('vaseSelection').textContent = optionName + (optionPrice > 0 ? ` (+$${optionPrice})` : '');
+            } else if (optionType.includes('Ribbon')) {
+                customization.ribbon = { name: optionName, price: optionPrice, key: optionKey };
+                document.getElementById('ribbonSelection').textContent = optionName + (optionPrice > 0 ? ` (+$${optionPrice})` : '');
+            } else if (optionType.includes('Greenery')) {
+                customization.greenery = { name: optionName, price: optionPrice, key: optionKey };
+                document.getElementById('greenerySelection').textContent = optionName + (optionPrice > 0 ? ` (+$${optionPrice})` : '');
+            }
+
+            updateCustomizationSummary();
+            updateTotal();
+        });
+    });
+
+    // Gift Options
+    document.getElementById('isGift').addEventListener('change', function() {
+        customization.isGift = this.checked;
+        document.getElementById('giftMessageSection').style.display = this.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('giftMessage').addEventListener('input', function() {
+        customization.giftMessage = this.value;
+    });
+
+    document.getElementById('includeCard').addEventListener('change', function() {
+        customization.includeCard = this.checked;
+    });
+
+    // Update Customization Summary
+    function updateCustomizationSummary() {
+        // Calculate customization total
+        const vasePrice = customization.vase ? customization.vase.price : 0;
+        const ribbonPrice = customization.ribbon ? customization.ribbon.price : 0;
+        const greeneryPrice = customization.greenery ? customization.greenery.price : 0;
+        const cardPrice = customization.includeCard ? 2.5 : 0;
+
+        const customizationTotal = vasePrice + ribbonPrice + greeneryPrice + cardPrice;
+        document.getElementById('customizationTotal').textContent = customizationTotal.toFixed(2);
+    }
+
+    // Update Total
+    function updateTotal() {
+        const flowerTotal = selectedFlowers.reduce((sum, flower) => sum + flower.price, 0);
+        const vasePrice = customization.vase ? customization.vase.price : 0;
+        const ribbonPrice = customization.ribbon ? customization.ribbon.price : 0;
+        const greeneryPrice = customization.greenery ? customization.greenery.price : 0;
+        const cardPrice = customization.includeCard ? 2.5 : 0;
+
+        const customizationTotal = vasePrice + ribbonPrice + greeneryPrice + cardPrice;
+        const estimatedTotal = flowerTotal + customizationTotal;
+
+        document.getElementById('estimatedTotal').textContent = estimatedTotal.toFixed(2);
+    }
+
+    // Apply Saved Customization
+    function applySavedCustomization() {
+        // Vase
+        if (customization.vase) {
+            const vaseCard = document.querySelector(`[data-option="${customization.vase.key}"]`);
+            if (vaseCard) {
+                vaseCard.classList.add('selected');
+                document.getElementById('vaseSelection').textContent = customization.vase.name + (customization.vase.price > 0 ? ` (+$${customization.vase.price})` : '');
+            }
+        }
+
+        // Ribbon
+        if (customization.ribbon) {
+            const ribbonCard = document.querySelector(`[data-option="${customization.ribbon.key}"]`);
+            if (ribbonCard) {
+                ribbonCard.classList.add('selected');
+                document.getElementById('ribbonSelection').textContent = customization.ribbon.name + (customization.ribbon.price > 0 ? ` (+$${customization.ribbon.price})` : '');
+            }
+        }
+
+        // Greenery
+        if (customization.greenery) {
+            const greeneryCard = document.querySelector(`[data-option="${customization.greenery.key}"]`);
+            if (greeneryCard) {
+                greeneryCard.classList.add('selected');
+                document.getElementById('greenerySelection').textContent = customization.greenery.name + (customization.greenery.price > 0 ? ` (+$${customization.greenery.price})` : '');
+            }
+        }
+
+        // Gift options
+        if (customization.isGift) {
+            document.getElementById('isGift').checked = true;
+            document.getElementById('giftMessageSection').style.display = 'block';
+            document.getElementById('giftMessage').value = customization.giftMessage || '';
+            document.getElementById('includeCard').checked = customization.includeCard || false;
+        }
+    }
+
+    // Next Button
+    document.getElementById('nextToReview').addEventListener('click', function() {
+        // Save customization
+        localStorage.setItem('bouquetCustomization', JSON.stringify(customization));
+
+        // Redirect to next step
+        window.location.href = '@Url.Action("Step3", "Cart")';
+    });
+</script>

@@ -240,6 +240,11 @@
     <Content Include="Views\Admin\AdminCategory\Create.cshtml" />
     <Content Include="Views\Admin\AdminCategory\Edit.cshtml" />
     <Content Include="Views\Admin\AdminProduct\Delete.cshtml" />
+    <Content Include="Views\Checkout\OrderComplete.cshtml" />
+    <Content Include="Views\Cart\SelectFlowers.cshtml" />
+    <Content Include="Views\Cart\CustomizeBouquet.cshtml" />
+    <Content Include="Views\Cart\ReviewBouquet.cshtml" />
+    <Content Include="Views\Cart\ordercomplete.cshtml" />
     <None Include="Views\Information\FAQ.cshtml" />
     <None Include="Views\Information\PrivacyPolicy.cshtml" />
     <Content Include="Scripts\catalog.js" />
@@ -266,6 +271,9 @@
     <None Include="Views\Admin\AdminOrder\Details.cshtml" />
     <None Include="Views\Admin\AdminUser\Index.cshtml" />
     <None Include="Views\Admin\AdminUser\Details.cshtml" />
+    <None Include="Views\Checkout\shippingInfo.cshtml" />
+    <None Include="Views\Checkout\PaymentInfo.cshtml" />
+    <None Include="Views\Checkout\OrderReview.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -287,8 +295,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\Cart\" />
-    <Folder Include="Views\Checkout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
