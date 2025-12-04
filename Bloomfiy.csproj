@@ -153,7 +153,30 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Content Include="Migrations\Configuration.txt" />
+    <Compile Include="Images\products_img\Alstroemeria\Class1.cs" />
+    <Compile Include="Images\products_img\Aster\Class1.cs" />
+    <Compile Include="Images\products_img\Baby rose\Class1.cs" />
+    <Compile Include="Images\products_img\Calla\Class1.cs" />
+    <Compile Include="Images\products_img\Carnations\Class1.cs" />
+    <Compile Include="Images\products_img\Chamomolie\Class1.cs" />
+    <Compile Include="Images\products_img\Chrysanthemum\Class1.cs" />
+    <Compile Include="Images\products_img\Cotton\Class1.cs" />
+    <Compile Include="Images\products_img\Delphiniums\Class1.cs" />
+    <Compile Include="Images\products_img\Dracaena\Class1.cs" />
+    <Compile Include="Images\products_img\Gypsophila\Class1.cs" />
+    <Compile Include="Images\products_img\Hypericum\Class1.cs" />
+    <Compile Include="Images\products_img\Iris\Class1.cs" />
+    <Compile Include="Images\products_img\Lavender\Class1.cs" />
+    <Compile Include="Images\products_img\Lilie\Class1.cs" />
+    <Compile Include="Images\products_img\Lisianthus\Class1.cs" />
+    <Compile Include="Images\products_img\Matthiola\Class1.cs" />
+    <Compile Include="Images\products_img\Orchid\Class1.cs" />
+    <Compile Include="Images\products_img\Roses\Class1.cs" />
+    <Compile Include="Images\products_img\Salix\Class1.cs" />
+    <Compile Include="Images\products_img\Spray Rose\Class1.cs" />
+    <Compile Include="Images\products_img\Sunflowers\Class1.cs" />
     <Compile Include="Images\products_img\tulip\Class1.cs" />
+    <Compile Include="Images\products_img\Veronica\Class1.cs" />
     <Compile Include="Migrations\202512031528306_InitialCreate.cs" />
     <Compile Include="Migrations\202512031528306_InitialCreate.designer.cs">
       <DependentUpon>202512031528306_InitialCreate.cs</DependentUpon>
