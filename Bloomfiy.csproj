@@ -153,6 +153,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Content Include="Migrations\Configuration.txt" />
+    <Compile Include="Images\products_img\tulip\Class1.cs" />
     <Compile Include="Migrations\202512031528306_InitialCreate.cs" />
     <Compile Include="Migrations\202512031528306_InitialCreate.designer.cs">
       <DependentUpon>202512031528306_InitialCreate.cs</DependentUpon>
