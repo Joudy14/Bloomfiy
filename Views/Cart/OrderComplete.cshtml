@@ -1,0 +1,142 @@
+﻿
+
+@{
+    ViewBag.Title = "OrderComplete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="checkout-page">
+    <div class="checkout-container">
+        <!-- Progress Bar -->
+        <div class="checkout-progress">
+            <div class="progress-step completed">
+                <div class="step-number">✓</div>
+                <div class="step-label">Shipping</div>
+            </div>
+            <div class="progress-step completed">
+                <div class="step-number">✓</div>
+                <div class="step-label">Payment</div>
+            </div>
+            <div class="progress-step completed">
+                <div class="step-number">✓</div>
+                <div class="step-label">Review</div>
+            </div>
+            <div class="progress-step active">
+                <div class="step-number">4</div>
+                <div class="step-label">Complete</div>
+            </div>
+        </div>
+
+        <!-- Success Content -->
+        <div class="success-container">
+            <div class="success-icon">🌸</div>
+            <h1>Order Confirmed!</h1>
+            <p>Thank you for choosing Bloomfiy! Your order has been received and is being prepared with love.</p>
+
+            <!-- Order Details -->
+            <div class="order-details">
+                <div class="order-detail-row">
+                    <span>Order Number</span>
+                    <strong>BLMF2024-789</strong>
+                </div>
+                <div class="order-detail-row">
+                    <span>Date</span>
+                    <span>@DateTime.Now.ToString("MMMM dd, yyyy")</span>
+                </div>
+                <div class="order-detail-row">
+                    <span>Total Amount</span>
+                    <strong>$160.59</strong>
+                </div>
+                <div class="order-detail-row">
+                    <span>Payment Method</span>
+                    <span>Credit Card ending in **** 3456</span>
+                </div>
+                <div class="order-detail-row">
+                    <span>Estimated Delivery</span>
+                    <strong>@DateTime.Now.AddDays(3).ToString("MMMM dd, yyyy")</strong>
+                </div>
+            </div>
+
+            <p>We'll send you a confirmation email shortly with tracking information.</p>
+
+            <!-- Success Actions -->
+            <div class="success-actions">
+                <a href="@Url.Action("Index", "Home")" class="btn">Continue Shopping</a>
+                <a href="@Url.Action("OrderTracking", "Account")" class="btn outline">Track Your Order</a>
+                <a href="@Url.Action("Index", "Product")" class="btn outline">Browse More Flowers</a>
+            </div>
+
+            <!-- Additional Info -->
+            <div style="margin-top: 40px; color: #666; font-size: 0.95rem;">
+                <p><strong>Need help with your order?</strong></p>
+                <p>Contact us at <a href="mailto:support@bloomfiy.com" style="color: #5a7c5a;">support@bloomfiy.com</a> or call (555) 123-4567</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .order-details {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        max-width: 600px;
+        margin: 40px auto;
+        text-align: left;
+    }
+
+    .order-detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+        .order-detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .order-detail-row strong {
+            color: #5a7c5a;
+        }
+</style>
+
+<script>
+    // Confetti effect for celebration
+    setTimeout(() => {
+        createConfetti();
+    }, 500);
+
+    function createConfetti() {
+        const colors = ['#5a7c5a', '#8b7355', '#d4af87', '#fadce9'];
+        const confettiCount = 100;
+
+        for (let i = 0; i < confettiCount; i++) {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.top = '-20px';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.opacity = '0.7';
+            confetti.style.zIndex = '9999';
+            confetti.style.pointerEvents = 'none';
+
+            document.body.appendChild(confetti);
+
+            // Animation
+            const animation = confetti.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 0.7 },
+                { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+            });
+
+            animation.onfinish = () => confetti.remove();
+        }
+    }
+</script>

@@ -1,0 +1,328 @@
+﻿
+@{
+    ViewBag.Title = "ReviewBouquet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="cart-view-page">
+    <div class="cart-view-container">
+        <!-- Progress Bar -->
+        <div class="cart-progress">
+            <div class="cart-step completed">
+                <div class="cart-step-number">✓</div>
+                <div class="cart-step-label">Select Flowers</div>
+            </div>
+            <div class="cart-step completed">
+                <div class="cart-step-number">✓</div>
+                <div class="cart-step-label">Customize</div>
+            </div>
+            <div class="cart-step active">
+                <div class="cart-step-number">3</div>
+                <div class="cart-step-label">Review</div>
+            </div>
+            <div class="cart-step">
+                <div class="cart-step-number">4</div>
+                <div class="cart-step-label">Checkout</div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="cart-view-header">
+            <h1>Review Your Bouquet</h1>
+            <p>Double-check your selection before proceeding to checkout</p>
+        </div>
+
+        <!-- Review Card -->
+        <div class="cart-view-card">
+            <!-- Order Summary -->
+            <div style="margin-bottom: 30px; padding: 25px; background: #f9f9f9; border-radius: 8px;">
+                <h2 style="color: #5a7c5a; font-size: 1.8rem; margin-bottom: 25px; font-weight: 500; font-style: italic;">
+                    Your Custom Bouquet
+                </h2>
+
+                <!-- Selected Flowers -->
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #5a7c5a; margin-bottom: 15px; font-weight: 500;">Selected Flowers</h3>
+                    <div id="reviewFlowersList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Customization Options -->
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #5a7c5a; margin-bottom: 15px; font-weight: 500;">Customization</h3>
+                    <div id="reviewCustomization" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Gift Message -->
+                <div id="reviewGiftMessage" style="display: none; margin-bottom: 25px; padding: 20px; background: white; border-radius: 5px; border: 1px solid #eee;">
+                    <h3 style="color: #5a7c5a; margin-bottom: 10px; font-weight: 500;">Gift Message</h3>
+                    <p id="reviewMessageText" style="color: #666; font-style: italic; line-height: 1.5;"></p>
+                </div>
+            </div>
+
+            <!-- Price Breakdown -->
+            <div style="margin-bottom: 30px; padding: 25px; background: white; border-radius: 8px; border: 1px solid #eee;">
+                <h3 style="color: #5a7c5a; margin-bottom: 20px; font-weight: 500; font-size: 1.3rem;">Price Breakdown</h3>
+
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;">
+                        <span style="color: #666;">Flowers:</span>
+                        <span style="color: #8b7355; font-weight: 600;">$<span id="reviewFlowerTotal">0.00</span></span>
+                    </div>
+
+                    <div id="customizationBreakdown" style="margin-bottom: 10px;">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;">
+                        <span style="color: #666;">Subtotal:</span>
+                        <span style="color: #8b7355; font-weight: 600;">$<span id="reviewSubtotal">0.00</span></span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #666;">Estimated Tax (7%):</span>
+                        <span style="color: #8b7355; font-weight: 600;">$<span id="reviewTax">0.00</span></span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0;">
+                        <span style="color: #666;">Standard Shipping:</span>
+                        <span style="color: #8b7355; font-weight: 600;">$5.99</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; padding-top: 15px; border-top: 2px solid #eee; font-size: 1.2rem;">
+                        <span style="color: #5a7c5a; font-weight: 600;">Total:</span>
+                        <span style="color: #5a7c5a; font-weight: 600;">$<span id="reviewTotal">0.00</span></span>
+                    </div>
+                </div>
+
+                <div style="padding: 15px; background: #f9f7f2; border-radius: 5px; text-align: center;">
+                    <p style="color: #666; font-size: 0.9rem; margin: 0;">
+                        <i>🎁</i> <strong>Free shipping</strong> on orders over $100! Add $<span id="amountToFreeShipping">0.00</span> more to qualify.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Add More Options -->
+            <div style="margin-bottom: 30px; text-align: center;">
+                <button id="addAnotherBouquet" class="cart-nav-btn add-more">
+                    <i>➕</i> Add Another Bouquet
+                </button>
+            </div>
+
+            <!-- Navigation -->
+            <div class="cart-navigation">
+                <a href="@Url.Action("Step2", "Cart")" class="cart-nav-btn back">← Back to Customization</a>
+                <button id="proceedToCheckout" class="cart-nav-btn next">Proceed to Checkout →</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Load data from localStorage
+    let selectedFlowers = [];
+    let customization = {};
+
+    // Initialize
+    window.addEventListener('load', function() {
+        // Load selected flowers
+        const savedFlowers = localStorage.getItem('selectedFlowers');
+        if (savedFlowers) {
+            selectedFlowers = JSON.parse(savedFlowers);
+        } else {
+            // No flowers selected, redirect to step 1
+            window.location.href = '@Url.Action("Step1", "Cart")';
+        }
+
+        // Load customization
+        const savedCustomization = localStorage.getItem('bouquetCustomization');
+        if (savedCustomization) {
+            customization = JSON.parse(savedCustomization);
+        }
+
+        // Populate review
+        populateReview();
+        calculateTotals();
+    });
+
+    // Populate Review
+    function populateReview() {
+        // Flowers List
+        const flowersList = document.getElementById('reviewFlowersList');
+        flowersList.innerHTML = '';
+
+        selectedFlowers.forEach(flower => {
+            const flowerDiv = document.createElement('div');
+            flowerDiv.style.cssText = `
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 15px;
+                background: white;
+                border-radius: 5px;
+                text-align: center;
+            `;
+
+            flowerDiv.innerHTML = `
+                <img src="${flower.image}" alt="${flower.displayName}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px; margin-bottom: 10px;">
+                <span style="font-size: 0.9rem; color: #5a7c5a; font-weight: 500; margin-bottom: 5px;">${flower.displayName}</span>
+                <span style="font-size: 0.85rem; color: #8b7355; font-weight: 600;">$${flower.price.toFixed(2)}</span>
+            `;
+
+            flowersList.appendChild(flowerDiv);
+        });
+
+        // Customization
+        const customizationDiv = document.getElementById('reviewCustomization');
+        customizationDiv.innerHTML = '';
+
+        // Vase
+        if (customization.vase) {
+            addCustomizationItem(customizationDiv, 'Vase', customization.vase.name, customization.vase.price);
+        } else {
+            addCustomizationItem(customizationDiv, 'Vase', 'No Vase', 0);
+        }
+
+        // Ribbon
+        if (customization.ribbon) {
+            addCustomizationItem(customizationDiv, 'Ribbon', customization.ribbon.name, customization.ribbon.price);
+        } else {
+            addCustomizationItem(customizationDiv, 'Ribbon', 'No Ribbon', 0);
+        }
+
+        // Greenery
+        if (customization.greenery) {
+            addCustomizationItem(customizationDiv, 'Greenery', customization.greenery.name, customization.greenery.price);
+        }
+
+        // Gift Card
+        if (customization.includeCard) {
+            addCustomizationItem(customizationDiv, 'Gift Card', 'Included', 2.5);
+        }
+
+        // Gift Message
+        if (customization.isGift && customization.giftMessage) {
+            document.getElementById('reviewGiftMessage').style.display = 'block';
+            document.getElementById('reviewMessageText').textContent = customization.giftMessage;
+        }
+    }
+
+    // Add Customization Item
+    function addCustomizationItem(container, title, name, price) {
+        const itemDiv = document.createElement('div');
+        itemDiv.style.cssText = `
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        `;
+
+        itemDiv.innerHTML = `
+            <div style="color: #5a7c5a; font-weight: 500; margin-bottom: 5px;">${title}</div>
+            <div style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">${name}</div>
+            <div style="color: #8b7355; font-weight: 600;">${price > 0 ? `+$${price.toFixed(2)}` : 'Free'}</div>
+        `;
+
+        container.appendChild(itemDiv);
+    }
+
+    // Calculate Totals
+    function calculateTotals() {
+        // Flower total
+        const flowerTotal = selectedFlowers.reduce((sum, flower) => sum + flower.price, 0);
+        document.getElementById('reviewFlowerTotal').textContent = flowerTotal.toFixed(2);
+
+        // Customization breakdown
+        const breakdownDiv = document.getElementById('customizationBreakdown');
+        breakdownDiv.innerHTML = '';
+
+        let customizationTotal = 0;
+
+        if (customization.vase && customization.vase.price > 0) {
+            addBreakdownItem(breakdownDiv, 'Vase', customization.vase.price);
+            customizationTotal += customization.vase.price;
+        }
+
+        if (customization.ribbon && customization.ribbon.price > 0) {
+            addBreakdownItem(breakdownDiv, 'Ribbon', customization.ribbon.price);
+            customizationTotal += customization.ribbon.price;
+        }
+
+        if (customization.greenery && customization.greenery.price > 0) {
+            addBreakdownItem(breakdownDiv, 'Greenery', customization.greenery.price);
+            customizationTotal += customization.greenery.price;
+        }
+
+        if (customization.includeCard) {
+            addBreakdownItem(breakdownDiv, 'Gift Card', 2.5);
+            customizationTotal += 2.5;
+        }
+
+        // Subtotal
+        const subtotal = flowerTotal + customizationTotal;
+        document.getElementById('reviewSubtotal').textContent = subtotal.toFixed(2);
+
+        // Tax (7%)
+        const tax = subtotal * 0.07;
+        document.getElementById('reviewTax').textContent = tax.toFixed(2);
+
+        // Shipping
+        const shipping = 5.99;
+
+        // Total
+        const total = subtotal + tax + shipping;
+        document.getElementById('reviewTotal').textContent = total.toFixed(2);
+
+        // Amount to free shipping
+        const amountToFreeShipping = Math.max(0, 100 - subtotal).toFixed(2);
+        document.getElementById('amountToFreeShipping').textContent = amountToFreeShipping;
+    }
+
+    // Add Breakdown Item
+    function addBreakdownItem(container, label, price) {
+        const itemDiv = document.createElement('div');
+        itemDiv.style.cssText = `
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+        `;
+
+        itemDiv.innerHTML = `
+            <span style="color: #666;">${label}:</span>
+            <span style="color: #8b7355;">+$${price.toFixed(2)}</span>
+        `;
+
+        container.appendChild(itemDiv);
+    }
+
+    // Add Another Bouquet
+    document.getElementById('addAnotherBouquet').addEventListener('click', function() {
+        // Clear current selections
+        localStorage.removeItem('selectedFlowers');
+        localStorage.removeItem('bouquetCustomization');
+
+        // Redirect to start
+        window.location.href = '@Url.Action("Step1", "Cart")';
+    });
+
+    // Proceed to Checkout
+    document.getElementById('proceedToCheckout').addEventListener('click', function() {
+        // Save final order to localStorage
+        const order = {
+            flowers: selectedFlowers,
+            customization: customization,
+            timestamp: new Date().toISOString(),
+            orderNumber: 'BLMF-' + Math.floor(100000 + Math.random() * 900000)
+        };
+
+        localStorage.setItem('currentOrder', JSON.stringify(order));
+
+        // Redirect to checkout
+        window.location.href = '@Url.Action("Step1", "Checkout")';
+    });
+</script>

@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "shippingInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="checkout-page">
+    <div class="checkout-container">
+        <!-- Progress Bar -->
+        <div class="checkout-progress">
+            <div class="progress-step active">
+                <div class="step-number">1</div>
+                <div class="step-label">Shipping</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">2</div>
+                <div class="step-label">Payment</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">3</div>
+                <div class="step-label">Review</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">4</div>
+                <div class="step-label">Complete</div>
+            </div>
+        </div>
+
+        <!-- Checkout Header -->
+        <div class="checkout-header">
+            <h1>Shipping Information</h1>
+            <p>Enter your delivery details to continue</p>
+        </div>
+
+        <!-- Checkout Form -->
+        <div class="checkout-card">
+            <form id="shippingForm" action="@Url.Action(" Step2", "Checkout" )" method="post">
+                <!-- Contact Information -->
+                <div class="form-section">
+                    <h2>Contact Information</h2>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" value="customer@example.com" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" value="Jane" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" value="Smith" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" value="(123) 456-7890" required>
+                    </div>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="form-section">
+                    <h2>Shipping Address</h2>
+                    <div class="form-group">
+                        <label for="address">Address *</label>
+                        <input type="text" id="address" name="address" value="123 Flower Street" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apartment">Apartment, suite, etc. (optional)</label>
+                        <input type="text" id="apartment" name="apartment" value="Apt 4B">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" value="San Francisco" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State *</label>
+                            <select id="state" name="state" required>
+                                <option value="">Select State</option>
+                                <option value="CA" selected>California</option>
+                                <option value="NY">New York</option>
+                                <option value="TX">Texas</option>
+                                <option value="FL">Florida</option>
+                                <option value="IL">Illinois</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="zipCode">ZIP Code *</label>
+                            <input type="text" id="zipCode" name="zipCode" value="94107" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country *</label>
+                            <select id="country" name="country" required>
+                                <option value="US" selected>United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Method -->
+                <div class="form-section">
+                    <h2>Shipping Method</h2>
+                    <div class="shipping-options">
+                        <label class="shipping-option selected">
+                            <input type="radio" name="shippingMethod" value="standard" checked>
+                            <div class="shipping-details">
+                                <h4>Standard Delivery</h4>
+                                <p>3-5 business days</p>
+                                <p>Free for orders over $50</p>
+                            </div>
+                            <div class="shipping-price">$5.99</div>
+                        </label>
+
+                        <label class="shipping-option">
+                            <input type="radio" name="shippingMethod" value="express">
+                            <div class="shipping-details">
+                                <h4>Express Delivery</h4>
+                                <p>1-2 business days</p>
+                                <p>Guaranteed before 5 PM</p>
+                            </div>
+                            <div class="shipping-price">$12.99</div>
+                        </label>
+
+                        <label class="shipping-option">
+                            <input type="radio" name="shippingMethod" value="same-day">
+                            <div class="shipping-details">
+                                <h4>Same Day Delivery</h4>
+                                <p>Order before 12 PM</p>
+                                <p>Available in selected areas</p>
+                            </div>
+                            <div class="shipping-price">$19.99</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Gift Message -->
+                <div class="form-section">
+                    <h2>Gift Options</h2>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="addGiftMessage">
+                            Add a gift message (optional)
+                        </label>
+                    </div>
+
+                    <div class="form-group" id="giftMessageGroup" style="display: none;">
+                        <label for="giftMessage">Your Message</label>
+                        <textarea id="giftMessage" name="giftMessage" rows="4" placeholder="Write your special message here..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="checkout-navigation">
+                    <a href="@Url.Action(" Cart", "Product" )" class="nav-btn back">← Back to Cart</a>
+                    <button type="submit" class="nav-btn continue">Continue to Payment →</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Gift message toggle
+    document.getElementById('addGiftMessage').addEventListener('change', function() {
+        const giftMessageGroup = document.getElementById('giftMessageGroup');
+        giftMessageGroup.style.display = this.checked ? 'block' : 'none';
+    });
+
+    // Shipping option selection
+    const shippingOptions = document.querySelectorAll('.shipping-option');
+    shippingOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            shippingOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            this.querySelector('input[type="radio"]').checked = true;
+        });
+    });
+
+    // Form validation
+    document.getElementById('shippingForm').addEventListener('submit', function(e) {
+        const requiredFields = this.querySelectorAll('[required]');
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.style.borderColor = '#ff6b6b';
+            } else {
+                field.style.borderColor = '#ddd';
+            }
+        });
+
+        if (!isValid) {
+            e.preventDefault();
+            alert('Please fill in all required fields marked with *');
+        }
+    });
+</script>
