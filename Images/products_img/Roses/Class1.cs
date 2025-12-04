@@ -5,7 +5,5 @@ using System.Web;
 
 namespace Bloomfiy.Images.products_img.tulip
 {
-    public class Class1
-    {
-    }
+
 }

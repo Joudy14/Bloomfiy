@@ -134,7 +134,7 @@
     <Content Include="Content\event.css" />
     <Content Include="Content\shop.css" />
     <Content Include="Controllers\AccountControllert.txt" />
-    <Content Include="Controllers\Admin\AdminCatagoryController.txt" />
+    <Compile Include="Controllers\AdminCatagoryController.cs" />
     <Content Include="Controllers\Admin\AdminContentController.txt" />
     <Content Include="Controllers\Admin\AdminController.txt" />
     <Content Include="Controllers\Admin\AdminEventController.txt" />
@@ -152,7 +152,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Content Include="Migrations\Configuration.txt" />
     <Compile Include="Images\products_img\Alstroemeria\Class1.cs" />
     <Compile Include="Images\products_img\Aster\Class1.cs" />
     <Compile Include="Images\products_img\Baby rose\Class1.cs" />
@@ -177,10 +176,6 @@
     <Compile Include="Images\products_img\Sunflowers\Class1.cs" />
     <Compile Include="Images\products_img\tulip\Class1.cs" />
     <Compile Include="Images\products_img\Veronica\Class1.cs" />
-    <Compile Include="Migrations\202512031528306_InitialCreate.cs" />
-    <Compile Include="Migrations\202512031528306_InitialCreate.designer.cs">
-      <DependentUpon>202512031528306_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Categories.cs" />
@@ -215,7 +210,7 @@
     <Content Include="Images\joud.png" />
     <Content Include="Images\layan.png" />
     <Content Include="Images\maftuna.png" />
-    <Content Include="Images\products_img\peony\peony_care.JPG" />
+    <Content Include="Images\products_img\peony\peony_info.JPG" />
     <Content Include="Images\products_img\peony\peony_pink.png" />
     <Content Include="Images\products_img\peony\peony_red.png" />
     <Content Include="Images\products_img\peony\peony_white.png" />
@@ -240,11 +235,6 @@
     <Content Include="Views\Admin\AdminCategory\Create.cshtml" />
     <Content Include="Views\Admin\AdminCategory\Edit.cshtml" />
     <Content Include="Views\Admin\AdminProduct\Delete.cshtml" />
-    <Content Include="Views\Checkout\OrderComplete.cshtml" />
-    <Content Include="Views\Cart\SelectFlowers.cshtml" />
-    <Content Include="Views\Cart\CustomizeBouquet.cshtml" />
-    <Content Include="Views\Cart\ReviewBouquet.cshtml" />
-    <Content Include="Views\Cart\ordercomplete.cshtml" />
     <None Include="Views\Information\FAQ.cshtml" />
     <None Include="Views\Information\PrivacyPolicy.cshtml" />
     <Content Include="Scripts\catalog.js" />
@@ -271,9 +261,6 @@
     <None Include="Views\Admin\AdminOrder\Details.cshtml" />
     <None Include="Views\Admin\AdminUser\Index.cshtml" />
     <None Include="Views\Admin\AdminUser\Details.cshtml" />
-    <None Include="Views\Checkout\shippingInfo.cshtml" />
-    <None Include="Views\Checkout\PaymentInfo.cshtml" />
-    <None Include="Views\Checkout\OrderReview.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -295,6 +282,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
+    <Folder Include="Views\Cart\" />
+    <Folder Include="Views\Checkout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -306,11 +295,6 @@
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Event\Services.cshtml" />
     <Content Include="Views\Event\Booking.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202512031528306_InitialCreate.resx">
-      <DependentUpon>202512031528306_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

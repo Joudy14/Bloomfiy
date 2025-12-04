@@ -3,7 +3,7 @@
     ViewBag.Title = "Flower Catalog - Bloomfiy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var categories = ViewBag.Categories as List<Bloomfiy.Models.Category>;
+    var categories = ViewBag.Categories as List<Bloomfiy.Models.Categories>;
     var colors = ViewBag.Colors as List<Bloomfiy.Models.Color>;
 }
 
@@ -99,7 +99,7 @@
                             </div>
                             <div class="product-info">
                                 <h3 class="product-title">@product.Name</h3>
-                                <p class="product-description">@product.ShortDescription</p>
+                                <p class="product-description">@product.Description</p>
 
                                 <div class="product-price">
                                     <span class="current-price">$@product.BasePrice</span>

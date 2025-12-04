@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Bloomfiy.Models;
+using System.Data.Entity;
 
 namespace Bloomfiy.Controllers
 {
@@ -16,8 +17,8 @@ namespace Bloomfiy.Controllers
         public ActionResult Index()
         {
             var products = db.Products
-                .Include(p => p.Category)
-                .Include(p => p.ProductColors)
+                .Include("Category")
+                .Include("ProductColors")
                 .ToList();
             return View("~/Views/Admin/AdminProduct/Index.cshtml", products);
         }
@@ -30,55 +31,86 @@ namespace Bloomfiy.Controllers
             return View("~/Views/Admin/AdminProduct/Create.cshtml");
         }
 
-        // POST: /AdminProduct/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product, int[] selectedColors, HttpPostedFileBase[] colorImages)
+        public ActionResult Create(Product product, int[] selectedColors,
+                                   Dictionary<int, string> colorImageNames,
+                                   string productInfoImage)
         {
+            // DEBUG: Log everything
+            System.Diagnostics.Debug.WriteLine($"=== CREATE DEBUG ===");
+            System.Diagnostics.Debug.WriteLine($"CategoryId from form: {product.CategoryId}");
+            System.Diagnostics.Debug.WriteLine($"All categories in DB:");
+            foreach (var cat in db.Categories.ToList())
+            {
+                System.Diagnostics.Debug.WriteLine($"- ID: {cat.CategoryId}, Name: {cat.CategoryName}");
+            }
+
             if (ModelState.IsValid)
             {
-                product.DateCreated = DateTime.Now;
-                db.Products.Add(product);
-                db.SaveChanges();
+                try
+                {
+                    // Double-check category exists
+                    var category = db.Categories.Find(product.CategoryId);
+                    if (category == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"ERROR: CategoryId {product.CategoryId} not found!");
+                        ModelState.AddModelError("CategoryId", "Selected category does not exist");
+                        ViewBag.Categories = db.Categories.ToList();
+                        ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
+                        return View("~/Views/Admin/AdminProduct/Create.cshtml", product);
+                    }
 
-                // Add colors with their images
+                    System.Diagnostics.Debug.WriteLine($"Found category: {category.CategoryName}");
+
+                    product.DateCreated = DateTime.Now;
+                    product.InfoImage = productInfoImage;
+
+                    // Save product
+                    db.Products.Add(product);
+                    db.SaveChanges();
+
+                    // 2. Create folder for images
+                    string folderPath = Server.MapPath($"~/Images/products_img/{product.ImageFolderName}/");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                // 3. Save colors with images
                 if (selectedColors != null)
                 {
-                    for (int i = 0; i < selectedColors.Length; i++)
+                    foreach (var colorId in selectedColors)
                     {
                         var productColor = new ProductColor
                         {
                             ProductId = product.ProductId,
-                            ColorId = selectedColors[i]
+                            ColorId = colorId,
+                            ImageFileName = colorImageNames.ContainsKey(colorId)
+                                ? colorImageNames[colorId].Trim()
+                                : $"{product.ImageFolderName}_{colorId}.jpg"
                         };
-
-                        // Handle image upload for this color
-                        if (colorImages != null && i < colorImages.Length && colorImages[i] != null && colorImages[i].ContentLength > 0)
-                        {
-                            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(colorImages[i].FileName);
-                            string folderPath = Server.MapPath("~/Images/products_img/");
-
-                            if (!Directory.Exists(folderPath))
-                            {
-                                Directory.CreateDirectory(folderPath);
-                            }
-
-                            string filePath = Path.Combine(folderPath, fileName);
-                            colorImages[i].SaveAs(filePath);
-                            productColor.ImageUrl = "/Images/products_img/" + fileName;
-                        }
-                        else
-                        {
-                            productColor.ImageUrl = "/Images/default-flower.jpg";
-                        }
 
                         db.ProductColors.Add(productColor);
                     }
                     db.SaveChanges();
                 }
 
-                TempData["SuccessMessage"] = "Product created successfully!";
-                return RedirectToAction("Index");
+                    TempData["SuccessMessage"] = "Product created successfully!";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"EXCEPTION: {ex.Message}");
+                    if (ex.InnerException != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"INNER: {ex.InnerException.Message}");
+                    }
+                    ViewBag.Error = ex.Message;
+                    ViewBag.Categories = db.Categories.ToList();
+                    ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
+                    return View("~/Views/Admin/AdminProduct/Create.cshtml", product);
+                }
             }
 
             ViewBag.Categories = db.Categories.ToList();
@@ -86,11 +118,13 @@ namespace Bloomfiy.Controllers
             return View("~/Views/Admin/AdminProduct/Create.cshtml", product);
         }
 
+
         // GET: /AdminProduct/Edit/5
         public ActionResult Edit(int id)
         {
             var product = db.Products
                 .Include("ProductColors")
+                .Include("ProductColors.Color")
                 .FirstOrDefault(p => p.ProductId == id);
 
             if (product == null)
@@ -101,31 +135,37 @@ namespace Bloomfiy.Controllers
             ViewBag.Categories = db.Categories.ToList();
             ViewBag.Colors = db.Colors.Where(c => c.IsAvailable).ToList();
 
-            // Load color data
-            foreach (var pc in product.ProductColors)
-            {
-                db.Entry(pc).Reference(p => p.Color).Load();
-            }
-
             return View("~/Views/Admin/AdminProduct/Edit.cshtml", product);
         }
 
-        // POST: /AdminProduct/Edit/5
+        // POST: /AdminProduct/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product, int[] selectedColors, HttpPostedFileBase[] colorImages)
+        public ActionResult Edit(Product product, int[] selectedColors, Dictionary<int, string> colorImageNames, string productInfoImage)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                // Update product basic info
+                db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
 
-                // Remove existing colors
-                var existingColors = db.ProductColors.Where(pc => pc.ProductId == product.ProductId).ToList();
-                db.ProductColors.RemoveRange(existingColors);
+                // Get existing product colors
+                var existingProductColors = db.ProductColors
+                    .Where(pc => pc.ProductId == product.ProductId)
+                    .ToList();
+
+                // Create a dictionary of existing color-image pairs
+                var existingImages = new Dictionary<int, string>();
+                foreach (var pc in existingProductColors)
+                {
+                    existingImages[pc.ColorId] = pc.ImageFileName;
+                }
+
+                // Remove all existing colors
+                db.ProductColors.RemoveRange(existingProductColors);
                 db.SaveChanges();
 
-                // Add new colors with images
+                // Add updated colors with their image filenames
                 if (selectedColors != null)
                 {
                     for (int i = 0; i < selectedColors.Length; i++)
@@ -133,22 +173,13 @@ namespace Bloomfiy.Controllers
                         var productColor = new ProductColor
                         {
                             ProductId = product.ProductId,
-                            ColorId = selectedColors[i]
+                            ColorId = selectedColors[i],
+                            ImageFileName = colorImageNames != null && i < colorImageNames.Count && !string.IsNullOrEmpty(colorImageNames[i].Trim())
+                                ? colorImageNames[i].Trim()
+                                : existingImages.ContainsKey(selectedColors[i])
+                                    ? existingImages[selectedColors[i]]
+                                    : $"{product.ImageFolderName}_{i + 1}.jpg"
                         };
-
-                        // Handle image upload
-                        if (colorImages != null && i < colorImages.Length && colorImages[i] != null && colorImages[i].ContentLength > 0)
-                        {
-                            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(colorImages[i].FileName);
-                            string folderPath = Server.MapPath("~/Images/products_img/");
-                            string filePath = Path.Combine(folderPath, fileName);
-                            colorImages[i].SaveAs(filePath);
-                            productColor.ImageUrl = "/Images/products_img/" + fileName;
-                        }
-                        else
-                        {
-                            productColor.ImageUrl = "/Images/default-flower.jpg";
-                        }
 
                         db.ProductColors.Add(productColor);
                     }
@@ -167,7 +198,11 @@ namespace Bloomfiy.Controllers
         // GET: /AdminProduct/Delete/5
         public ActionResult Delete(int id)
         {
-            var product = db.Products.Find(id);
+            var product = db.Products
+                .Include("ProductColors")
+                .Include("ProductColors.Color")
+                .FirstOrDefault(p => p.ProductId == id);
+
             if (product == null)
             {
                 return HttpNotFound();
@@ -196,6 +231,7 @@ namespace Bloomfiy.Controllers
             return RedirectToAction("Index");
         }
 
+        // Toggle Availability
         public ActionResult ToggleAvailability(int id)
         {
             var product = db.Products.Find(id);
@@ -206,37 +242,6 @@ namespace Bloomfiy.Controllers
                 TempData["SuccessMessage"] = $"Product {(product.IsAvailable ? "activated" : "deactivated")} successfully!";
             }
             return RedirectToAction("Index");
-        }
-
-        // Test action
-        public ActionResult Test()
-        {
-            try
-            {
-                // Create test data if needed
-                if (!db.Categories.Any())
-                {
-                    db.Categories.Add(new Category { CategoryName = "Bouquets" });
-                    db.SaveChanges();
-                }
-
-                if (!db.Colors.Any())
-                {
-                    db.Colors.AddRange(new List<Color>
-                    {
-                        new Color { ColorName = "Red", ColorCode = "#FF0000" },
-                        new Color { ColorName = "White", ColorCode = "#FFFFFF" },
-                        new Color { ColorName = "Pink", ColorCode = "#FFC0CB" }
-                    });
-                    db.SaveChanges();
-                }
-
-                return Content("✅ AdminProductController is working!");
-            }
-            catch (Exception ex)
-            {
-                return Content($"❌ Error: {ex.Message}");
-            }
         }
     }
 }

@@ -1,7 +1,46 @@
-﻿
+﻿@model IEnumerable<Bloomfiy.Models.Categories>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Category Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="admin-header">
+    <h1>Category Management</h1>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Add New Category</a>
+</div>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<table class="admin-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.CategoryId</td>
+                <td>@category.CategoryName</td>
+                <td>@category.Description</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = category.CategoryId })" class="btn-edit">Edit</a>
+                    @using (Html.BeginForm("Delete", "AdminCategory", new { id = category.CategoryId }, FormMethod.Post, new { style = "display:inline;" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-delete" onclick="return confirm('Are you sure?')">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
