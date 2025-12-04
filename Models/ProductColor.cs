@@ -19,10 +19,33 @@ namespace Bloomfiy.Models
         [Column("color_id")]
         public int ColorId { get; set; }
 
+        // NEW: Image URL for THIS specific product-color combination
+        [StringLength(500)]
+        [Column("image_url")]
+        public string ImageUrl { get; set; }
+
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
 
         [ForeignKey("ColorId")]
         public virtual Color Color { get; set; }
+
+        // Helper property to get full price
+        [NotMapped]
+        public string DefaultImageUrl
+        {
+            get
+            {
+                if (ProductColors != null)
+                {
+                    foreach (var pc in ProductColors)
+                    {
+                        if (pc != null && !string.IsNullOrEmpty(pc.ImageUrl))
+                            return pc.ImageUrl;
+                    }
+                }
+                return "/Images/default-flower.jpg";
+            }
+        }
     }
 }

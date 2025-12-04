@@ -27,7 +27,6 @@ namespace Bloomfiy.Models
         [Column("is_available")]
         public bool IsAvailable { get; set; } = true;
 
-        // ✅ CORRECT: Navigation property for Products (many-to-many via ProductColors)
         public virtual ICollection<ProductColor> ProductColors { get; set; }
     }
 }

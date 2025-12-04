@@ -26,6 +26,7 @@
                 <th>Category</th>
                 <th>Price</th>
                 <th>Stock</th>
+                <th>Colors</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -36,12 +37,31 @@
                 <tr>
                     <td>@product.ProductId</td>
                     <td>
-                        <img src="@product.ImageUrl" alt="@product.Name" class="product-thumbnail">
+                        <img src="@product.DefaultImageUrl" alt="@product.Name" class="product-thumbnail">
                     </td>
                     <td>@product.Name</td>
-                    <td>@product.Category.CategoryName</td>
+                    <td>
+                        @if (product.Category != null)
+                        {
+                            @product.Category.CategoryName
+                        }
+                        else
+                        {
+                            <span class="text-muted">No Category</span>
+                        }
+                    </td>
                     <td>$@product.BasePrice</td>
                     <td>@product.StockQuantity</td>
+                    <td>
+                        @if (product.ProductColors != null)
+                        {
+                            <span>@product.ProductColors.Count colors</span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">No colors</span>
+                        }
+                    </td>
                     <td>
                         @if (product.IsAvailable)
                         {
@@ -56,7 +76,10 @@
                         <a href="@Url.Action("Edit", new { id = product.ProductId })" class="btn-edit">Edit</a>
                         <a href="@Url.Action("Delete", new { id = product.ProductId })" class="btn-delete">Delete</a>
                         <a href="@Url.Action("ToggleAvailability", new { id = product.ProductId })"
-                           class="btn-toggle">@(product.IsAvailable ? "Deactivate" : "Activate")</a>
+                           class="btn-toggle"
+                           onclick="return confirm('Are you sure?')">
+                            @(product.IsAvailable ? "Deactivate" : "Activate")
+                        </a>
                     </td>
                 </tr>
             }
@@ -158,4 +181,9 @@
         .btn-edit:hover, .btn-delete:hover, .btn-toggle:hover {
             opacity: 0.9;
         }
+
+    .text-muted {
+        color: #6c757d;
+        font-style: italic;
+    }
 </style>

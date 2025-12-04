@@ -19,7 +19,7 @@
         <!-- Filters Sidebar -->
         <aside class="filters-sidebar">
             <!-- Category Filter -->
-            @if (categories != null && categories.Any())
+            @if (categories != null && categories.Count > 0)
             {
                 <div class="filter-group">
                     <h3>Categories</h3>
@@ -35,15 +35,20 @@
             }
 
             <!-- Color Filter -->
-            @if (colors != null && colors.Any())
+            @if (colors != null && colors.Count > 0)
             {
                 <div class="filter-group">
                     <h3>Colors</h3>
                     <div class="color-filters">
                         @foreach (var color in colors)
                         {
+                            string colorCode = "#ccc";
+                            if (!string.IsNullOrEmpty(color.ColorCode))
+                            {
+                                colorCode = color.ColorCode;
+                            }
                             <div class="color-option"
-                                 style="background-color: @(!string.IsNullOrEmpty(color.ColorCode) ? color.ColorCode : "#ccc")"
+                                 style="background-color: @colorCode"
                                  data-color-id="@color.ColorId"
                                  title="@color.ColorName">
                             </div>
@@ -52,7 +57,6 @@
                 </div>
             }
 
-            <!-- Price Range -->
             <div class="filter-group">
                 <h3>Price Range</h3>
                 <div class="price-range">
@@ -73,14 +77,6 @@
                 <div class="results-count">
                     Showing @Model.Count() product@(Model.Count() != 1 ? "s" : "")
                 </div>
-                <div class="sort-options">
-                    <select class="sort-select" id="sortSelect">
-                        <option value="name">Sort by: Name</option>
-                        <option value="price-low">Price: Low to High</option>
-                        <option value="price-high">Price: High to Low</option>
-                        <option value="newest">Newest First</option>
-                    </select>
-                </div>
             </div>
 
             @if (Model.Any())
@@ -92,10 +88,9 @@
                              data-price="@product.BasePrice"
                              data-category="@product.CategoryId">
                             <div class="product-image">
-                                <img src="@product.MainImageUrl" alt="@product.Name" class="main-product-image">
+                                <img src="@product.DefaultImageUrl" alt="@product.Name" class="main-product-image">
                                 <div class="product-actions">
                                     <button class="wishlist-btn" title="Add to Wishlist">♡</button>
-                                    <button class="quick-view-btn" title="Quick View">👁️</button>
                                 </div>
                                 @if (product.BasePrice > 50)
                                 {
@@ -104,34 +99,44 @@
                             </div>
                             <div class="product-info">
                                 <h3 class="product-title">@product.Name</h3>
-                                <p class="product-description">@(product.Description.Length > 100 ? product.Description.Substring(0, 100) + "..." : product.Description)</p>
+                                <p class="product-description">@product.ShortDescription</p>
 
                                 <div class="product-price">
                                     <span class="current-price">$@product.BasePrice</span>
-                                    @if (product.BasePrice < 80)
-                                    {
-                                        <span class="original-price">$@(product.BasePrice + 10)</span>
-                                    }
                                 </div>
 
                                 @if (product.ProductColors != null && product.ProductColors.Any())
                                 {
                                     <div class="product-colors">
                                         Available in:
-                                        @foreach (var pc in product.ProductColors.Take(3))
-                                        {
-                                            <span class="color-chip" style="background-color: @(!string.IsNullOrEmpty(pc.Color?.ColorCode) ? pc.Color.ColorCode : "#ccc")"
-                                                  title="@pc.Color?.ColorName">
-                                            </span>
-                                        }
-                                        @if (product.ProductColors.Count > 3)
-                                        {
-                                            <span class="more-colors">+@(product.ProductColors.Count - 3) more</span>
+                                        @{
+                                            int colorCount = 0;
+                                            foreach (var pc in product.ProductColors)
+                                            {
+                                                if (colorCount < 3 && pc.Color != null)
+                                                {
+                                                    string pcColorCode = "#ccc";
+                                                    if (!string.IsNullOrEmpty(pc.Color.ColorCode))
+                                                    {
+                                                        pcColorCode = pc.Color.ColorCode;
+                                                    }
+                                                    <span class="color-chip" style="background-color: @pcColorCode"
+                                                          title="@pc.Color.ColorName">
+                                                    </span>
+                                                    colorCount++;
+                                                }
+                                            }
+                                            if (product.ProductColors.Count > 3)
+                                            {
+                                                <span class="more-colors">+@(product.ProductColors.Count - 3) more</span>
+                                            }
                                         }
                                     </div>
                                 }
 
-                                <button class="add-to-cart-btn" data-product-id="@product.ProductId">Add to Cart</button>
+                                <a href="@Url.Action("Details", new { id = product.ProductId })" class="add-to-cart-btn">
+                                    View Details
+                                </a>
                             </div>
                         </div>
                     }
@@ -147,113 +152,3 @@
         </div>
     </div>
 </section>
-
-@section Scripts {
-    <script>
-    $(document).ready(function() {
-        // Product card click navigation
-        $('.product-card').click(function(e) {
-            if (!$(e.target).closest('button').length) {
-                var productId = $(this).data('product-id');
-                window.location.href = '@Url.Action("Details", "Product")/' + productId;
-            }
-        });
-
-        // Filter functionality
-        $('#clearFilters').click(function() {
-            $('.filter-options input[type="checkbox"]').prop('checked', false);
-            $('#priceSlider').val(200);
-            updatePriceDisplay();
-            filterProducts();
-        });
-
-        // Price slider
-        $('#priceSlider').on('input', function() {
-            updatePriceDisplay();
-            filterProducts();
-        });
-
-        // Category/color filter
-        $('.filter-options input, .color-option').change(function() {
-            filterProducts();
-        });
-
-        // Sort functionality
-        $('#sortSelect').change(function() {
-            sortProducts($(this).val());
-        });
-
-        function updatePriceDisplay() {
-            var maxPrice = $('#priceSlider').val();
-            $('#maxPrice').text(maxPrice);
-        }
-
-        function filterProducts() {
-            var selectedCategories = [];
-            $('.filter-options input[type="checkbox"]:checked').each(function() {
-                selectedCategories.push($(this).data('category'));
-            });
-
-            var selectedColors = [];
-            $('.color-option.active').each(function() {
-                selectedColors.push($(this).data('color-id'));
-            });
-
-            var maxPrice = $('#priceSlider').val();
-
-            $('.product-card').each(function() {
-                var $card = $(this);
-                var categoryId = $card.data('category');
-                var price = $card.data('price');
-
-                var showCard = true;
-
-                // Category filter
-                if (selectedCategories.length > 0 && !selectedCategories.includes(categoryId)) {
-                    showCard = false;
-                }
-
-                // Price filter
-                if (price > maxPrice) {
-                    showCard = false;
-                }
-
-                // Color filter (simplified - would need color IDs on product cards)
-                // You would need to add data-colors attribute to product cards
-
-                if (showCard) {
-                    $card.show();
-                } else {
-                    $card.hide();
-                }
-            });
-        }
-
-        function sortProducts(sortBy) {
-            var $container = $('#productsGrid');
-            var $items = $container.children('.product-card');
-
-            $items.sort(function(a, b) {
-                var aPrice = $(a).data('price');
-                var bPrice = $(b).data('price');
-                var aName = $(a).find('.product-title').text().toLowerCase();
-                var bName = $(b).find('.product-title').text().toLowerCase();
-
-                switch(sortBy) {
-                    case 'price-low':
-                        return aPrice - bPrice;
-                    case 'price-high':
-                        return bPrice - aPrice;
-                    case 'newest':
-                        // Assuming newer products have higher IDs
-                        return $(b).data('product-id') - $(a).data('product-id');
-                    default: // 'name'
-                        return aName.localeCompare(bName);
-                }
-            });
-
-            $container.append($items);
-        }
-    });
-    </script>
-}

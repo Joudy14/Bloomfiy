@@ -22,16 +22,23 @@
             <!-- Product Images -->
             <div class="product-images">
                 <div class="main-image">
-                    <img src="@Model.MainImageUrl" alt="@Model.Name" id="mainProductImage">
+                    <img src="@Model.DefaultImageUrl" alt="@Model.Name" id="mainProductImage">
                 </div>
-                @if (Model.AdditionalImageUrls != null && Model.AdditionalImageUrls.Length > 1)
+                @if (Model.ProductColors != null && Model.ProductColors.Count > 1)
                 {
                     <div class="image-thumbnails">
-                        @for (int i = 0; i < Model.AdditionalImageUrls.Length; i++)
-                        {
-                            <div class="thumbnail @(i == 0 ? "active" : "")" data-image="@Model.AdditionalImageUrls[i]">
-                                <img src="@Model.AdditionalImageUrls[i]" alt="@Model.Name - Image @(i+1)">
-                            </div>
+                        @{
+                            int imageIndex = 0;
+                            foreach (var pc in Model.ProductColors)
+                            {
+                                if (pc != null && !string.IsNullOrEmpty(pc.ImageUrl))
+                                {
+                                    <div class="thumbnail @(imageIndex == 0 ? "active" : "")" data-image="@pc.ImageUrl">
+                                        <img src="@pc.ImageUrl" alt="@Model.Name - @(pc.Color != null ? pc.Color.ColorName : "Color")">
+                                    </div>
+                                    imageIndex++;
+                                }
+                            }
                         }
                     </div>
                 }
@@ -47,37 +54,44 @@
                 }
 
                 <!-- Color Selection -->
-                @if (Model.ProductColors != null && Model.ProductColors.Any())
+                @if (Model.ProductColors != null && Model.ProductColors.Count > 0)
                 {
                     <div class="color-selection-detail">
                         <label>Select Color:</label>
                         <div class="color-options-detail">
-                            @foreach (var pc in Model.ProductColors)
-                            {
-                                var color = pc.Color;
-                                var isFirst = Model.ProductColors.First() == pc;
-                                <div class="color-option-detail @(isFirst ? "active" : "")"
-                                     data-color-id="@color.ColorId"
-                                     data-color-name="@color.ColorName"
-                                     data-price="@(Model.BasePrice + color.PriceAdjustment)"
-                                     data-image="@Model.MainImageUrl">
-                                    <div class="color-swatch-large" style="background-color: @(!string.IsNullOrEmpty(color.ColorCode) ? color.ColorCode : "#ccc")"></div>
-                                    <div class="color-info">
-                                        <span class="color-name">@color.ColorName</span>
-                                        <span class="color-price">$@(Model.BasePrice + color.PriceAdjustment)</span>
-                                        @if (color.PriceAdjustment > 0)
-                                        {
-                                            <span class="color-adjustment">+$@color.PriceAdjustment</span>
-                                        }
-                                    </div>
-                                </div>
+                            @{
+                                bool isFirst = true;
+                                foreach (var pc in Model.ProductColors)
+                                {
+                                    if (pc != null && pc.Color != null)
+                                    {
+                                        var color = pc.Color;
+                                        var price = Model.BasePrice + color.PriceAdjustment;
+                                        <div class="color-option-detail @(isFirst ? "active" : "")"
+                                             data-color-id="@color.ColorId"
+                                             data-color-name="@color.ColorName"
+                                             data-price="@price"
+                                             data-image="@(string.IsNullOrEmpty(pc.ImageUrl) ? Model.DefaultImageUrl : pc.ImageUrl)">
+                                            <div class="color-swatch-large" style="background-color: @(!string.IsNullOrEmpty(color.ColorCode) ? color.ColorCode : "#ccc")"></div>
+                                            <div class="color-info">
+                                                <span class="color-name">@color.ColorName</span>
+                                                <span class="color-price">$@price</span>
+                                                @if (color.PriceAdjustment > 0)
+                                                {
+                                                    <span class="color-adjustment">+$@color.PriceAdjustment</span>
+                                                }
+                                            </div>
+                                        </div>
+                                        isFirst = false;
+                                    }
+                                }
                             }
                         </div>
                     </div>
                 }
 
                 <div class="product-price-detail">
-                    <span class="current-price">$@Model.BasePrice</span>
+                    <span class="current-price" id="currentPriceDisplay">$@Model.BasePrice</span>
                     @if (Model.BasePrice < 80)
                     {
                         <span class="original-price">$@(Model.BasePrice + 10)</span>
@@ -86,7 +100,11 @@
 
                 <div class="product-features-detail">
                     <div class="feature-item">
-                        <strong>Category:</strong> @Model.Category?.CategoryName
+                        <strong>Category:</strong>
+                        @if (Model.Category != null)
+                        {
+                            @Model.Category.CategoryName
+                        }
                     </div>
                     <div class="feature-item">
                         <strong>Stock:</strong> @Model.StockQuantity available
@@ -105,16 +123,16 @@
                 <!-- Add to Cart -->
                 <div class="add-to-cart-detail">
                     <div class="quantity-selector">
-                        <button class="quantity-btn minus">-</button>
+                        <button class="quantity-btn minus" type="button">-</button>
                         <input type="number" value="1" min="1" max="@Model.StockQuantity" class="quantity-input">
-                        <button class="quantity-btn plus">+</button>
+                        <button class="quantity-btn plus" type="button">+</button>
                     </div>
                     <button class="add-to-cart-btn large"
                             data-product-id="@Model.ProductId"
                             @(!Model.IsAvailable ? "disabled" : "")>
                         @if (Model.IsAvailable)
                         {
-                            <text>Add to Cart - $@Model.BasePrice</text>
+                            <text>Add to Cart - $<span id="cartPrice">@Model.BasePrice</span></text>
                         }
                         else
                         {
@@ -139,7 +157,7 @@
                             <p>7-day freshness guarantee</p>
                         </div>
                     </div>
-                    @if (Model.ProductColors != null && Model.ProductColors.Any())
+                    @if (Model.ProductColors != null && Model.ProductColors.Count > 0)
                     {
                         <div class="feature">
                             <span>🎨</span>
@@ -199,7 +217,7 @@
             </div>
 
             <!-- Related Products -->
-            @if (relatedProducts != null && relatedProducts.Any())
+            @if (relatedProducts != null && relatedProducts.Count > 0)
             {
                 <div class="detail-section">
                     <h2>Related Products</h2>
@@ -208,7 +226,7 @@
                         {
                             <div class="related-product-card">
                                 <a href="@Url.Action("Details", new { id = relatedProduct.ProductId })">
-                                    <img src="@relatedProduct.MainImageUrl" alt="@relatedProduct.Name">
+                                    <img src="@relatedProduct.DefaultImageUrl" alt="@relatedProduct.Name">
                                     <h4>@relatedProduct.Name</h4>
                                     <p>$@relatedProduct.BasePrice</p>
                                 </a>
@@ -223,70 +241,77 @@
 
 @section Scripts {
     <script>
-    $(document).ready(function() {
-        // Color selection
-        $('.color-option-detail').click(function() {
-            $('.color-option-detail').removeClass('active');
-            $(this).addClass('active');
+        $(document).ready(function () {
+            // Color selection
+            $('.color-option-detail').click(function () {
+                $('.color-option-detail').removeClass('active');
+                $(this).addClass('active');
 
-            var price = $(this).data('price');
-            var colorName = $(this).data('color-name');
-            var image = $(this).data('image');
+                var price = $(this).data('price');
+                var colorName = $(this).data('color-name');
+                var image = $(this).data('image');
 
-            // Update price
-            $('.current-price').text('$' + price);
-            $('.add-to-cart-btn.large').text('Add to Cart - $' + price);
+                // Update price display
+                $('#currentPriceDisplay').text('$' + price);
+                $('#cartPrice').text(price);
+                $('.add-to-cart-btn.large').html('Add to Cart - $<span id="cartPrice">' + price + '</span>');
 
-            // Update image
-            if (image) {
-                $('#mainProductImage').attr('src', image);
-            }
-        });
-
-        // Quantity selector
-        $('.quantity-btn.minus').click(function() {
-            var $input = $(this).siblings('.quantity-input');
-            var value = parseInt($input.val());
-            if (value > 1) {
-                $input.val(value - 1);
-            }
-        });
-
-        $('.quantity-btn.plus').click(function() {
-            var $input = $(this).siblings('.quantity-input');
-            var value = parseInt($input.val());
-            var max = parseInt($input.attr('max'));
-            if (value < max) {
-                $input.val(value + 1);
-            }
-        });
-
-        // Add to cart
-        $('.add-to-cart-btn.large').click(function() {
-            var productId = $(this).data('product-id');
-            var quantity = $('.quantity-input').val();
-            var selectedColor = $('.color-option-detail.active').data('color-id') || null;
-
-            // Add to cart logic here
-            console.log('Adding to cart:', {
-                productId: productId,
-                quantity: quantity,
-                colorId: selectedColor
+                // Update image
+                if (image) {
+                    $('#mainProductImage').attr('src', image);
+                }
             });
 
-            // Show success message
-            alert('Added to cart successfully!');
-        });
+            // Quantity selector
+            $('.quantity-btn.minus').click(function () {
+                var $input = $(this).siblings('.quantity-input');
+                var value = parseInt($input.val());
+                if (value > 1) {
+                    $input.val(value - 1);
+                }
+            });
 
-        // Thumbnail click
-        $('.thumbnail').click(function() {
-            var imageUrl = $(this).data('image');
-            if (imageUrl) {
-                $('#mainProductImage').attr('src', imageUrl);
-                $('.thumbnail').removeClass('active');
-                $(this).addClass('active');
-            }
+            $('.quantity-btn.plus').click(function () {
+                var $input = $(this).siblings('.quantity-input');
+                var value = parseInt($input.val());
+                var max = parseInt($input.attr('max'));
+                if (value < max) {
+                    $input.val(value + 1);
+                }
+            });
+
+            // Add to cart
+            $('.add-to-cart-btn.large').click(function () {
+                if ($(this).prop('disabled')) {
+                    return;
+                }
+
+                var productId = $(this).data('product-id');
+                var quantity = $('.quantity-input').val();
+                var selectedColor = $('.color-option-detail.active').data('color-id') || null;
+                var price = $('#cartPrice').text();
+
+                // Add to cart logic here
+                console.log('Adding to cart:', {
+                    productId: productId,
+                    quantity: quantity,
+                    colorId: selectedColor,
+                    price: price
+                });
+
+                // Show success message
+                alert('Added to cart successfully!');
+            });
+
+            // Thumbnail click
+            $('.thumbnail').click(function () {
+                var imageUrl = $(this).data('image');
+                if (imageUrl) {
+                    $('#mainProductImage').attr('src', imageUrl);
+                    $('.thumbnail').removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
         });
-    });
     </script>
 }
