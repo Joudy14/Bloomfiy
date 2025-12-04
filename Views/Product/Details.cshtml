@@ -1,6 +1,9 @@
-﻿﻿@{
-    ViewBag.Title = "Peony - Bloomfiy";
+﻿@model Bloomfiy.Models.Product
+@{
+    ViewBag.Title = Model.Name + " - Bloomfiy";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var relatedProducts = ViewBag.RelatedProducts as List<Bloomfiy.Models.Product>;
 }
 
 <section class="product-detail-hero">
@@ -8,7 +11,7 @@
         <nav class="breadcrumb">
             <a href="@Url.Action("Index", "Home")">Home</a> &gt;
             <a href="@Url.Action("Catalog", "Product")">Shop</a> &gt;
-            <span>Peony</span>
+            <span>@Model.Name</span>
         </nav>
     </div>
 </section>
@@ -19,94 +22,104 @@
             <!-- Product Images -->
             <div class="product-images">
                 <div class="main-image">
-                    <img src="~/Images/products_img/peony/peony_pink.png" alt="Pink Peony" id="mainProductImage">
+                    <img src="@Model.MainImageUrl" alt="@Model.Name" id="mainProductImage">
                 </div>
-                <div class="image-thumbnails">
-                    <div class="thumbnail active">
-                        <img src="~/Images/products_img/peony/peony_pink.png" alt="Pink Peony">
+                @if (Model.AdditionalImageUrls != null && Model.AdditionalImageUrls.Length > 1)
+                {
+                    <div class="image-thumbnails">
+                        @for (int i = 0; i < Model.AdditionalImageUrls.Length; i++)
+                        {
+                            <div class="thumbnail @(i == 0 ? "active" : "")" data-image="@Model.AdditionalImageUrls[i]">
+                                <img src="@Model.AdditionalImageUrls[i]" alt="@Model.Name - Image @(i+1)">
+                            </div>
+                        }
                     </div>
-                    <div class="thumbnail">
-                        <img src="~/Images/products_img/peony/peony_red.png" alt="Red Peony">
-                    </div>
-                    <div class="thumbnail">
-                        <img src="~/Images/products_img/peony/peony_white.png" alt="White Peony">
-                    </div>
-                </div>
+                }
             </div>
 
             <!-- Product Info -->
             <div class="product-info-detail">
-                <h1>Peony</h1>
+                <h1>@Model.Name</h1>
+
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <p class="product-description">@Model.Description</p>
+                }
 
                 <!-- Color Selection -->
-                <div class="color-selection-detail">
-                    <label>Select Color:</label>
-                    <div class="color-options-detail">
-                        <div class="color-option-detail active" data-color="pink" data-price="68.99"
-                             data-image="/Images/products_img/peony/peony_pink.png">
-                            <div class="color-swatch-large" style="background-color: #ff69b4;"></div>
-                            <div class="color-info">
-                                <span class="color-name">Pink</span>
-                                <span class="color-price">$68.99</span>
-                            </div>
-                        </div>
-
-                        <div class="color-option-detail" data-color="red" data-price="72.99"
-                             data-image="/Images/products_img/peony/peony_red.png">
-                            <div class="color-swatch-large" style="background-color: #ff0000;"></div>
-                            <div class="color-info">
-                                <span class="color-name">Red</span>
-                                <span class="color-price">$72.99</span>
-                            </div>
-                        </div>
-
-                        <div class="color-option-detail" data-color="white" data-price="65.99"
-                             data-image="/Images/products_img/peony/peony_white.png">
-                            <div class="color-swatch-large" style="background-color: #ffffff; border: 1px solid #ccc;"></div>
-                            <div class="color-info">
-                                <span class="color-name">White</span>
-                                <span class="color-price">$65.99</span>
-                            </div>
+                @if (Model.ProductColors != null && Model.ProductColors.Any())
+                {
+                    <div class="color-selection-detail">
+                        <label>Select Color:</label>
+                        <div class="color-options-detail">
+                            @foreach (var pc in Model.ProductColors)
+                            {
+                                var color = pc.Color;
+                                var isFirst = Model.ProductColors.First() == pc;
+                                <div class="color-option-detail @(isFirst ? "active" : "")"
+                                     data-color-id="@color.ColorId"
+                                     data-color-name="@color.ColorName"
+                                     data-price="@(Model.BasePrice + color.PriceAdjustment)"
+                                     data-image="@Model.MainImageUrl">
+                                    <div class="color-swatch-large" style="background-color: @(!string.IsNullOrEmpty(color.ColorCode) ? color.ColorCode : "#ccc")"></div>
+                                    <div class="color-info">
+                                        <span class="color-name">@color.ColorName</span>
+                                        <span class="color-price">$@(Model.BasePrice + color.PriceAdjustment)</span>
+                                        @if (color.PriceAdjustment > 0)
+                                        {
+                                            <span class="color-adjustment">+$@color.PriceAdjustment</span>
+                                        }
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
-                </div>
+                }
 
                 <div class="product-price-detail">
-                    <span class="current-price">$68.99</span>
-                    <span class="original-price">$78.99</span>
-                </div>
-
-                <div class="product-rating-detail">
-                    ⭐⭐⭐⭐⭐ (256 reviews)
+                    <span class="current-price">$@Model.BasePrice</span>
+                    @if (Model.BasePrice < 80)
+                    {
+                        <span class="original-price">$@(Model.BasePrice + 10)</span>
+                    }
                 </div>
 
                 <div class="product-features-detail">
                     <div class="feature-item">
-                        <strong>Origin:</strong> Holland
+                        <strong>Category:</strong> @Model.Category?.CategoryName
                     </div>
                     <div class="feature-item">
-                        <strong>Scent:</strong> Scented
+                        <strong>Stock:</strong> @Model.StockQuantity available
                     </div>
                     <div class="feature-item">
-                        <strong>Vase Life:</strong> 5-7 days (with proper care)
+                        <strong>Status:</strong> @(Model.IsAvailable ? "Available" : "Out of Stock")
                     </div>
-                    <div class="feature-item">
-                        <strong>Bloom Stage:</strong> Bud (on arrival)
-                    </div>
-                    <div class="feature-item">
-                        <strong>Available Colors:</strong> Pink, Red, White
-                    </div>
+                    @if (Model.DateCreated > DateTime.Now.AddDays(-30))
+                    {
+                        <div class="feature-item">
+                            <strong>New Arrival!</strong> Added recently
+                        </div>
+                    }
                 </div>
 
                 <!-- Add to Cart -->
                 <div class="add-to-cart-detail">
                     <div class="quantity-selector">
                         <button class="quantity-btn minus">-</button>
-                        <input type="number" value="1" min="1" max="10" class="quantity-input">
+                        <input type="number" value="1" min="1" max="@Model.StockQuantity" class="quantity-input">
                         <button class="quantity-btn plus">+</button>
                     </div>
-                    <button class="add-to-cart-btn large" data-product-id="7" data-color="pink" data-price="68.99">
-                        Add to Cart - $68.99
+                    <button class="add-to-cart-btn large"
+                            data-product-id="@Model.ProductId"
+                            @(!Model.IsAvailable ? "disabled" : "")>
+                        @if (Model.IsAvailable)
+                        {
+                            <text>Add to Cart - $@Model.BasePrice</text>
+                        }
+                        else
+                        {
+                            <text>Out of Stock</text>
+                        }
                     </button>
                 </div>
 
@@ -126,23 +139,26 @@
                             <p>7-day freshness guarantee</p>
                         </div>
                     </div>
-                    <div class="feature">
-                        <span>🎨</span>
-                        <div>
-                            <strong>3 Colors</strong>
-                            <p>Multiple color options</p>
+                    @if (Model.ProductColors != null && Model.ProductColors.Any())
+                    {
+                        <div class="feature">
+                            <span>🎨</span>
+                            <div>
+                                <strong>@Model.ProductColors.Count Colors</strong>
+                                <p>Multiple color options</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
 
-        <!-- Product Description & Details - ALL TOGETHER -->
+        <!-- Product Description & Details -->
         <div class="product-full-details">
             <!-- About Section -->
             <div class="detail-section" id="about">
-                <h2>About Peonies</h2>
-                <p class="lead">Peony stands out with its lush, rose-shaped blooms in a rich, sweet fragrance that fills any space. It offers calm and elegance impact for premium floral arrangements.</p>
+                <h2>About @Model.Name</h2>
+                <p class="lead">@Model.Name stands out with its lush, rose-shaped blooms in a rich, sweet fragrance that fills any space. It offers calm and elegant impact for premium floral arrangements.</p>
 
                 <div class="perfect-for">
                     <h3>🎯 Perfect For</h3>
@@ -157,15 +173,11 @@
                 </div>
             </div>
 
+            <!-- Care Guide -->
             <div class="tab-content" id="care">
-                <h2>Peony Care Guide</h2>
+                <h2>@Model.Name Care Guide</h2>
                 <div class="care-guide-container">
-                    <!-- Image spans full width -->
-                    <div class="care-image-full">
-                        <img src="~/Images/products_img/peony/peony_care.JPG" alt="Flower Care Instructions">
-                    </div>
-
-                    <!-- Care info below the image -->
+                    <!-- Care info -->
                     <div class="care-steps-simple">
                         <div class="care-step">
                             <strong>Keep in cool environment</strong> - Away from direct sunlight and heat sources
@@ -185,35 +197,96 @@
                     </div>
                 </div>
             </div>
-            <!-- Important Information -->
-            <div class="detail-section important-section" id="important">
-                <h2>📋 Important Information</h2>
-                <div class="important-info">
-                    <div class="info-card">
-                        <div class="info-icon">🌿</div>
-                        <div class="info-content">
-                            <h3>Farm-fresh, wholesale grade</h3>
-                            <p>Our flowers ship straight from the farm and are packed to protect them in transit and extend shelf life. Because they are farm-fresh and minimally handled, natural imperfections - such as minor bruising, bent or occasionally broken buds/stems - can occur. This is normal. A quick trim, rehydration, and light arranging on arrival will help them open beautifully.</p>
-                        </div>
-                    </div>
 
-                    <div class="info-card">
-                        <div class="info-icon">🌸</div>
-                        <div class="info-content">
-                            <h3>Bloom & longevity</h3>
-                            <p>Actual appearance will vary as blooms continue to open with proper care. We take great care in selecting and packing, but once delivered, longevity depends on handling and environment.</p>
-                        </div>
-                    </div>
-
-                    <div class="info-card warning-card">
-                        <div class="info-icon">⚠️</div>
-                        <div class="info-content">
-                            <h3>Safety Notice</h3>
-                            <p>For ornamental use only; not for human or animal consumption. Some flowers may cause skin/eye irritation and can be harmful if eaten. Please wash hands after handling and keep out of reach of children and pets.</p>
-                        </div>
+            <!-- Related Products -->
+            @if (relatedProducts != null && relatedProducts.Any())
+            {
+                <div class="detail-section">
+                    <h2>Related Products</h2>
+                    <div class="related-products-grid">
+                        @foreach (var relatedProduct in relatedProducts)
+                        {
+                            <div class="related-product-card">
+                                <a href="@Url.Action("Details", new { id = relatedProduct.ProductId })">
+                                    <img src="@relatedProduct.MainImageUrl" alt="@relatedProduct.Name">
+                                    <h4>@relatedProduct.Name</h4>
+                                    <p>$@relatedProduct.BasePrice</p>
+                                </a>
+                            </div>
+                        }
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+    $(document).ready(function() {
+        // Color selection
+        $('.color-option-detail').click(function() {
+            $('.color-option-detail').removeClass('active');
+            $(this).addClass('active');
+
+            var price = $(this).data('price');
+            var colorName = $(this).data('color-name');
+            var image = $(this).data('image');
+
+            // Update price
+            $('.current-price').text('$' + price);
+            $('.add-to-cart-btn.large').text('Add to Cart - $' + price);
+
+            // Update image
+            if (image) {
+                $('#mainProductImage').attr('src', image);
+            }
+        });
+
+        // Quantity selector
+        $('.quantity-btn.minus').click(function() {
+            var $input = $(this).siblings('.quantity-input');
+            var value = parseInt($input.val());
+            if (value > 1) {
+                $input.val(value - 1);
+            }
+        });
+
+        $('.quantity-btn.plus').click(function() {
+            var $input = $(this).siblings('.quantity-input');
+            var value = parseInt($input.val());
+            var max = parseInt($input.attr('max'));
+            if (value < max) {
+                $input.val(value + 1);
+            }
+        });
+
+        // Add to cart
+        $('.add-to-cart-btn.large').click(function() {
+            var productId = $(this).data('product-id');
+            var quantity = $('.quantity-input').val();
+            var selectedColor = $('.color-option-detail.active').data('color-id') || null;
+
+            // Add to cart logic here
+            console.log('Adding to cart:', {
+                productId: productId,
+                quantity: quantity,
+                colorId: selectedColor
+            });
+
+            // Show success message
+            alert('Added to cart successfully!');
+        });
+
+        // Thumbnail click
+        $('.thumbnail').click(function() {
+            var imageUrl = $(this).data('image');
+            if (imageUrl) {
+                $('#mainProductImage').attr('src', imageUrl);
+                $('.thumbnail').removeClass('active');
+                $(this).addClass('active');
+            }
+        });
+    });
+    </script>
+}

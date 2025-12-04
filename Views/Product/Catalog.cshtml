@@ -1,6 +1,10 @@
-﻿﻿@{
-    ViewBag.Title = "Flower Shop - Bloomfiy";
+﻿@model IEnumerable<Bloomfiy.Models.Product>
+@{
+    ViewBag.Title = "Flower Catalog - Bloomfiy";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var categories = ViewBag.Categories as List<Bloomfiy.Models.Category>;
+    var colors = ViewBag.Colors as List<Bloomfiy.Models.Color>;
 }
 
 <section class="shop-hero">
@@ -14,535 +18,242 @@
     <div class="container">
         <!-- Filters Sidebar -->
         <aside class="filters-sidebar">
-            <div class="filter-group">
-                <h3>Categories</h3>
-                <div class="filter-options">
-                    <label class="filter-option">
-                        <input type="checkbox" checked> Bouquets
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Single Varieties
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Arrangements
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Premium Collection
-                    </label>
+            <!-- Category Filter -->
+            @if (categories != null && categories.Any())
+            {
+                <div class="filter-group">
+                    <h3>Categories</h3>
+                    <div class="filter-options">
+                        @foreach (var category in categories)
+                        {
+                            <label class="filter-option">
+                                <input type="checkbox" data-category="@category.CategoryId"> @category.CategoryName
+                            </label>
+                        }
+                    </div>
                 </div>
-            </div>
+            }
 
-            <div class="filter-group">
-                <h3>Occasions</h3>
-                <div class="filter-options">
-                    <label class="filter-option">
-                        <input type="checkbox"> Romantic
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Birthday
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Wedding
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Thank You
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Sympathy
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Celebration
-                    </label>
+            <!-- Color Filter -->
+            @if (colors != null && colors.Any())
+            {
+                <div class="filter-group">
+                    <h3>Colors</h3>
+                    <div class="color-filters">
+                        @foreach (var color in colors)
+                        {
+                            <div class="color-option"
+                                 style="background-color: @(!string.IsNullOrEmpty(color.ColorCode) ? color.ColorCode : "#ccc")"
+                                 data-color-id="@color.ColorId"
+                                 title="@color.ColorName">
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
+            }
 
-            <div class="filter-group">
-                <h3>Scent</h3>
-                <div class="filter-options">
-                    <label class="filter-option">
-                        <input type="checkbox" checked> Scented
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Unscented
-                    </label>
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <h3>Origin</h3>
-                <div class="filter-options">
-                    <label class="filter-option">
-                        <input type="checkbox"> Holland
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Ecuador
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Colombia
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox"> Local
-                    </label>
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <h3>Colors</h3>
-                <div class="color-filters">
-                    <div class="color-option" style="background-color: #ff0000;" data-color="red" title="Red"></div>
-                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ccc;" data-color="white" title="White"></div>
-                    <div class="color-option" style="background-color: #ff69b4;" data-color="pink" title="Pink"></div>
-                    <div class="color-option" style="background-color: #ffd700;" data-color="yellow" title="Yellow"></div>
-                    <div class="color-option" style="background-color: #800080;" data-color="purple" title="Purple"></div>
-                </div>
-            </div>
-
+            <!-- Price Range -->
             <div class="filter-group">
                 <h3>Price Range</h3>
                 <div class="price-range">
-                    <input type="range" min="0" max="200" value="100" class="price-slider">
+                    <input type="range" min="0" max="200" value="200" class="price-slider" id="priceSlider">
                     <div class="price-values">
-                        <span>$0</span>
-                        <span>$200</span>
+                        <span>$<span id="minPrice">0</span></span>
+                        <span>$<span id="maxPrice">200</span></span>
                     </div>
                 </div>
             </div>
 
-            <button class="clear-filters-btn">Clear All Filters</button>
+            <button class="clear-filters-btn" id="clearFilters">Clear All Filters</button>
         </aside>
 
         <!-- Products Main Area -->
         <div class="products-main">
             <div class="products-header">
                 <div class="results-count">
-                    Showing 1 product
+                    Showing @Model.Count() product@(Model.Count() != 1 ? "s" : "")
                 </div>
                 <div class="sort-options">
-                    <select class="sort-select">
-                        <option>Sort by: Featured</option>
-                        <option>Price: Low to High</option>
-                        <option>Price: High to Low</option>
-                        <option>Newest First</option>
-                        <option>Most Popular</option>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="name">Sort by: Name</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="newest">Newest First</option>
                     </select>
                 </div>
             </div>
 
-            <div class="products-grid">
-                <!-- Only Peony Product -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="~/Images/products_img/peony/peony_pink.png" alt="Peony Flowers" class="main-product-image">
-                        <div class="product-actions">
-                            <button class="wishlist-btn" title="Add to Wishlist">♡</button>
-                            <button class="quick-view-btn" title="Quick View">👁️</button>
-                        </div>
-                        <div class="product-badge">Premium</div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Peony</h3>
-                        <p class="product-description">Lush, rose-shaped blooms with rich sweet fragrance</p>
-                        <div class="product-price">
-                            <span class="current-price">$68.99</span>
-                            <span class="original-price">$78.99</span>
-                        </div>
-                        <div class="product-rating">
-                            ⭐⭐⭐⭐⭐ (256 reviews)
-                        </div>
-                        <button class="add-to-cart-btn" data-product-id="7">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
+            @if (Model.Any())
+            {
+                <div class="products-grid" id="productsGrid">
+                    @foreach (var product in Model)
+                    {
+                        <div class="product-card" data-product-id="@product.ProductId"
+                             data-price="@product.BasePrice"
+                             data-category="@product.CategoryId">
+                            <div class="product-image">
+                                <img src="@product.MainImageUrl" alt="@product.Name" class="main-product-image">
+                                <div class="product-actions">
+                                    <button class="wishlist-btn" title="Add to Wishlist">♡</button>
+                                    <button class="quick-view-btn" title="Quick View">👁️</button>
+                                </div>
+                                @if (product.BasePrice > 50)
+                                {
+                                    <div class="product-badge">Premium</div>
+                                }
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">@product.Name</h3>
+                                <p class="product-description">@(product.Description.Length > 100 ? product.Description.Substring(0, 100) + "..." : product.Description)</p>
 
-            <!-- Load More - CORRECT POSITION outside products-grid -->
-            <div class="load-more-container">
-                <button class="load-more-btn" id="loadMoreBtn">Load More Flowers</button>
-                <div class="no-more-products" style="display: none;">
-                    No more flowers to load. You've seen all our beautiful collection!
+                                <div class="product-price">
+                                    <span class="current-price">$@product.BasePrice</span>
+                                    @if (product.BasePrice < 80)
+                                    {
+                                        <span class="original-price">$@(product.BasePrice + 10)</span>
+                                    }
+                                </div>
+
+                                @if (product.ProductColors != null && product.ProductColors.Any())
+                                {
+                                    <div class="product-colors">
+                                        Available in:
+                                        @foreach (var pc in product.ProductColors.Take(3))
+                                        {
+                                            <span class="color-chip" style="background-color: @(!string.IsNullOrEmpty(pc.Color?.ColorCode) ? pc.Color.ColorCode : "#ccc")"
+                                                  title="@pc.Color?.ColorName">
+                                            </span>
+                                        }
+                                        @if (product.ProductColors.Count > 3)
+                                        {
+                                            <span class="more-colors">+@(product.ProductColors.Count - 3) more</span>
+                                        }
+                                    </div>
+                                }
+
+                                <button class="add-to-cart-btn" data-product-id="@product.ProductId">Add to Cart</button>
+                            </div>
+                        </div>
+                    }
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="no-products">
+                    <p>No products found. Please try a different filter or search.</p>
+                    <a href="@Url.Action("Catalog")" class="btn btn-primary">View All Products</a>
+                </div>
+            }
         </div>
     </div>
 </section>
 
-
-<script>
-    // FANCY JAVASCRIPT FOR ENTIRE CATALOG PAGE
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('🌸 Bloomfiy Catalog - Fancy Edition Loaded!');
-
-        // ===== FANCY PAGE LOAD ANIMATIONS =====
-        // Animate hero section
-        const hero = document.querySelector('.shop-hero');
-        if (hero) {
-            hero.style.opacity = '0';
-            hero.style.transform = 'translateY(30px)';
-
-            setTimeout(() => {
-                hero.style.transition = 'all 0.8s ease';
-                hero.style.opacity = '1';
-                hero.style.transform = 'translateY(0)';
-            }, 200);
-        }
-
-        // Animate filters sidebar
-        const filters = document.querySelector('.filters-sidebar');
-        if (filters) {
-            filters.style.opacity = '0';
-            filters.style.transform = 'translateX(-30px)';
-
-            setTimeout(() => {
-                filters.style.transition = 'all 0.6s ease 0.3s';
-                filters.style.opacity = '1';
-                filters.style.transform = 'translateX(0)';
-            }, 400);
-        }
-
-        // Animate product cards with stagger
-        const productCards = document.querySelectorAll('.product-card');
-        productCards.forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(40px) scale(0.95)';
-
-            setTimeout(() => {
-                card.style.transition = `all 0.6s ease ${index * 0.1}s`;
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0) scale(1)';
-            }, 500 + (index * 100));
-        });
-
-        // ===== INTERACTIVE FILTERS =====
-        // Color filter animation
-        const colorOptions = document.querySelectorAll('.color-option');
-        colorOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                this.style.transform = 'scale(0.8)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                    this.classList.toggle('active');
-                }, 150);
-            });
-        });
-
-        // Checkbox animations
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const label = this.closest('.filter-option');
-                if (this.checked) {
-                    label.style.color = '#5a7c5a';
-                    label.style.transform = 'translateX(5px)';
-                    setTimeout(() => label.style.transform = 'translateX(0)', 200);
-                } else {
-                    label.style.color = '';
-                }
-            });
-        });
-
-        // Price slider animation
-        const priceSlider = document.querySelector('.price-slider');
-        if (priceSlider) {
-            priceSlider.addEventListener('input', function() {
-                this.style.background = `linear-gradient(90deg, #5a7c5a ${this.value}%, #e0e0e0 ${this.value}%)`;
-            });
-        }
-
-        // Clear filters animation
-        const clearBtn = document.querySelector('.clear-filters-btn');
-        if (clearBtn) {
-            clearBtn.addEventListener('click', function() {
-                this.innerHTML = '✓ Cleared!';
-                this.style.background = '#27ae60';
-
-                // Reset all filters with animation
-                checkboxes.forEach(cb => {
-                    cb.checked = false;
-                    const label = cb.closest('.filter-option');
-                    label.style.color = '';
-                });
-
-                colorOptions.forEach(opt => opt.classList.remove('active'));
-
-                setTimeout(() => {
-                    this.innerHTML = 'Clear All Filters';
-                    this.style.background = '';
-                }, 1500);
-            });
-        }
-
-        // ===== PRODUCT CARD INTERACTIONS =====
-        // Product card click with ripple effect
-        productCards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Don't navigate if clicking buttons
-                if (e.target.closest('button')) return;
-
-                // Create ripple effect
-                const ripple = document.createElement('div');
-                ripple.style.position = 'absolute';
-                ripple.style.borderRadius = '50%';
-                ripple.style.background = 'rgba(90, 124, 90, 0.3)';
-                ripple.style.transform = 'scale(0)';
-                ripple.style.animation = 'ripple 0.6s linear';
-                ripple.style.pointerEvents = 'none';
-
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-
-                this.style.position = 'relative';
-                this.style.overflow = 'hidden';
-                this.appendChild(ripple);
-
-                // Navigate after animation
-                setTimeout(() => {
-                    window.location.href = '/Product/Details/7';
-                }, 400);
-            });
-        });
-
-        // Add to Cart with fancy animation
-        const addToCartBtn = document.querySelector('.add-to-cart-btn');
-        if (addToCartBtn) {
-            addToCartBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-
-                // Button animation
-                this.style.transform = 'scale(0.95)';
-                this.innerHTML = '✓ Adding...';
-
-                // Create flying flower animation
-                const productImage = this.closest('.product-card').querySelector('img');
-                const productRect = productImage.getBoundingClientRect();
-                const cartIcon = document.querySelector('.cart-icon') || document.querySelector('.cart-count');
-
-                if (cartIcon) {
-                    const cartRect = cartIcon.getBoundingClientRect();
-
-                    // Create flying element
-                    const flyingFlower = document.createElement('div');
-                    flyingFlower.innerHTML = '🌸';
-                    flyingFlower.style.position = 'fixed';
-                    flyingFlower.style.left = productRect.left + 'px';
-                    flyingFlower.style.top = productRect.top + 'px';
-                    flyingFlower.style.fontSize = '20px';
-                    flyingFlower.style.zIndex = '10000';
-                    flyingFlower.style.pointerEvents = 'none';
-                    flyingFlower.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-
-                    document.body.appendChild(flyingFlower);
-
-                    // Animate to cart
-                    setTimeout(() => {
-                        flyingFlower.style.left = cartRect.left + 'px';
-                        flyingFlower.style.top = cartRect.top + 'px';
-                        flyingFlower.style.transform = 'scale(0.5)';
-                        flyingFlower.style.opacity = '0';
-                    }, 50);
-
-                    // Remove flying element
-                    setTimeout(() => {
-                        document.body.removeChild(flyingFlower);
-                    }, 850);
-                }
-
-                // Update cart count with animation
-                const cartCount = document.querySelector('.cart-count');
-                if (cartCount) {
-                    const currentCount = parseInt(cartCount.textContent) || 0;
-                    cartCount.textContent = currentCount + 1;
-                    cartCount.style.transform = 'scale(1.5)';
-                    setTimeout(() => cartCount.style.transform = 'scale(1)', 300);
-                }
-
-                // Reset button
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                    this.innerHTML = '✓ Added!';
-                    setTimeout(() => {
-                        this.innerHTML = 'Add to Cart';
-                    }, 1000);
-                }, 800);
-            });
-        }
-
-        // Wishlist heart animation
-        const wishlistBtn = document.querySelector('.wishlist-btn');
-        if (wishlistBtn) {
-            wishlistBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-
-                const isFilled = this.textContent === '♥';
-                this.textContent = isFilled ? '♡' : '♥';
-
-                // Heart animation
-                this.style.transform = 'scale(1.3)';
-                this.style.color = isFilled ? '' : '#e74c3c';
-                setTimeout(() => this.style.transform = 'scale(1)', 200);
-
-                // Floating hearts effect
-                if (!isFilled) {
-                    for (let i = 0; i < 3; i++) {
-                        createFloatingHeart(this);
-                    }
-                }
-            });
-        }
-
-        // Quick view animation
-        const quickViewBtn = document.querySelector('.quick-view-btn');
-        if (quickViewBtn) {
-            quickViewBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-
-                // Button animation
-                this.style.transform = 'scale(0.8)';
-                setTimeout(() => this.style.transform = 'scale(1)', 200);
-
-                // Show quick view modal (simulated)
-                const productCard = this.closest('.product-card');
-                productCard.style.boxShadow = '0 0 30px rgba(90, 124, 90, 0.5)';
-                setTimeout(() => productCard.style.boxShadow = '', 1000);
-
-                alert('🌸 Quick view feature would open here!');
-            });
-        }
-
-        // ===== LOAD MORE BUTTON =====
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
-        if (loadMoreBtn) {
-            loadMoreBtn.addEventListener('click', function() {
-                this.innerHTML = '🌷 Loading Beautiful Flowers...';
-                this.style.background = '#8b7355';
-
-                // Simulate loading
-                setTimeout(() => {
-                    this.innerHTML = '✨ No More Flowers Available';
-                    this.style.background = '#95a5a6';
-                    this.disabled = true;
-
-                    // Show message
-                    const noMore = document.querySelector('.no-more-products');
-                    if (noMore) {
-                        noMore.style.display = 'block';
-                        noMore.style.opacity = '0';
-                        noMore.style.transform = 'translateY(20px)';
-
-                        setTimeout(() => {
-                            noMore.style.transition = 'all 0.6s ease';
-                            noMore.style.opacity = '1';
-                            noMore.style.transform = 'translateY(0)';
-                        }, 100);
-                    }
-                }, 1500);
-            });
-        }
-
-        // ===== SCROLL ANIMATIONS =====
-        // Parallax effect for hero
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.shop-hero');
-            if (hero) {
-                const rate = scrolled * -0.3;
-                hero.style.transform = `translateY(${rate}px)`;
+@section Scripts {
+    <script>
+    $(document).ready(function() {
+        // Product card click navigation
+        $('.product-card').click(function(e) {
+            if (!$(e.target).closest('button').length) {
+                var productId = $(this).data('product-id');
+                window.location.href = '@Url.Action("Details", "Product")/' + productId;
             }
         });
 
-        // ===== HELPER FUNCTIONS =====
-        function createFloatingHeart(element) {
-            const heart = document.createElement('div');
-            heart.innerHTML = '♥';
-            heart.style.position = 'absolute';
-            heart.style.color = '#e74c3c';
-            heart.style.fontSize = '16px';
-            heart.style.pointerEvents = 'none';
-            heart.style.zIndex = '1000';
-            heart.style.opacity = '1';
-
-            const rect = element.getBoundingClientRect();
-            heart.style.left = rect.left + rect.width / 2 + 'px';
-            heart.style.top = rect.top + 'px';
-
-            document.body.appendChild(heart);
-
-            // Random animation
-            const randomX = (Math.random() - 0.5) * 100;
-            const randomY = -Math.random() * 80 - 20;
-
-            heart.style.transition = 'all 1s ease';
-            setTimeout(() => {
-                heart.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                heart.style.opacity = '0';
-            }, 10);
-
-            // Remove after animation
-            setTimeout(() => {
-                document.body.removeChild(heart);
-            }, 1000);
-        }
-    });
-
-    </script>
-
-
-<script>
-    // SIMPLE FIX - Product click navigation
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log('🛍️ Catalog navigation loaded');
-
-        // Product card click to go to details page
-        const productCards = document.querySelectorAll('.product-card');
-        productCards.forEach(card => {
-            card.addEventListener('click', function (e) {
-                console.log('Product card clicked');
-                // Only navigate if not clicking a button
-                if (!e.target.closest('button')) {
-                    window.location.href = '/Product/Details/7';
-                }
-            });
+        // Filter functionality
+        $('#clearFilters').click(function() {
+            $('.filter-options input[type="checkbox"]').prop('checked', false);
+            $('#priceSlider').val(200);
+            updatePriceDisplay();
+            filterProducts();
         });
 
-        // Add to Cart button
-        const addToCartBtn = document.querySelector('.add-to-cart-btn');
-        if (addToCartBtn) {
-            addToCartBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                console.log('Add to cart clicked');
-                alert('Peony added to cart!');
+        // Price slider
+        $('#priceSlider').on('input', function() {
+            updatePriceDisplay();
+            filterProducts();
+        });
 
-                // Update cart count
-                const cartCount = document.querySelector('.cart-count');
-                if (cartCount) {
-                    const currentCount = parseInt(cartCount.textContent) || 0;
-                    cartCount.textContent = currentCount + 1;
+        // Category/color filter
+        $('.filter-options input, .color-option').change(function() {
+            filterProducts();
+        });
+
+        // Sort functionality
+        $('#sortSelect').change(function() {
+            sortProducts($(this).val());
+        });
+
+        function updatePriceDisplay() {
+            var maxPrice = $('#priceSlider').val();
+            $('#maxPrice').text(maxPrice);
+        }
+
+        function filterProducts() {
+            var selectedCategories = [];
+            $('.filter-options input[type="checkbox"]:checked').each(function() {
+                selectedCategories.push($(this).data('category'));
+            });
+
+            var selectedColors = [];
+            $('.color-option.active').each(function() {
+                selectedColors.push($(this).data('color-id'));
+            });
+
+            var maxPrice = $('#priceSlider').val();
+
+            $('.product-card').each(function() {
+                var $card = $(this);
+                var categoryId = $card.data('category');
+                var price = $card.data('price');
+
+                var showCard = true;
+
+                // Category filter
+                if (selectedCategories.length > 0 && !selectedCategories.includes(categoryId)) {
+                    showCard = false;
+                }
+
+                // Price filter
+                if (price > maxPrice) {
+                    showCard = false;
+                }
+
+                // Color filter (simplified - would need color IDs on product cards)
+                // You would need to add data-colors attribute to product cards
+
+                if (showCard) {
+                    $card.show();
+                } else {
+                    $card.hide();
                 }
             });
         }
 
-        // Wishlist button
-        const wishlistBtn = document.querySelector('.wishlist-btn');
-        if (wishlistBtn) {
-            wishlistBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                console.log('Wishlist clicked');
-                this.textContent = this.textContent === '♡' ? '♥' : '♡';
-            });
-        }
+        function sortProducts(sortBy) {
+            var $container = $('#productsGrid');
+            var $items = $container.children('.product-card');
 
-        // Quick view button
-        const quickViewBtn = document.querySelector('.quick-view-btn');
-        if (quickViewBtn) {
-            quickViewBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                console.log('Quick view clicked');
-                alert('Quick view would open here!');
+            $items.sort(function(a, b) {
+                var aPrice = $(a).data('price');
+                var bPrice = $(b).data('price');
+                var aName = $(a).find('.product-title').text().toLowerCase();
+                var bName = $(b).find('.product-title').text().toLowerCase();
+
+                switch(sortBy) {
+                    case 'price-low':
+                        return aPrice - bPrice;
+                    case 'price-high':
+                        return bPrice - aPrice;
+                    case 'newest':
+                        // Assuming newer products have higher IDs
+                        return $(b).data('product-id') - $(a).data('product-id');
+                    default: // 'name'
+                        return aName.localeCompare(bName);
+                }
             });
+
+            $container.append($items);
         }
     });
-</script>
+    </script>
+}

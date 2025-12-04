@@ -13,11 +13,29 @@ namespace Bloomfiy
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Default route
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "Bloomfiy.Controllers" }  // Specify namespace
+
+
+            );
+
+            routes.MapRoute(
+                name: "ProductByCategory",
+                url: "products/category/{categoryId}",
+                defaults: new { controller = "Product", action = "ByCategory" }
+            );
+
+            routes.MapRoute(
+                name: "ProductSearch",
+                url: "products/search/{query}",
+                defaults: new { controller = "Product", action = "Search" }
             );
         }
     }
+
+
 }
