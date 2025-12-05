@@ -1,14 +1,22 @@
 ﻿@model Bloomfiy.Models.User
 
-<div class="profile-container">
-    <h1>Your Account</h1>
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-    <div class="profile-box">
-        <p><strong>Username:</strong> @Model.Username</p>
-        <p><strong>Email:</strong> @Model.Email</p>
-        <p><strong>Full Name:</strong> @Model.FullName</p>
-        <p><strong>Role:</strong> @Model.Role</p>
+}
 
-        <a href="@Url.Action("Logout", "Account")" class="profile-logout-btn">Logout</a>
+<div class="profile-page-wrapper">
+    <div class="profile-container">
+        <h1>Your Account</h1>
+
+        <p class="profile-info"><b>Username:</b> @Model.Username</p>
+        <p class="profile-info"><b>Email:</b> @Model.Email</p>
+        <p class="profile-info"><b>Full Name:</b> @Model.FullName</p>
+        <p class="profile-info"><b>Role:</b> @Model.Role</p>
+
+        <a href="@Url.Action("Logout", "Account")" class="profile-logout-btn">
+            Logout
+        </a>
     </div>
 </div>
