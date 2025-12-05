@@ -7,6 +7,7 @@ using Bloomfiy.Models;
 
 namespace Bloomfiy.Controllers.Admin
 {
+    [Authorize(Roles = "Admin")]
     public class AdminCategoryController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

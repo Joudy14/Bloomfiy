@@ -1,0 +1,35 @@
+﻿.auth-menu {
+	position: fixed;
+	bottom: 25px;
+	left: 25px;
+	z-index: 9999;
+}
+
+.auth-btn {
+	display: block;
+	width: 150px;
+	padding: 12px 15px;
+	margin-bottom: 10px;
+	background-color: #ff8fb1;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 8px;
+	font-size: 16px;
+	font-family: 'Poppins', sans-serif;
+	transition: 0.3s ease;
+	box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+}
+
+	.auth-btn:hover {
+		background-color: #ff6f99;
+		transform: translateY(-2px);
+	}
+
+	.auth-btn.logout {
+		background-color: #555;
+	}
+
+		.auth-btn.logout:hover {
+			background-color: #333;
+		}

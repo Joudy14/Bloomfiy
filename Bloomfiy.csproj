@@ -129,11 +129,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\AdminStyle.css" />
+    <Content Include="Content\auth-buttons.css" />
     <Content Include="Content\blog.css" />
     <Content Include="Content\details.css" />
     <Content Include="Content\event.css" />
     <Content Include="Content\shop.css" />
-    <Content Include="Controllers\AccountControllert.txt" />
+    <Compile Include="Controllers\AccountControllert.cs" />
     <Compile Include="Controllers\AdminCatagoryController.cs" />
     <Content Include="Controllers\Admin\AdminContentController.txt" />
     <Content Include="Controllers\Admin\AdminController.txt" />
@@ -149,9 +150,11 @@
     <Compile Include="Controllers\InformationController.cs" />
     <Content Include="Controllers\OrderController.txt" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Content Include="Controllers\WishlistController.txt" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Images\products_img\Alstroemeria\Class1.cs" />
     <Compile Include="Images\products_img\Aster\Class1.cs" />
     <Compile Include="Images\products_img\Baby rose\Class1.cs" />
@@ -176,6 +179,10 @@
     <Compile Include="Images\products_img\Sunflowers\Class1.cs" />
     <Compile Include="Images\products_img\tulip\Class1.cs" />
     <Compile Include="Images\products_img\Veronica\Class1.cs" />
+    <Compile Include="Migrations\202512051109474_InitAgain.cs" />
+    <Compile Include="Migrations\202512051109474_InitAgain.designer.cs">
+      <DependentUpon>202512051109474_InitAgain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\CartItem.cs" />
@@ -184,6 +191,7 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductColor.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +301,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
+    <Folder Include="Views\Wishlist\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -304,6 +313,11 @@
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Event\Services.cshtml" />
     <Content Include="Views\Event\Booking.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202512051109474_InitAgain.resx">
+      <DependentUpon>202512051109474_InitAgain.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
