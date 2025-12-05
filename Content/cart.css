@@ -1,0 +1,91 @@
+﻿/* ========================
+   CART PAGE STYLES
+   ======================== */
+
+.cart-page {
+    padding: 100px 20px 50px; /* top padding to avoid fixed header */
+    min-height: 70vh;
+    background-color: #f9f7f2;
+    color: #5a7c5a;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+    .cart-page h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 40px;
+        color: #8b7355;
+        font-style: italic;
+    }
+
+.cart-empty {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 50px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+    .cart-table th, .cart-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .cart-table th {
+        background-color: #8b7355;
+        color: white;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    .cart-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .cart-table .action-btn {
+        background-color: #5a7c5a;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+        .cart-table .action-btn:hover {
+            background-color: #4a6c4a;
+        }
+
+.cart-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+    .cart-buttons a {
+        background-color: #d4af87;
+        color: #2d2d2d;
+        padding: 10px 25px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+        .cart-buttons a:hover {
+            background-color: #c19a6b;
+        }

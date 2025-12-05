@@ -19,8 +19,10 @@
     <link rel="stylesheet" href="~/Content/shop.css">
     <link rel="stylesheet" href="~/Content/details.css">
     <link rel="stylesheet" href="~/Content/cart.css">
-    <link rel="stylesheet" href="~/Content/auth-buttons.css" />
-
+    @if (ViewBag.IncludeCartCss != null && ViewBag.IncludeCartCss)
+    {
+        <link rel="stylesheet" href="~/Content/cart.css" />
+    }
 
 
 
@@ -69,11 +71,10 @@
                     <span class="cart-count">0</span>
                 </a>
 
-<<<<<<< HEAD
 
                 <!-- Login Button -->
                 <a href="@Url.Action("Login", "Account")" class="login-btn">Login</a>
-=======
+
                 @{
                     if (Request.IsAuthenticated)
                     {
@@ -97,7 +98,6 @@
                     }
                 }
 
->>>>>>> 1ed5b5ad773931b315245e48aaa608f06ad5842e
             </div>
 
         </nav>

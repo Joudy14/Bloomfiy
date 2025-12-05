@@ -131,6 +131,7 @@
     <Content Include="Content\AdminStyle.css" />
     <Content Include="Content\auth-buttons.css" />
     <Content Include="Content\blog.css" />
+    <Content Include="Content\cart.css" />
     <Content Include="Content\details.css" />
     <Content Include="Content\event.css" />
     <Content Include="Content\Profile.css" />
