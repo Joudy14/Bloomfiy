@@ -133,6 +133,7 @@
     <Content Include="Content\blog.css" />
     <Content Include="Content\details.css" />
     <Content Include="Content\event.css" />
+    <Content Include="Content\Profile.css" />
     <Content Include="Content\shop.css" />
     <Compile Include="Controllers\AccountControllert.cs" />
     <Compile Include="Controllers\AdminCatagoryController.cs" />
