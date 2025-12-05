@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\AdminStyle.css" />
+    <Content Include="Content\auth-buttons.css" />
     <Content Include="Content\blog.css" />
     <Content Include="Content\details.css" />
     <Content Include="Content\event.css" />
@@ -149,9 +150,11 @@
     <Compile Include="Controllers\InformationController.cs" />
     <Content Include="Controllers\OrderController.txt" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Content Include="Controllers\WishlistController.txt" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Images\products_img\Alstroemeria\Class1.cs" />
     <Compile Include="Images\products_img\Aster\Class1.cs" />
     <Compile Include="Images\products_img\Baby rose\Class1.cs" />
@@ -295,6 +298,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
+    <Folder Include="Views\Wishlist\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

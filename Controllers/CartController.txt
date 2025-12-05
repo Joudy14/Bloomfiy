@@ -8,6 +8,7 @@ namespace Bloomfiy.Controllers
 {
     public class CartController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View();

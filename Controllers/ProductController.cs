@@ -8,6 +8,7 @@ using Bloomfiy.Models;
 
 namespace Bloomfiy.Controllers
 {
+
     public class ProductController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

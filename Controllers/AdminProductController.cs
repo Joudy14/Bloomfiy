@@ -9,6 +9,7 @@ using System.Data.Entity;
 
 namespace Bloomfiy.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminProductController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

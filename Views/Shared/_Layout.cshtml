@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="~/Content/event.css">
     <link rel="stylesheet" href="~/Content/shop.css">
     <link rel="stylesheet" href="~/Content/details.css">
+    <link rel="stylesheet" href="~/Content/auth-buttons.css" />
+
 
 
 
@@ -26,6 +28,8 @@
 
 
 </head>
+
+
 <body>
     <!-- Header & Navigation -->
     <header>
@@ -36,6 +40,7 @@
                     <img src="~/Images/webName.png" alt="Bloomfiy" class="webname-img">
                 </a>
             </div>
+
 
             <!-- Mobile Menu Button -->
             <button class="mobile-menu-btn">☰</button>
@@ -63,9 +68,31 @@
                     <span class="cart-count">0</span>
                 </a>
 
-                <!-- Login Button -->
-                <a href="@Url.Action("Login", "Account")" class="login-btn">Login</a>
+                @{
+                    if (Request.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Profile", "Account")" class="action-icon" title="My Account">
+                            👤
+                        </a>
+
+                        <a href="@Url.Action("Logout", "Account")" class="action-icon" title="Logout">
+                            ⎋
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")" class="action-icon" title="Login">
+                            Login
+                        </a>
+
+                        <a href="@Url.Action("Register", "Account")" class="action-icon" title="Register">
+                            Register
+                        </a>
+                    }
+                }
+
             </div>
+
         </nav>
     </header>
 
@@ -132,6 +159,17 @@
     @RenderSection("scripts", required: false)
 
 
+    <div class="auth-menu">
+        @if (!Request.IsAuthenticated)
+        {
+            <a href="@Url.Action("Login", "Account")" class="auth-btn">Login</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Profile", "Account")" class="auth-btn">Profile</a>
+            <a href="@Url.Action("Logout", "Account")" class="auth-btn logout">Logout</a>
+        }
+    </div>
 
 </body>
 </html>

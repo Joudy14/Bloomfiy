@@ -1,7 +1,14 @@
-﻿@{
-    ViewBag.Title = "Profile";
-}
+﻿@model Bloomfiy.Models.User
 
-<h2>Profile</h2>
+<div class="profile-container">
+    <h1>Your Account</h1>
 
-<p>This page is under development. Content coming soon.</p> 
+    <div class="profile-box">
+        <p><strong>Username:</strong> @Model.Username</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Full Name:</strong> @Model.FullName</p>
+        <p><strong>Role:</strong> @Model.Role</p>
+
+        <a href="@Url.Action("Logout", "Account")" class="profile-logout-btn">Logout</a>
+    </div>
+</div>
