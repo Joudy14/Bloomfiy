@@ -256,77 +256,69 @@
 
     @section Scripts {
         <script>
-            $(document).ready(function () {
-                // Color selection
-                $('.color-option-detail').click(function () {
-                    $('.color-option-detail').removeClass('active');
-                    $(this).addClass('active');
+           $(document).ready(function () {
+    // Color selection
+    $('.color-option-detail').click(function () {
+        $('.color-option-detail').removeClass('active');
+        $(this).addClass('active');
 
-                    var price = $(this).data('price');
-                    var colorName = $(this).data('color-name');
-                    var image = $(this).data('image');
+        var price = $(this).data('price');
+        var colorName = $(this).data('color-name');
+        var image = $(this).data('image');
 
-                    // Update price display
-                    $('#currentPriceDisplay').text('$' + price);
-                    $('#cartPrice').text(price);
-                    $('.add-to-cart-btn.large').html('Add to Cart - $<span id="cartPrice">' + price + '</span>');
+        // Update price display
+        $('#currentPriceDisplay').text('$' + price);
+        $('#cartPrice').text(price);
+        $('.add-to-cart-btn.large').html('Add to Cart - $<span id="cartPrice">' + price + '</span>');
 
-                    // Update image
-                    if (image) {
-                        $('#mainProductImage').attr('src', image);
-                    }
-                });
+        // Update image
+        if (image) {
+            $('#mainProductImage').attr('src', image);
+        }
+    });
 
-                // Quantity selector
-                $('.quantity-btn.minus').click(function () {
-                    var $input = $(this).siblings('.quantity-input');
-                    var value = parseInt($input.val());
-                    if (value > 1) {
-                        $input.val(value - 1);
-                    }
-                });
+    // Quantity selector
+    $('.quantity-btn.minus').click(function () {
+        var $input = $(this).siblings('.quantity-input');
+        var value = parseInt($input.val());
+        if (value > 1) $input.val(value - 1);
+    });
+    $('.quantity-btn.plus').click(function () {
+        var $input = $(this).siblings('.quantity-input');
+        var value = parseInt($input.val());
+        var max = parseInt($input.attr('max'));
+        if (value < max) $input.val(value + 1);
+    });
 
-                $('.quantity-btn.plus').click(function () {
-                    var $input = $(this).siblings('.quantity-input');
-                    var value = parseInt($input.val());
-                    var max = parseInt($input.attr('max'));
-                    if (value < max) {
-                        $input.val(value + 1);
-                    }
-                });
+    // Add to cart
+    $('.add-to-cart-btn.large').click(function () {
+    var productId = $(this).data('product-id');
+    var quantity = parseInt($('.quantity-input').val());
+    var color = $('.color-option-detail.active').data('color-name') || '';
+    var price = parseFloat($('#cartPrice').text());
 
-                // Add to cart
-                $('.add-to-cart-btn.large').click(function () {
-                    if ($(this).prop('disabled')) {
-                        return;
-                    }
+    // Post to Cart/Add
+    var form = $('<form method="post" action="/Cart/Add"></form>');
+    form.append('<input type="hidden" name="id" value="' + productId + '">');
+    form.append('<input type="hidden" name="name" value="@Model.Name">');
+    form.append('<input type="hidden" name="price" value="' + price + '">');
+    form.append('<input type="hidden" name="color" value="' + color + '">');
+    form.append('<input type="hidden" name="quantity" value="' + quantity + '">');
+    $('body').append(form);
+    form.submit();
+});
 
-                    var productId = $(this).data('product-id');
-                    var quantity = $('.quantity-input').val();
-                    var selectedColor = $('.color-option-detail.active').data('color-id') || null;
-                    var price = $('#cartPrice').text();
 
-                    // Add to cart logic here
-                    console.log('Adding to cart:', {
-                        productId: productId,
-                        quantity: quantity,
-                        colorId: selectedColor,
-                        price: price
-                    });
+    // Thumbnail click
+    $('.thumbnail').click(function () {
+        var imageUrl = $(this).data('image');
+        if (imageUrl) {
+            $('#mainProductImage').attr('src', imageUrl);
+            $('.thumbnail').removeClass('active');
+            $(this).addClass('active');
+        }
+    });
+});
 
-                    // Show success message
-                    alert('Added to cart successfully!');
-                });
-
-                // Thumbnail click
-                $('.thumbnail').click(function () {
-                    var imageUrl = $(this).data('image');
-                    if (imageUrl) {
-                        $('#mainProductImage').attr('src', imageUrl);
-                        $('.thumbnail').removeClass('active');
-                        $(this).addClass('active');
-                    }
-                });
-            });
         </script>
     }
