@@ -133,7 +133,7 @@
     <Content Include="Content\details.css" />
     <Content Include="Content\event.css" />
     <Content Include="Content\shop.css" />
-    <Content Include="Controllers\AccountControllert.txt" />
+    <Compile Include="Controllers\AccountControllert.cs" />
     <Compile Include="Controllers\AdminCatagoryController.cs" />
     <Content Include="Controllers\Admin\AdminContentController.txt" />
     <Content Include="Controllers\Admin\AdminController.txt" />
@@ -176,12 +176,17 @@
     <Compile Include="Images\products_img\Sunflowers\Class1.cs" />
     <Compile Include="Images\products_img\tulip\Class1.cs" />
     <Compile Include="Images\products_img\Veronica\Class1.cs" />
+    <Compile Include="Migrations\202512051109474_InitAgain.cs" />
+    <Compile Include="Migrations\202512051109474_InitAgain.designer.cs">
+      <DependentUpon>202512051109474_InitAgain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductColor.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +306,11 @@
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Event\Services.cshtml" />
     <Content Include="Views\Event\Booking.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202512051109474_InitAgain.resx">
+      <DependentUpon>202512051109474_InitAgain.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

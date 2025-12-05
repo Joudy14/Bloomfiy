@@ -10,7 +10,9 @@ namespace Bloomfiy.Models
         {
             // Optional: Disable lazy loading for better performance
             // this.Configuration.LazyLoadingEnabled = false;
+
         }
+        public DbSet<User> Users { get; set; }
 
         // DbSet properties for each entity
         public DbSet<Product> Products { get; set; }
